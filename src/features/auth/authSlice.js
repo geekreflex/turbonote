@@ -9,27 +9,49 @@ import { auth } from '../../config/firebase';
 
 const initialState = {
   user: null,
+  isLoggedIn: false,
+  error: null,
 };
 
 const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setUser: (state, action) => {
+    setUserAuth: (state, action) => {
       state.user = action.payload;
+      state.isLoggedIn = true;
+    },
+    clearUserAuth: (state, action) => {
+      state.user = null;
+      state.isLoggedIn = false;
+      state.error = action.payload;
+    },
+    checkUserAuthStorage: (state) => {
+      state.isLoggedIn = localStorage.getItem('isLoggedIn') || false;
+      state.user = localStorage.getItem('user')
+        ? JSON.parse(localStorage.getItem('user'))
+        : null;
     },
   },
 });
 
-export const { setUser } = authSlice.actions;
+export const { setUserAuth, clearUserAuth, checkUserAuthStorage } =
+  authSlice.actions;
 
 export const listenForAuthChanges = () => (dispatch) => {
   onAuthStateChanged(auth, (user) => {
     if (user) {
       const { uid, displayName, email, photoURL } = user;
-      dispatch(setUser({ uid, displayName, email, photoURL }));
+      dispatch(setUserAuth({ uid, displayName, email, photoURL }));
+      localStorage.setItem('isLoggedIn', true);
+      localStorage.setItem(
+        'user',
+        JSON.stringify({ uid, displayName, email, photoURL })
+      );
     } else {
-      dispatch(setUser(null));
+      dispatch(clearUserAuth(null));
+      localStorage.removeItem('isLoggedIn');
+      localStorage.removeItem('user');
     }
   });
 };
@@ -39,20 +61,27 @@ export const signInWithGoogle = () => (dispatch) => {
   signInWithPopup(auth, provider)
     .then((result) => {
       const { uid, displayName, email, photoURL } = result.user;
-      dispatch(setUser({ uid, displayName, email, photoURL }));
+      dispatch(setUserAuth({ uid, displayName, email, photoURL }));
+      localStorage.setItem('isLoggedIn', true);
+      localStorage.setItem(
+        'user',
+        JSON.stringify({ uid, displayName, email, photoURL })
+      );
     })
     .catch((error) => {
-      console.error(error);
+      dispatch(clearUserAuth(error.message));
+      localStorage.removeItem('isLoggedIn');
+      localStorage.removeItem('user');
     });
 };
 
 export const signOutUser = () => (dispatch) => {
   signOut(auth)
     .then(() => {
-      dispatch(setUser(null));
+      dispatch(clearUserAuth(null));
     })
     .catch((error) => {
-      console.error(error);
+      dispatch(clearUserAuth(error.message));
     });
 };
 

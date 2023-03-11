@@ -4,14 +4,17 @@ import Home from './pages/Home';
 import Auth from './pages/Auth';
 import Note from './pages/Note';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { listenForAuthChanges } from './features/auth/authSlice';
+import { listenForNotes } from './features/note/noteSlice';
 
 function App() {
   const dispatch = useDispatch();
+  const { isLoggedIn } = useSelector((state) => state.auth);
 
   useEffect(() => {
     dispatch(listenForAuthChanges());
+    dispatch(listenForNotes());
   }, []);
 
   return (
@@ -21,7 +24,7 @@ function App() {
         <Route
           path="/note"
           element={
-            <ProtectedRoute>
+            <ProtectedRoute isLoggedIn={isLoggedIn}>
               <Note />
             </ProtectedRoute>
           }
@@ -29,7 +32,7 @@ function App() {
         <Route
           path="/auth"
           element={
-            <PublicRoute>
+            <PublicRoute isLoggedIn={isLoggedIn}>
               <Auth />
             </PublicRoute>
           }
