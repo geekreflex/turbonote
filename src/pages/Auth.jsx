@@ -1,11 +1,15 @@
 import React from 'react';
-import GoogleAuthButton from '../components/GoogleAuthButton';
+import { useDispatch } from 'react-redux';
+import { signInWithGoogle } from '../features/auth/authSlice';
 
 const Auth = () => {
+  const dispatch = useDispatch();
   return (
     <div>
       <h1>Auth</h1>
-      <GoogleAuthButton />
+      <button onClick={() => dispatch(signInWithGoogle())}>
+        Sign in with Google
+      </button>
     </div>
   );
 };
