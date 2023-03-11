@@ -1,8 +1,9 @@
 import { onAuthStateChanged } from 'firebase/auth';
-import { useEffect } from 'react';
+import { onSnapshot, query, where } from 'firebase/firestore';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
-import { auth } from './config/firebase';
+import { auth, noteRef } from './config/firebase';
 import { clearAuthState, setUser } from './features/auth/authSlice';
 import Auth from './pages/Auth';
 import Home from './pages/Home';
@@ -11,7 +12,25 @@ import { ProtectedRoute, PublicRoute } from './routes';
 
 function App() {
   const dispatch = useDispatch();
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const { isLoggedIn, user } = useSelector((state) => state.auth);
+  const [notes, setNotes] = useState([]);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      const q = query(noteRef, where('userId', '==', user.uid));
+      const unsub = onSnapshot(q, (snapshot) => {
+        let items = [];
+        snapshot.docs.forEach((doc) => {
+          console.log({ ...doc.data(), id: doc.id });
+          items.push({ ...doc.data(), id: doc.id });
+        });
+        setNotes(items);
+        console.log(items);
+      });
+
+      return () => unsub();
+    }
+  }, [user]);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -39,7 +58,7 @@ function App() {
           path="note"
           element={
             <ProtectedRoute isLoggedIn={isLoggedIn}>
-              <Note />
+              <Note notes={notes} />
             </ProtectedRoute>
           }
         />

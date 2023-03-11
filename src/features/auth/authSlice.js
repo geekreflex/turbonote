@@ -35,31 +35,37 @@ const authSlice = createSlice({
       state.user = action.payload;
       state.isLoggedIn = true;
       localStorage.setItem('isLoggedIn', true);
+      localStorage.setItem('user', JSON.stringify(action.payload));
     },
     clearAuthState(state) {
       state.user = null;
       state.isLoggedIn = false;
       localStorage.removeItem('isLoggedIn');
+      localStorage.removeItem('user');
     },
     isLoggedInFromStorage(state) {
       state.isLoggedIn = localStorage.getItem('isLoggedIn') || false;
+      state.user = localStorage.getItem('user')
+        ? JSON.parse(localStorage.getItem('user'))
+        : null;
     },
   },
-  extraReducers: {
-    // Google Auth
-    [signInWithGoogle.pending]: (state) => {
-      state.status = 'pending';
-    },
-    [signInWithGoogle.fulfilled]: (state, action) => {
-      state.status = 'fulfilled';
-      state.user = action.payload;
-      state.isLoggedIn = true;
-      localStorage.setItem('isLoggedIn', true);
-    },
-    [signInWithGoogle.rejected]: (state, action) => {
-      state.status = 'rejected';
-      state.error = action.payload;
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(signInWithGoogle.pending, (state) => {
+        state.status = 'pending';
+      })
+      .addCase(signInWithGoogle.fulfilled, (state, action) => {
+        state.status = 'fulfilled';
+        state.user = action.payload;
+        state.isLoggedIn = true;
+        localStorage.setItem('user', JSON.stringify(action.payload));
+        localStorage.setItem('isLoggedIn', true);
+      })
+      .addCase(signInWithGoogle.rejected, (state, action) => {
+        state.status = 'rejected';
+        state.error = action.payload;
+      });
   },
 });
 
