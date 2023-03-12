@@ -13,7 +13,6 @@ const Note = ({ note }) => {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ duration: 0.5 }}
       whileHover={{ scale: 1.05 }}
-      key={note.id}
     >
       <div className="card-data">
         <h4>{note.title}</h4>

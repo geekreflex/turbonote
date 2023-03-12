@@ -1,33 +1,44 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import {
+  removeSelectedNote,
+  setSelectedNote,
+} from '../features/note/noteSlice';
 import Note from './Note';
+import ViewNote from './ViewNote';
 
 const NoteList = () => {
-  const { notes } = useSelector((state) => state.note);
+  const dispatch = useDispatch();
+  const { notes, note } = useSelector((state) => state.note);
   const [selectedId, setSelectedId] = useState(null);
+
+  const selectedNote = (noteId) => {
+    setSelectedId(noteId);
+    dispatch(setSelectedNote(noteId));
+  };
+
+  const removeNote = () => {
+    setSelectedId(null);
+    dispatch(removeSelectedNote());
+  };
 
   return (
     <div>
       <NoteListWrap>
-        {notes.map((note) => (
-          <motion.div layoutId={note.id} onClick={() => setSelectedId(note.id)}>
-            <Note note={note} key={note.id} />
+        {notes?.map((note) => (
+          <motion.div
+            layoutId={note.id}
+            onClick={() => selectedNote(note.id)}
+            key={note.id}
+          >
+            <Note note={note} />
           </motion.div>
         ))}
       </NoteListWrap>
-      <AnimatePresence>
-        {selectedId && (
-          <motion.div layoutId={selectedId}>
-            <motion.h5>{'Hi everyone'}</motion.h5>
-            <motion.h2>{'This is a logn cone'}</motion.h2>
-            <motion.button onClick={() => setSelectedId(null)}>
-              click
-            </motion.button>
-          </motion.div>
-        )}
-      </AnimatePresence>
+
+      <ViewNote selectedId={selectedId} remove={removeNote} />
     </div>
   );
 };

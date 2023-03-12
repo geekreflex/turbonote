@@ -16,6 +16,7 @@ import { serializeTimestamps } from '../../utils/serializeTimestamp';
 
 const initialState = {
   notes: [],
+  note: null,
 };
 
 const noteSlice = createSlice({
@@ -31,10 +32,23 @@ const noteSlice = createSlice({
     removeNote: (state, action) => {
       state.notes = state.notes.filter((note) => note.id !== action.payload);
     },
+
+    setSelectedNote: (state, action) => {
+      state.note = state.notes.find((note) => note.id === action.payload);
+    },
+    removeSelectedNote: (state) => {
+      state.note = null;
+    },
   },
 });
 
-export const { setNotes, addNote, removeNote } = noteSlice.actions;
+export const {
+  setNotes,
+  addNote,
+  removeNote,
+  setSelectedNote,
+  removeSelectedNote,
+} = noteSlice.actions;
 
 export const listenForNotes = () => (dispatch, getState) => {
   try {
@@ -83,16 +97,18 @@ export const createNote = (note) => async (dispatch, getState) => {
       ...noteToAdd,
       id: docRef.id,
     });
-    dispatch(addNote(serializeNoteData));
+    dispatch(addNote({ serializeNoteData, id: 234 }));
   } catch (error) {
     console.error('Error creating note:', error);
   }
 };
 
-export const updateNote = (id, update) => async (dispatch) => {
+export const updateNote = (update) => async (dispatch) => {
   try {
-    await updateDoc(doc(db, 'notes', id), update);
-    dispatch();
+    await updateDoc(doc(db, 'notes', update.id), {
+      ...update.data,
+      updatedAt: serverTimestamp(),
+    });
   } catch (error) {
     console.error('Error updateing note:', error);
   }
