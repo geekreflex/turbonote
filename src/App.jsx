@@ -13,8 +13,8 @@ function App() {
   const { isLoggedIn } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    dispatch(listenForAuthChanges());
     dispatch(listenForNotes());
+    dispatch(listenForAuthChanges());
   }, []);
 
   return (

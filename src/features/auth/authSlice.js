@@ -20,11 +20,15 @@ const authSlice = createSlice({
     setUserAuth: (state, action) => {
       state.user = action.payload;
       state.isLoggedIn = true;
+      localStorage.setItem('user', JSON.stringify(action.payload));
+      localStorage.setItem('isLoggedIn', true);
     },
     clearUserAuth: (state, action) => {
       state.user = null;
       state.isLoggedIn = false;
       state.error = action.payload;
+      localStorage.removeItem('isLoggedIn');
+      localStorage.removeItem('user');
     },
     checkUserAuthStorage: (state) => {
       state.isLoggedIn = localStorage.getItem('isLoggedIn') || false;
@@ -43,15 +47,8 @@ export const listenForAuthChanges = () => (dispatch) => {
     if (user) {
       const { uid, displayName, email, photoURL } = user;
       dispatch(setUserAuth({ uid, displayName, email, photoURL }));
-      localStorage.setItem('isLoggedIn', true);
-      localStorage.setItem(
-        'user',
-        JSON.stringify({ uid, displayName, email, photoURL })
-      );
     } else {
       dispatch(clearUserAuth(null));
-      localStorage.removeItem('isLoggedIn');
-      localStorage.removeItem('user');
     }
   });
 };
@@ -62,16 +59,9 @@ export const signInWithGoogle = () => (dispatch) => {
     .then((result) => {
       const { uid, displayName, email, photoURL } = result.user;
       dispatch(setUserAuth({ uid, displayName, email, photoURL }));
-      localStorage.setItem('isLoggedIn', true);
-      localStorage.setItem(
-        'user',
-        JSON.stringify({ uid, displayName, email, photoURL })
-      );
     })
     .catch((error) => {
       dispatch(clearUserAuth(error.message));
-      localStorage.removeItem('isLoggedIn');
-      localStorage.removeItem('user');
     });
 };
 
