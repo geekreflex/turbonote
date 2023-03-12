@@ -6,6 +6,8 @@ import { listenForNotes } from '../features/note/noteSlice';
 import styled from 'styled-components';
 import Navbar from '../components/Navbar';
 import { Container } from '../styles/GlobalStyles';
+import ViewNote from '../components/ViewNote';
+import { Link } from 'react-router-dom';
 
 const Note = () => {
   const dispatch = useDispatch();
@@ -15,8 +17,12 @@ const Note = () => {
   return (
     <div>
       <Container>
+        <div>
+          <Link to="/">Turbo Note</Link>
+        </div>
         <NoteList />
         <CreateNote />
+        <ViewNote />
         <Navbar />
       </Container>
     </div>

@@ -1,44 +1,18 @@
-import { AnimatePresence, motion } from 'framer-motion';
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import {
-  removeSelectedNote,
-  setSelectedNote,
-} from '../features/note/noteSlice';
+
 import Note from './Note';
-import ViewNote from './ViewNote';
 
 const NoteList = () => {
-  const dispatch = useDispatch();
-  const { notes, note } = useSelector((state) => state.note);
-  const [selectedId, setSelectedId] = useState(null);
-
-  const selectedNote = (noteId) => {
-    setSelectedId(noteId);
-    dispatch(setSelectedNote(noteId));
-  };
-
-  const removeNote = () => {
-    setSelectedId(null);
-    dispatch(removeSelectedNote());
-  };
+  const { notes } = useSelector((state) => state.note);
 
   return (
     <div>
       <NoteListWrap>
         {notes?.map((note) => (
-          <motion.div
-            layoutId={note.id}
-            onClick={() => selectedNote(note.id)}
-            key={note.id}
-          >
-            <Note note={note} />
-          </motion.div>
+          <Note note={note} key={note.id} />
         ))}
       </NoteListWrap>
-
-      <ViewNote selectedId={selectedId} remove={removeNote} />
     </div>
   );
 };

@@ -2,24 +2,37 @@ import { motion } from 'framer-motion';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
+import { deleteNote, setSelectedNote } from '../features/note/noteSlice';
+import { shortenSentence } from '../utils/convert';
 
 const Note = ({ note }) => {
   const dispatch = useDispatch();
 
+  const handleDeleteNote = (e) => {
+    e.stopPropagation();
+    dispatch(deleteNote(note.id));
+  };
+
+  const handleViewNote = () => {
+    dispatch(setSelectedNote(note.id));
+  };
+
   return (
     <NoteCard
       as={motion.div}
-      initial={{ opacity: 0, y: 100, scale: 0 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
+      initial={{ scale: 0, y: 300 }}
+      animate={{ scale: 1, y: 0 }}
+      exit={{ scale: 0, y: -600 }}
       transition={{ duration: 0.5 }}
-      whileHover={{ scale: 1.05 }}
     >
-      <div className="card-data">
+      <div className="card-data" onClick={handleViewNote}>
         <h4>{note.title}</h4>
-        <p>{note.content}</p>
+        <p>{shortenSentence(note.content, 110)}</p>
       </div>
       <div className="card-actions">
-        <button className="card-actions__del">del</button>
+        <button className="card-actions__del " onClick={handleDeleteNote}>
+          del
+        </button>
       </div>
     </NoteCard>
   );
@@ -32,6 +45,11 @@ const NoteCard = styled.div`
 
   .card-data {
     padding: 10px;
+    height: 100px;
+
+    h4 {
+      margin-bottom: 10px;
+    }
   }
 
   .card-actions {
