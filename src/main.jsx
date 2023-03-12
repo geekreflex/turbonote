@@ -6,6 +6,7 @@ import './index.css';
 import { Provider } from 'react-redux';
 import { store } from './app/store';
 import { checkUserAuthStorage } from './features/auth/authSlice';
+import GlobalStyles from './styles/GlobalStyles';
 
 store.dispatch(checkUserAuthStorage());
 
@@ -13,6 +14,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
       <Router>
+        <GlobalStyles />
         <App />
       </Router>
     </Provider>
