@@ -11,4 +11,8 @@ export const store = configureStore({
     label: labelReducer,
     action: actionReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });

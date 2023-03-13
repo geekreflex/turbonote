@@ -71,11 +71,9 @@ export const listenForNotes = () => (dispatch, getState) => {
         return {
           id: doc.id,
           ...data,
-          createdAt: data.createdAt ? data.createdAt.toDate().getTime() : null,
-          updatedAt: data.createdAt ? data.createdAt.toDate().getTime() : null,
         };
       });
-      dispatch(setNotes(notes));
+      dispatch(setNotes(serializeTimestamps(notes)));
     });
   } catch (error) {
     console.log('Error:', error.message);
@@ -91,13 +89,12 @@ export const createNote = (note) => async (dispatch, getState) => {
       userId: uid,
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp(),
+      pinned: false,
+      trashed: false,
     };
-    const docRef = await addDoc(collection(db, 'notes'), noteToAdd);
-    const serializeNoteData = serializeTimestamps({
-      ...noteToAdd,
-      id: docRef.id,
-    });
-    dispatch(addNote({ serializeNoteData, id: 234 }));
+    await addDoc(collection(db, 'notes'), noteToAdd);
+
+    dispatch(addNote({ ...noteToAdd, id: 234 }));
   } catch (error) {
     console.error('Error creating note:', error);
   }
@@ -120,6 +117,26 @@ export const deleteNote = (noteId) => async (dispatch) => {
     dispatch(removeNote(noteId));
   } catch (error) {
     console.error('Error deleting note:', error);
+  }
+};
+
+export const pinNote = (note) => async (dispatch) => {
+  try {
+    await updateDoc(doc(db, 'notes', note.id), {
+      ...note,
+    });
+  } catch (error) {
+    console.error('Error pinning note:', error);
+  }
+};
+
+export const archiveNote = (note) => async (dispatch) => {
+  try {
+    await updateDoc(doc(db, 'notes', note.id), {
+      ...note,
+    });
+  } catch (error) {
+    console.error('Error archiving note:', error);
   }
 };
 

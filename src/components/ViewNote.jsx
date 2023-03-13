@@ -74,7 +74,7 @@ const ViewNote = () => {
                 {editContent}
               </Content>
               <EditTime>
-                <span id="edited">Edited</span> <Time time={note.updatedAt} />
+                <span id="edited">Edited</span> <Time time={note?.updatedAt} />
               </EditTime>
             </ViewData>
             <ViewActions>

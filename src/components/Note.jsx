@@ -2,10 +2,16 @@ import { motion } from 'framer-motion';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { deleteNote, setSelectedNote } from '../features/note/noteSlice';
+import {
+  deleteNote,
+  pinNote,
+  setSelectedNote,
+} from '../features/note/noteSlice';
 import { shortenSentence } from '../utils/convert';
+import ArchiveIcon from './icons/ArchiveIcon';
 import BinIcon from './icons/BinIcon';
 import PinIcon from './icons/PinIcon';
+import StarIcon from './icons/StarIcon';
 
 const Note = ({ note }) => {
   const dispatch = useDispatch();
@@ -13,6 +19,17 @@ const Note = ({ note }) => {
   const handleDeleteNote = (e) => {
     e.stopPropagation();
     dispatch(deleteNote(note.id));
+  };
+
+  const handlePinNote = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    console.log('here');
+    const payload = {
+      ...note,
+      pinned: !note.pinned,
+    };
+    dispatch(pinNote(payload));
   };
 
   const handleViewNote = () => {
@@ -25,18 +42,32 @@ const Note = ({ note }) => {
       initial={{ scale: 0, y: 300 }}
       animate={{ scale: 1, y: 0 }}
       exit={{ scale: 0, y: -600 }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.2 }}
+      whileHover={{
+        scale: 1.05,
+        boxShadow: `rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px`,
+      }}
+      whileTap={{ scale: 0.8 }}
+      onPointerDownCapture={(e) => e.stopPropagation()}
     >
+      {note.pinned && (
+        <Star>
+          <StarIcon />
+        </Star>
+      )}
       <div className="card-data" onClick={handleViewNote}>
         <h4>{note.title}</h4>
         <p>{note && shortenSentence(note.content, 110)}</p>
       </div>
       <div className="card-actions">
-        <ButtonIconSm className="card-actions__del " onClick={handleDeleteNote}>
+        <ButtonIconSm onClick={handleDeleteNote}>
           <BinIcon />
         </ButtonIconSm>
-        <ButtonIconSm className="card-actions__del ">
+        <ButtonIconSm onClick={handlePinNote}>
           <PinIcon />
+        </ButtonIconSm>
+        <ButtonIconSm>
+          <ArchiveIcon />
         </ButtonIconSm>
       </div>
     </NoteCard>
@@ -47,6 +78,8 @@ const NoteCard = styled.div`
   cursor: default;
   background-color: #fff;
   border-radius: 21px;
+  box-shadow: 0 0px 1px 1px #eee;
+  position: relative;
 
   .card-data {
     padding: 30px;
@@ -100,6 +133,20 @@ const ButtonIconSm = styled.button`
     background-color: #eee;
     color: #222;
   }
+`;
+
+const Star = styled.div`
+  position: absolute;
+  background-color: #444;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  border-radius: 50%;
+  right: -10px;
+  top: -10px;
 `;
 
 export default Note;

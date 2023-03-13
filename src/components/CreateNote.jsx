@@ -16,6 +16,7 @@ const CreateNote = () => {
   const handleCreateNote = (e) => {
     e.preventDefault();
     dispatch(createNote({ title, content }));
+    closeModal();
   };
 
   const closeModal = () => {
