@@ -10,6 +10,7 @@ import ViewNote from '../components/ViewNote';
 import { Link } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import AddEditLabels from '../components/AddEditLabels';
+import { signOutUser } from '../features/auth/authSlice';
 
 const Note = () => {
   const dispatch = useDispatch();
@@ -29,6 +30,7 @@ const Note = () => {
             <Link to="/">
               <span>🚀🚀🚀</span>
             </Link>
+            <button onClick={() => dispatch(signOutUser())}>Logout</button>
           </Logo>
           <NoteList />
           <CreateNote />

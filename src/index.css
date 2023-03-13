@@ -12,6 +12,7 @@ input {
 /* Change the scrollbar style for webkit-based browsers */
 ::-webkit-scrollbar {
   width: 10px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-track {

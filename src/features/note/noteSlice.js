@@ -12,7 +12,6 @@ import {
   where,
 } from 'firebase/firestore';
 import { db } from '../../config/firebase';
-import { serializeTimestamps } from '../../utils/serializeTimestamp';
 
 const initialState = {
   notes: [],
@@ -78,7 +77,7 @@ export const listenForNotes = () => (dispatch, getState) => {
           ...data,
         };
       });
-      dispatch(setNotes(serializeTimestamps(notes)));
+      dispatch(setNotes(notes));
       localStorage.setItem('notes', JSON.stringify(notes));
     });
   } catch (error) {

@@ -1,20 +1,14 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 const Labels = () => {
-  const labels = [
-    { name: 'All' },
-    { name: 'Personal' },
-    { name: 'Work' },
-    { name: 'School' },
-    { name: 'Designs' },
-    { name: 'Coding' },
-    { name: 'Ideas' },
-  ];
+  const { labels } = useSelector((state) => state.label);
   return (
     <LabelsWrap>
+      <button>All</button>
       {labels.map((label) => (
-        <button key={label.name}>{label.name}</button>
+        <button key={label.id}>{label.name}</button>
       ))}
     </LabelsWrap>
   );
@@ -26,6 +20,7 @@ const LabelsWrap = styled.div`
   display: flex;
   justify-content: center;
   gap: 10px;
+  flex-wrap: wrap;
 
   button {
     padding: 5px 10px;

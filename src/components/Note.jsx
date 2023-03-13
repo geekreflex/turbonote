@@ -13,6 +13,7 @@ import { shortenSentence } from '../utils/convert';
 import ArchiveIcon from './icons/ArchiveIcon';
 import BinIcon from './icons/BinIcon';
 import PinIcon from './icons/PinIcon';
+import PinIcon2 from './icons/PinIcon2';
 import StarIcon from './icons/StarIcon';
 
 const Note = ({ note }) => {
@@ -61,11 +62,9 @@ const Note = ({ note }) => {
       whileTap={{ scale: 0.8 }}
       onPointerDownCapture={(e) => e.stopPropagation()}
     >
-      {note.pinned && (
-        <Star>
-          <StarIcon />
-        </Star>
-      )}
+      <Pin onClick={handlePinNote} className="pin">
+        {note.pinned ? <PinIcon2 /> : <PinIcon />}
+      </Pin>
       <div className="card-data" onClick={handleViewNote}>
         <h4>{note.title}</h4>
         <p>{note && shortenSentence(note.content, 110)}</p>
@@ -73,9 +72,6 @@ const Note = ({ note }) => {
       <div className="card-actions">
         <ButtonIconSm onClick={handleDeleteNote}>
           <BinIcon />
-        </ButtonIconSm>
-        <ButtonIconSm onClick={handlePinNote}>
-          <PinIcon />
         </ButtonIconSm>
         <ButtonIconSm onClick={handleArchiveNote}>
           <ArchiveIcon />
@@ -117,7 +113,16 @@ const NoteCard = styled.div`
     }
   }
 
+  .pin {
+    visibility: hidden;
+    opacity: 0;
+  }
+
   :hover {
+    .pin {
+      visibility: visible;
+      opacity: 1;
+    }
     .card-actions {
       button {
         visibility: visible;
@@ -146,18 +151,26 @@ const ButtonIconSm = styled.button`
   }
 `;
 
-const Star = styled.div`
+const Pin = styled.div`
   position: absolute;
-  background-color: #444;
   width: 30px;
   height: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #fff;
+  color: #444;
   border-radius: 50%;
-  right: -10px;
-  top: -10px;
+  right: 10px;
+  top: 10px;
+  font-size: 20px;
+  cursor: pointer;
+
+  :hover {
+    :hover {
+      background-color: #eee;
+      color: #222;
+    }
+  }
 `;
 
 export default Note;

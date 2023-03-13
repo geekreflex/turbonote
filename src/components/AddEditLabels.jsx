@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { toggleAddEditLabel } from '../features/action/actionSlice';
+import { createLabel } from '../features/label/labelSlice';
 import { Overlay } from '../styles/GlobalStyles';
 
 const AddEditLabels = () => {
@@ -10,6 +11,11 @@ const AddEditLabels = () => {
   const { labels } = useSelector((state) => state.label);
   const { addLabelModal } = useSelector((state) => state.action);
   const [name, setName] = useState('');
+
+  const handleCreateLabel = (e) => {
+    e.preventDefault();
+    dispatch(createLabel({ name }));
+  };
 
   const closeModal = () => {
     dispatch(toggleAddEditLabel(false));
@@ -34,12 +40,15 @@ const AddEditLabels = () => {
             transition={{ duration: 0.5 }}
           >
             <div>
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Create new label"
-              />
+              <form onSubmit={handleCreateLabel}>
+                <input
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="Create new label"
+                />
+                <button>create</button>
+              </form>
             </div>
           </Main>
         </AddEditLabelsWrap>

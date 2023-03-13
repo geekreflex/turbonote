@@ -7,14 +7,16 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { listenForAuthChanges } from './features/auth/authSlice';
 import { listenForNotes } from './features/note/noteSlice';
+import { listenForLabels } from './features/label/labelSlice';
 
 function App() {
   const dispatch = useDispatch();
   const { isLoggedIn } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    dispatch(listenForNotes());
     dispatch(listenForAuthChanges());
+    dispatch(listenForNotes());
+    dispatch(listenForLabels());
   }, []);
 
   return (

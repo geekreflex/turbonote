@@ -1,7 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addDoc, serverTimestamp } from 'firebase/firestore';
+import {
+  addDoc,
+  collection,
+  onSnapshot,
+  orderBy,
+  query,
+  serverTimestamp,
+  where,
+} from 'firebase/firestore';
 import { db } from '../../config/firebase';
-import { serializeTimestamps } from '../../utils/serializeTimestamp';
 
 const initialState = {
   labels: [],
@@ -14,10 +21,44 @@ const labelSlice = createSlice({
     addLabel: (state, action) => {
       state.labels.push(action.payload);
     },
+    setLabels: (state, action) => {
+      state.labels = action.payload;
+    },
   },
 });
 
-export const { addLabel } = labelSlice.actions;
+export const { addLabel, setLabels } = labelSlice.actions;
+
+export const listenForLabels = () => (dispatch, getState) => {
+  try {
+    const { isLoggedIn } = getState().auth;
+
+    if (!isLoggedIn) {
+      return;
+    }
+
+    const uid = getState().auth.user.uid;
+
+    const q = query(
+      collection(db, 'labels'),
+      where('userId', '==', uid),
+      orderBy('createdAt')
+    );
+    onSnapshot(q, (snapshot) => {
+      const labels = snapshot.docs.map((doc) => {
+        const data = doc.data();
+        return {
+          id: doc.id,
+          ...data,
+        };
+      });
+      dispatch(setLabels(labels));
+      localStorage.setItem('labels', JSON.stringify(labels));
+    });
+  } catch (error) {
+    console.log('Error:', error.message);
+  }
+};
 
 export const createLabel = (label) => async (dispatch, getState) => {
   const uid = getState().auth.user.uid;
@@ -30,12 +71,9 @@ export const createLabel = (label) => async (dispatch, getState) => {
       updatedAt: serverTimestamp(),
     };
 
-    const docRef = await addDoc(collection(db, 'labels'), labelToAdd);
-    const serializedLabelData = serializeTimestamps({
-      ...labelToAdd,
-      id: docRef.id,
-    });
-    dispatch(addLabel({ serializedLabelData, id: 234 }));
+    await addDoc(collection(db, 'labels'), labelToAdd);
+
+    dispatch(addLabel({ ...labelToAdd, id: 234 }));
   } catch (error) {
     console.error('Error creating label:', error);
   }

@@ -49,7 +49,7 @@ export const listenForAuthChanges = () => (dispatch) => {
       dispatch(setUserAuth({ uid, displayName, email, photoURL }));
     } else {
       dispatch(clearUserAuth(null));
-      localSorage.removeItem('notes');
+      localStorage.removeItem('notes');
     }
   });
 };

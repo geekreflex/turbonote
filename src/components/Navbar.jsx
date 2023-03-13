@@ -10,7 +10,6 @@ import AddIcon from './icons/AddIcon';
 import ArchiveIcon from './icons/ArchiveIcon';
 import BinIcon from './icons/BinIcon';
 import EditIcon from './icons/EditIcon';
-import LabelIcon from './icons/LabelIcon';
 
 const Navbar = () => {
   const { user } = useSelector((state) => state.auth);
@@ -102,6 +101,7 @@ const NavMain = styled.div`
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   pointer-events: auto;
   justify-content: space-between;
+  align-items: center;
 `;
 const Avatar = styled.div`
   display: flex;
