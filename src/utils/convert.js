@@ -7,6 +7,11 @@ export const shortenText = (text, maxLength) => {
 };
 
 export function shortenSentence(sentence, n) {
+  // If sentence is not provided, return an empty string
+  if (!sentence) {
+    return '';
+  }
+
   // If the sentence is already shorter than n characters, return it as is
   if (sentence.length <= n) {
     return sentence;
@@ -18,9 +23,9 @@ export function shortenSentence(sentence, n) {
     boundaryIndex--;
   }
 
-  // If the boundary is at the beginning of the sentence, return an empty string
+  // If the boundary is at the beginning of the sentence, return the full sentence
   if (boundaryIndex === 0) {
-    return '';
+    return sentence;
   }
 
   // Shorten the sentence to the boundary, trim any trailing whitespace, and add an ellipsis

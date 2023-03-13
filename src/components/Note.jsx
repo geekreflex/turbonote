@@ -27,7 +27,7 @@ const Note = ({ note }) => {
     >
       <div className="card-data" onClick={handleViewNote}>
         <h4>{note.title}</h4>
-        <p>{shortenSentence(note.content, 110)}</p>
+        <p>{note && shortenSentence(note.content, 110)}</p>
       </div>
       <div className="card-actions">
         <button className="card-actions__del " onClick={handleDeleteNote}>
@@ -41,14 +41,20 @@ const Note = ({ note }) => {
 const NoteCard = styled.div`
   cursor: default;
   background-color: #fff;
-  border-radius: 8px;
+  border-radius: 21px;
 
   .card-data {
-    padding: 10px;
-    height: 100px;
+    padding: 30px;
+    height: 110px;
 
     h4 {
       margin-bottom: 10px;
+      color: #333;
+    }
+
+    p {
+      color: #444;
+      line-height: 1.3;
     }
   }
 

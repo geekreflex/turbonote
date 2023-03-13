@@ -1,10 +1,16 @@
 import { motion } from 'framer-motion';
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { toggleAddNote } from '../features/action/actionSlice';
 
 const Navbar = () => {
   const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  const handleAddNoteModal = () => {
+    dispatch(toggleAddNote(true));
+  };
   return (
     <NavWrap>
       <NavMain
@@ -16,6 +22,7 @@ const Navbar = () => {
         <Avatar>
           <img src={user.photoURL} alt={user.displayName} />
         </Avatar>
+        <button onClick={handleAddNoteModal}>Add Note</button>
       </NavMain>
     </NavWrap>
   );
@@ -32,6 +39,7 @@ const NavWrap = styled.div`
   bottom: 0;
   padding: 30px 0;
   left: 0;
+  pointer-events: none;
 `;
 const NavMain = styled.div`
   width: 400px;
@@ -40,6 +48,7 @@ const NavMain = styled.div`
   border-radius: 50px;
   display: flex;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  pointer-events: auto;
 `;
 const Avatar = styled.div`
   display: flex;

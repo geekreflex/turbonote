@@ -22,7 +22,8 @@ export default NoteList;
 export const NoteListWrap = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-  gap: 15px;
+  gap: 25px;
   list-style: none;
   margin-top: 20px;
+  margin-bottom: 150px;
 `;
