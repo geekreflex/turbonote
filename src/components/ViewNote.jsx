@@ -3,14 +3,22 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { removeSelectedNote, updateNote } from '../features/note/noteSlice';
+import {
+  removeSelectedNote,
+  setSelectedNote,
+  updateNote,
+} from '../features/note/noteSlice';
 import { Overlay } from '../styles/GlobalStyles';
 import Time from './excerpts/Time';
 
 const ViewNote = () => {
   const dispatch = useDispatch();
-  const { note } = useSelector((state) => state.note);
+  const navigate = useNavigate();
+  const localtion = useLocation();
+  const noteId = localtion.hash.substr(6);
+  const { note, notes } = useSelector((state) => state.note);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [editTitle, setEditTitle] = useState('');
@@ -23,7 +31,13 @@ const ViewNote = () => {
       setEditTitle(note.title);
       setEditContent(note.content);
     }
-  }, [note]);
+  }, [note, noteId]);
+
+  useEffect(() => {
+    if (notes.length > 0 && noteId) {
+      dispatch(setSelectedNote(noteId));
+    }
+  }, [noteId, notes]);
 
   const handleUpdateNote = () => {
     const payload = {
@@ -35,6 +49,7 @@ const ViewNote = () => {
 
   const handleCloseNote = () => {
     dispatch(removeSelectedNote());
+    navigate('/note');
   };
 
   return (

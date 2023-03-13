@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import {
   archiveNote,
@@ -16,6 +17,7 @@ import StarIcon from './icons/StarIcon';
 
 const Note = ({ note }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleDeleteNote = (e) => {
     e.stopPropagation();
@@ -42,6 +44,7 @@ const Note = ({ note }) => {
 
   const handleViewNote = () => {
     dispatch(setSelectedNote(note.id));
+    navigate(`#note/${note.id}`);
   };
 
   return (
