@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { removeSelectedNote, updateNote } from '../features/note/noteSlice';
 import { Overlay } from '../styles/GlobalStyles';
+import Time from './excerpts/Time';
 
 const ViewNote = () => {
   const dispatch = useDispatch();
@@ -72,6 +73,9 @@ const ViewNote = () => {
               >
                 {editContent}
               </Content>
+              <EditTime>
+                <span id="edited">Edited</span> <Time time={note.updatedAt} />
+              </EditTime>
             </ViewData>
             <ViewActions>
               <button onClick={handleUpdateNote}>Update Note</button>
@@ -109,7 +113,7 @@ const ViewNoteMain = styled.div`
 `;
 
 const ViewData = styled.div`
-  overflow-y: scroll;
+  overflow-y: auto;
   flex: 1;
   padding: 15px;
   border-radius: 20px;
@@ -141,4 +145,13 @@ const Content = styled.div`
   letter-spacing: 0.00625em;
   font-weight: 400;
   color: #333;
+`;
+
+const EditTime = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  font-size: 12px;
+  color: #444;
+  gap: 3px;
+  font-weight: 400;
 `;
