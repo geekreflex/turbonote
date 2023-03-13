@@ -9,6 +9,7 @@ import { Container } from '../styles/GlobalStyles';
 import ViewNote from '../components/ViewNote';
 import { Link } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
+import AddEditLabels from '../components/AddEditLabels';
 
 const Note = () => {
   const dispatch = useDispatch();
@@ -26,12 +27,12 @@ const Note = () => {
         <Container>
           <Logo>
             <Link to="/">
-              <span>🚀</span>
-              Turbo Note
+              <span>🚀🚀🚀</span>
             </Link>
           </Logo>
           <NoteList />
           <CreateNote />
+          <AddEditLabels />
           <ViewNote />
           <Navbar />
         </Container>

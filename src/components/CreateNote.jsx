@@ -9,7 +9,7 @@ import { AutoResizableTextarea } from './Expand';
 
 const CreateNote = () => {
   const dispatch = useDispatch();
-  const { addNote } = useSelector((state) => state.action);
+  const { addNoteModal } = useSelector((state) => state.action);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
 
@@ -25,7 +25,7 @@ const CreateNote = () => {
 
   return (
     <AnimatePresence>
-      {addNote && (
+      {addNoteModal && (
         <CreateNoteWrap>
           <Overlay
             as={motion.div}

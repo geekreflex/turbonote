@@ -39,6 +39,10 @@ const noteSlice = createSlice({
     removeSelectedNote: (state) => {
       state.note = null;
     },
+    getNotesFromStorage: (state, action) => {
+      const json = localStorage.getItem('note');
+      state.notes = json ? JSON.parse(json) : [];
+    },
   },
 });
 
@@ -48,6 +52,7 @@ export const {
   removeNote,
   setSelectedNote,
   removeSelectedNote,
+  getNotesFromStorage,
 } = noteSlice.actions;
 
 export const listenForNotes = () => (dispatch, getState) => {
@@ -74,6 +79,7 @@ export const listenForNotes = () => (dispatch, getState) => {
         };
       });
       dispatch(setNotes(serializeTimestamps(notes)));
+      localStorage.setItem('notes', JSON.stringify(notes));
     });
   } catch (error) {
     console.log('Error:', error.message);

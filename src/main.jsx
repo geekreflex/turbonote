@@ -7,8 +7,10 @@ import { Provider } from 'react-redux';
 import { store } from './app/store';
 import { checkUserAuthStorage } from './features/auth/authSlice';
 import GlobalStyles from './styles/GlobalStyles';
+import { getNotesFromStorage } from './features/note/noteSlice';
 
 store.dispatch(checkUserAuthStorage());
+store.dispatch(getNotesFromStorage());
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import Labels from './Labels';
 
 import Note from './Note';
 
@@ -17,6 +18,7 @@ const NoteList = () => {
 
   return (
     <div>
+      <Labels />
       <NoteListWrap>
         {sortedNotes?.map((note) => (
           <Note note={note} key={note.id} />

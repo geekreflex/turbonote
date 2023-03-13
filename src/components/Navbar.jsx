@@ -2,10 +2,14 @@ import { motion } from 'framer-motion';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { toggleAddNote } from '../features/action/actionSlice';
+import {
+  toggleAddEditLabel,
+  toggleAddNote,
+} from '../features/action/actionSlice';
 import AddIcon from './icons/AddIcon';
 import ArchiveIcon from './icons/ArchiveIcon';
 import BinIcon from './icons/BinIcon';
+import EditIcon from './icons/EditIcon';
 import LabelIcon from './icons/LabelIcon';
 
 const Navbar = () => {
@@ -15,6 +19,11 @@ const Navbar = () => {
   const handleAddNoteModal = () => {
     dispatch(toggleAddNote(true));
   };
+
+  const handleAddEditLabel = () => {
+    dispatch(toggleAddEditLabel(true));
+  };
+
   return (
     <NavWrap>
       <NavMain
@@ -41,7 +50,6 @@ const Navbar = () => {
           <AddIcon />
         </ButtonIcon>
         <ButtonIcon
-          onClick={handleAddNoteModal}
           as={motion.button}
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -50,7 +58,6 @@ const Navbar = () => {
           <ArchiveIcon />
         </ButtonIcon>
         <ButtonIcon
-          onClick={handleAddNoteModal}
           as={motion.button}
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -59,12 +66,13 @@ const Navbar = () => {
           <BinIcon />
         </ButtonIcon>
         <ButtonIcon
+          onClick={handleAddEditLabel}
           as={motion.button}
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3, delay: 1 }}
         >
-          <LabelIcon />
+          <EditIcon />
         </ButtonIcon>
       </NavMain>
     </NavWrap>

@@ -3,7 +3,8 @@ import {} from 'firebase/firestore';
 import { db } from '../../config/firebase';
 
 const initialState = {
-  addNote: false,
+  addNoteModal: false,
+  addLabelModal: false,
 };
 
 const actionSlice = createSlice({
@@ -11,12 +12,15 @@ const actionSlice = createSlice({
   initialState,
   reducers: {
     toggleAddNote: (state, action) => {
-      state.addNote = action.payload;
+      state.addNoteModal = action.payload;
+    },
+    toggleAddEditLabel: (state, action) => {
+      state.addLabelModal = action.payload;
     },
   },
 });
 
-export const { toggleAddNote } = actionSlice.actions;
+export const { toggleAddNote, toggleAddEditLabel } = actionSlice.actions;
 
 export const listenForNetworkChange = () => {};
 

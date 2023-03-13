@@ -49,6 +49,7 @@ export const listenForAuthChanges = () => (dispatch) => {
       dispatch(setUserAuth({ uid, displayName, email, photoURL }));
     } else {
       dispatch(clearUserAuth(null));
+      localSorage.removeItem('notes');
     }
   });
 };
@@ -69,6 +70,7 @@ export const signOutUser = () => (dispatch) => {
   signOut(auth)
     .then(() => {
       dispatch(clearUserAuth(null));
+      localSorage.removeItem('notes');
     })
     .catch((error) => {
       dispatch(clearUserAuth(error.message));
