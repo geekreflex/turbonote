@@ -4,6 +4,8 @@ import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { deleteNote, setSelectedNote } from '../features/note/noteSlice';
 import { shortenSentence } from '../utils/convert';
+import BinIcon from './icons/BinIcon';
+import PinIcon from './icons/PinIcon';
 
 const Note = ({ note }) => {
   const dispatch = useDispatch();
@@ -30,9 +32,12 @@ const Note = ({ note }) => {
         <p>{note && shortenSentence(note.content, 110)}</p>
       </div>
       <div className="card-actions">
-        <button className="card-actions__del " onClick={handleDeleteNote}>
-          del
-        </button>
+        <ButtonIconSm className="card-actions__del " onClick={handleDeleteNote}>
+          <BinIcon />
+        </ButtonIconSm>
+        <ButtonIconSm className="card-actions__del ">
+          <PinIcon />
+        </ButtonIconSm>
       </div>
     </NoteCard>
   );
@@ -60,7 +65,9 @@ const NoteCard = styled.div`
 
   .card-actions {
     padding: 10px;
-    .card-actions__del {
+    display: flex;
+    gap: 10px;
+    button {
       visibility: hidden;
       opacity: 0;
     }
@@ -68,11 +75,30 @@ const NoteCard = styled.div`
 
   :hover {
     .card-actions {
-      .card-actions__del {
+      button {
         visibility: visible;
         opacity: 1;
       }
     }
+  }
+`;
+
+const ButtonIconSm = styled.button`
+  border: none;
+  outline: none;
+  width: 33px;
+  height: 33px;
+  font-size: 18px;
+  border-radius: 50%;
+  background-color: transparent;
+  color: #444;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  :hover {
+    background-color: #eee;
+    color: #222;
   }
 `;
 

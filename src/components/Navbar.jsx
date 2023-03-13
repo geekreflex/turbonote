@@ -3,6 +3,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { toggleAddNote } from '../features/action/actionSlice';
+import AddIcon from './icons/AddIcon';
 
 const Navbar = () => {
   const { user } = useSelector((state) => state.auth);
@@ -22,7 +23,15 @@ const Navbar = () => {
         <Avatar>
           <img src={user.photoURL} alt={user.displayName} />
         </Avatar>
-        <button onClick={handleAddNoteModal}>Add Note</button>
+        <ButtonIcon onClick={handleAddNoteModal}>
+          <AddIcon />
+        </ButtonIcon>
+        <ButtonIcon onClick={handleAddNoteModal}>
+          <AddIcon />
+        </ButtonIcon>
+        <ButtonIcon onClick={handleAddNoteModal}>
+          <AddIcon />
+        </ButtonIcon>
       </NavMain>
     </NavWrap>
   );
@@ -42,13 +51,15 @@ const NavWrap = styled.div`
   pointer-events: none;
 `;
 const NavMain = styled.div`
-  width: 400px;
+  width: 300px;
+  max-width: 100%;
   background-color: #fff;
-  padding: 15px;
+  padding: 10px 20px;
   border-radius: 50px;
   display: flex;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   pointer-events: auto;
+  justify-content: space-between;
 `;
 const Avatar = styled.div`
   display: flex;
@@ -57,4 +68,19 @@ const Avatar = styled.div`
   img {
     width: 50px;
   }
+`;
+
+const ButtonIcon = styled.button`
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 20px;
+  background-color: #222;
+  color: #fff;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

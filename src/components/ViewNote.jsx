@@ -111,7 +111,7 @@ const ViewNoteMain = styled.div`
 const ViewData = styled.div`
   overflow-y: scroll;
   flex: 1;
-  padding: 10px;
+  padding: 15px;
   border-radius: 20px;
 `;
 const ViewActions = styled.div`
@@ -129,6 +129,8 @@ const Title = styled.div`
   outline: none;
   margin-bottom: 20px;
   font-size: 25px;
+  font-weight: 400;
+  color: #222;
 `;
 const Content = styled.div`
   white-space: pre-wrap;
@@ -138,4 +140,5 @@ const Content = styled.div`
   line-height: 1.5rem;
   letter-spacing: 0.00625em;
   font-weight: 400;
+  color: #333;
 `;

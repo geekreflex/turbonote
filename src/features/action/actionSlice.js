@@ -9,7 +9,6 @@ const actionSlice = createSlice({
   initialState,
   reducers: {
     toggleAddNote: (state, action) => {
-      console.log(action.payload);
       state.addNote = action.payload;
     },
   },

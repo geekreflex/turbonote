@@ -17,9 +17,12 @@ const Note = () => {
   return (
     <div>
       <Container>
-        <div>
-          <Link to="/">Turbo Note</Link>
-        </div>
+        <Logo>
+          <Link to="/">
+            <span>🚀</span>
+            Turbo Note
+          </Link>
+        </Logo>
         <NoteList />
         <CreateNote />
         <ViewNote />
@@ -32,3 +35,15 @@ const Note = () => {
 export default Note;
 
 export const NoteWrap = styled.div``;
+export const Logo = styled.div`
+  font-size: 30px;
+  font-weight: 900;
+  margin: 20px 0;
+  a {
+    color: #333;
+    text-decoration: none;
+    span {
+      margin-right: 10px;
+    }
+  }
+`;
