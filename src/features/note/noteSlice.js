@@ -91,6 +91,7 @@ export const createNote = (note) => async (dispatch, getState) => {
       updatedAt: serverTimestamp(),
       pinned: false,
       trashed: false,
+      archived: false,
     };
     await addDoc(collection(db, 'notes'), noteToAdd);
 

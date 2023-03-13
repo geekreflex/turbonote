@@ -3,6 +3,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import {
+  archiveNote,
   deleteNote,
   pinNote,
   setSelectedNote,
@@ -24,12 +25,19 @@ const Note = ({ note }) => {
   const handlePinNote = (e) => {
     e.stopPropagation();
     e.preventDefault();
-    console.log('here');
     const payload = {
       ...note,
       pinned: !note.pinned,
     };
     dispatch(pinNote(payload));
+  };
+
+  const handleArchiveNote = (e) => {
+    const payload = {
+      ...note,
+      archived: !note.archived,
+    };
+    dispatch(archiveNote(payload));
   };
 
   const handleViewNote = () => {
@@ -66,7 +74,7 @@ const Note = ({ note }) => {
         <ButtonIconSm onClick={handlePinNote}>
           <PinIcon />
         </ButtonIconSm>
-        <ButtonIconSm>
+        <ButtonIconSm onClick={handleArchiveNote}>
           <ArchiveIcon />
         </ButtonIconSm>
       </div>

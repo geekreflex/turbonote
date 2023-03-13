@@ -8,6 +8,7 @@ import Navbar from '../components/Navbar';
 import { Container } from '../styles/GlobalStyles';
 import ViewNote from '../components/ViewNote';
 import { Link } from 'react-router-dom';
+import { AnimatePresence, motion } from 'framer-motion';
 
 const Note = () => {
   const dispatch = useDispatch();
@@ -15,20 +16,27 @@ const Note = () => {
     dispatch(listenForNotes());
   }, []);
   return (
-    <div>
-      <Container>
-        <Logo>
-          <Link to="/">
-            <span>🚀</span>
-            Turbo Note
-          </Link>
-        </Logo>
-        <NoteList />
-        <CreateNote />
-        <ViewNote />
-        <Navbar />
-      </Container>
-    </div>
+    <AnimatePresence>
+      <motion.div
+        initial={{ x: 100 }}
+        animate={{ x: 0 }}
+        transition={{ duration: 0.5 }}
+        exit={{ x: 100 }}
+      >
+        <Container>
+          <Logo>
+            <Link to="/">
+              <span>🚀</span>
+              Turbo Note
+            </Link>
+          </Logo>
+          <NoteList />
+          <CreateNote />
+          <ViewNote />
+          <Navbar />
+        </Container>
+      </motion.div>
+    </AnimatePresence>
   );
 };
 

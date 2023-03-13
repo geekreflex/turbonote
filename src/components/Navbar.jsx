@@ -4,6 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { toggleAddNote } from '../features/action/actionSlice';
 import AddIcon from './icons/AddIcon';
+import ArchiveIcon from './icons/ArchiveIcon';
+import BinIcon from './icons/BinIcon';
+import LabelIcon from './icons/LabelIcon';
 
 const Navbar = () => {
   const { user } = useSelector((state) => state.auth);
@@ -18,19 +21,50 @@ const Navbar = () => {
         as={motion.div}
         initial={{ y: 100, opacity: 0, scale: 0.5 }}
         animate={{ y: 0, opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.5, delay: 0.5 }}
       >
-        <Avatar>
+        <Avatar
+          as={motion.div}
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.3, delay: 0.6 }}
+        >
           <img src={user.photoURL} alt={user.displayName} />
         </Avatar>
-        <ButtonIcon onClick={handleAddNoteModal}>
+        <ButtonIcon
+          onClick={handleAddNoteModal}
+          as={motion.button}
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.3, delay: 0.7 }}
+        >
           <AddIcon />
         </ButtonIcon>
-        <ButtonIcon onClick={handleAddNoteModal}>
-          <AddIcon />
+        <ButtonIcon
+          onClick={handleAddNoteModal}
+          as={motion.button}
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.3, delay: 0.8 }}
+        >
+          <ArchiveIcon />
         </ButtonIcon>
-        <ButtonIcon onClick={handleAddNoteModal}>
-          <AddIcon />
+        <ButtonIcon
+          onClick={handleAddNoteModal}
+          as={motion.button}
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.3, delay: 0.9 }}
+        >
+          <BinIcon />
+        </ButtonIcon>
+        <ButtonIcon
+          as={motion.button}
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.3, delay: 1 }}
+        >
+          <LabelIcon />
         </ButtonIcon>
       </NavMain>
     </NavWrap>
@@ -75,12 +109,18 @@ const ButtonIcon = styled.button`
   border: none;
   outline: none;
   font-size: 20px;
-  background-color: #222;
-  color: #fff;
+  background-color: transparent;
+  color: #333;
   width: 50px;
   height: 50px;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+
+  :hover {
+    background-color: #333;
+    color: #fff;
+  }
 `;
