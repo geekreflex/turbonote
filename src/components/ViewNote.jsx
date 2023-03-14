@@ -46,8 +46,9 @@ const ViewNote = () => {
 
   const handleUpdateNote = () => {
     const payload = {
-      id: note.id,
-      data: { title, content },
+      ...note,
+      title,
+      content,
     };
     dispatch(updateNote(payload));
   };

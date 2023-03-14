@@ -7,17 +7,26 @@ import { createNote } from '../features/note/noteSlice';
 import { ButtonIconSm, CloseBtn, Overlay } from '../styles/GlobalStyles';
 import { AutoResizableTextarea } from './Expand';
 import LabelIcon from './icons/LabelIcon';
+import Labels from './Labels';
+import OutsideClickHandler from 'react-outside-click-handler';
 
 const CreateNote = () => {
   const dispatch = useDispatch();
   const { addNoteModal } = useSelector((state) => state.action);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [showLabels, setShowLabels] = useState(false);
+  const [selectedLabels, setSelectedLabels] = useState([]);
 
   const handleCreateNote = (e) => {
     e.preventDefault();
+    const payload = {
+      title,
+      content,
+      labels: selectedLabels,
+    };
     if (content !== '') {
-      dispatch(createNote({ title, content }));
+      dispatch(createNote(payload));
     }
     closeModal();
   };
@@ -63,7 +72,7 @@ const CreateNote = () => {
             </NoteInput>
             <NoteActions>
               <div className="left">
-                <ButtonIconSm>
+                <ButtonIconSm onClick={() => setShowLabels(true)}>
                   <LabelIcon />
                 </ButtonIconSm>
               </div>
@@ -71,6 +80,14 @@ const CreateNote = () => {
                 <CloseBtn onClick={handleCreateNote}>Close</CloseBtn>
               </div>
             </NoteActions>
+            <OutsideClickHandler onOutsideClick={() => setShowLabels(false)}>
+              {showLabels && (
+                <Labels
+                  selectedLabels={selectedLabels}
+                  setSelectedLabels={setSelectedLabels}
+                />
+              )}
+            </OutsideClickHandler>
           </CreateNoteMain>
         </CreateNoteWrap>
       )}
@@ -96,12 +113,16 @@ const CreateNoteMain = styled.div`
   background-color: #fff;
   width: 600px;
   border-radius: 21px;
+  overflow: hidden;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
     rgba(0, 0, 0, 0.04) 0px 10px 10px -5px, 0 0px 1px 1px #eee;
   @media (max-width: 680px) {
     height: 100vh;
+    width: 100%;
     border-radius: 0;
   }
+  display: flex;
+  flex-direction: column;
 `;
 
 const NoteInput = styled.div`
@@ -109,6 +130,7 @@ const NoteInput = styled.div`
   flex-direction: column;
   padding-top: 30px;
   overflow: hidden;
+  flex: 1;
 
   textarea {
     border: none;
@@ -119,12 +141,13 @@ const NoteInput = styled.div`
     overflow-y: auto !important;
     padding: 0 20px;
     font-weight: 600;
+    color: #444;
   }
 
   #title {
     min-height: 20px;
     max-height: 100px;
-    font-size: 16px;
+    font-size: 17px;
   }
 
   #content {

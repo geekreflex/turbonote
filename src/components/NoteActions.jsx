@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
@@ -9,10 +9,10 @@ import {
   trashNote,
 } from '../features/note/noteSlice';
 import { ButtonIconSm, CloseBtn } from '../styles/GlobalStyles';
-import { BinIcon, RestoreIcon } from './icons';
+import { BinIcon, LabelIcon, RestoreIcon } from './icons';
 import ArchiveIcon from './icons/ArchiveIcon';
 
-const NoteActions = ({ note, show }) => {
+const NoteActions = ({ note, show, clickLabel }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { view } = useSelector((state) => state.action);
@@ -65,6 +65,9 @@ const NoteActions = ({ note, show }) => {
             </ButtonIconSm>
             <ButtonIconSm onClick={handleArchiveNote}>
               <ArchiveIcon />
+            </ButtonIconSm>
+            <ButtonIconSm onClick={clickLabel}>
+              <LabelIcon />
             </ButtonIconSm>
           </>
         )}

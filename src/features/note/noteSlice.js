@@ -116,10 +116,10 @@ export const createNote = (note) => async (dispatch, getState) => {
   }
 };
 
-export const updateNote = (update) => async (dispatch) => {
+export const updateNote = (note) => async (dispatch) => {
   try {
-    await updateDoc(doc(db, 'notes', update.id), {
-      ...update.data,
+    await updateDoc(doc(db, 'notes', note.id), {
+      ...note,
       updatedAt: serverTimestamp(),
     });
   } catch (error) {
