@@ -20,8 +20,8 @@ const ViewNote = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const localtion = useLocation();
-  const noteId = localtion.hash.split('/')[1];
-  const { note, notes } = useSelector((state) => state.note);
+  const noteId = location.hash && localtion.hash.split('/')[1];
+  const { note } = useSelector((state) => state.note);
   const { view } = useSelector((state) => state.action);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -30,19 +30,19 @@ const ViewNote = () => {
 
   useEffect(() => {
     if (note) {
-      <div className="right">o</div>;
+      console.log('123');
       setTitle(note.title);
       setContent(note.content);
       setEditTitle(note.title);
       setEditContent(note.content);
     }
-  }, [note, noteId]);
+  }, [note]);
 
   useEffect(() => {
-    if (notes.length > 0 && noteId) {
+    if (noteId) {
       dispatch(setSelectedNote(noteId));
     }
-  }, [noteId, notes]);
+  }, [noteId]);
 
   const handleUpdateNote = () => {
     const payload = {
@@ -82,7 +82,7 @@ const ViewNote = () => {
               <Title
                 contentEditable={view === 'trash' ? false : true}
                 onInput={(e) => setTitle(e.currentTarget.textContent)}
-                onBlur={handleUpdateNote}
+                onBlur={view !== 'trash' && handleUpdateNote}
                 suppressContentEditableWarning="true"
                 data-placeholder="Title"
                 id="title"
@@ -92,7 +92,7 @@ const ViewNote = () => {
               <Content
                 contentEditable={view === 'trash' ? false : true}
                 onInput={(e) => setContent(e.currentTarget.textContent)}
-                onBlur={handleUpdateNote}
+                onBlur={view !== 'trash' && handleUpdateNote}
                 suppressContentEditableWarning="true"
               >
                 {editContent}
