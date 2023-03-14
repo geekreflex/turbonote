@@ -1,5 +1,4 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Profile from './Profile';
@@ -24,11 +23,13 @@ const Nav = () => {
 export default Nav;
 
 const NavWrap = styled.div`
+  position: relative;
   display: flex;
   justify-content: space-between;
   margin-bottom: 30px;
   align-items: center;
   height: 80px;
+  z-index: 9;
 
   .left,
   .right {

@@ -1,7 +1,6 @@
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import Labels from './Labels';
-
+import PaperIcon from './icons/PaperIcon';
 import Note from './Note';
 
 const NoteList = () => {
@@ -13,27 +12,37 @@ const NoteList = () => {
   // Sort pinned notes by date in descending order
   pinnedNotes.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
 
+  if (pinnedNotes.length === 0 && otherNotes.length === 0) {
+    return (
+      <NoNote>
+        <span>
+          <PaperIcon />
+        </span>
+        <p>You don't have any notes yet.</p>
+      </NoNote>
+    );
+  }
+
   return (
     <div>
-      <Labels />
       <NoteListWrap>
         {!!pinnedNotes.length && (
           <section>
             <h2>Pinned</h2>
-            <PinnedNotes className="note-wrap">
+            <div className="note-wrap">
               {pinnedNotes?.map((note) => (
                 <Note note={note} key={note.id} />
               ))}
-            </PinnedNotes>
+            </div>
           </section>
         )}
         <section>
           {!!pinnedNotes.length && <h2>Others</h2>}
-          <OtherNotes className="note-wrap">
+          <div className="note-wrap">
             {otherNotes?.map((note) => (
               <Note note={note} key={note.id} />
             ))}
-          </OtherNotes>
+          </div>
         </section>
       </NoteListWrap>
     </div>
@@ -64,5 +73,23 @@ const NoteListWrap = styled.div`
   }
 `;
 
-const PinnedNotes = styled.div``;
-const OtherNotes = styled.div``;
+const NoNote = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 20vh;
+  gap: 10px;
+
+  span {
+    font-size: 150px;
+    color: #777;
+    display: flex;
+  }
+
+  p {
+    font-size: 20px;
+    font-weight: 400;
+    color: #888;
+  }
+`;

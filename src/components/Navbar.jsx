@@ -82,7 +82,7 @@ const Navbar = () => {
 export default Navbar;
 
 const NavWrap = styled.div`
-  position: sticky;
+  position: fixed;
   display: flex;
   justify-content: center;
   align-items: center;

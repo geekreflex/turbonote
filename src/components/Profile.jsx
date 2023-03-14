@@ -1,14 +1,34 @@
+import { AnimatePresence, motion } from 'framer-motion';
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import LogoutIcon from './icons/LogoutIcon';
 import SettingsIcon from './icons/SettingsIcon';
+import OutsideClickHandler from 'react-outside-click-handler';
+import { signOutUser } from '../features/auth/authSlice';
 
 const Profile = () => {
+  const [show, setShow] = useState(false);
+
   return (
     <ProfileWrap>
-      <Img size={40} />
-      <Dropdown />
+      <OutsideClickHandler onOutsideClick={() => setShow(false)}>
+        <span onClick={() => setShow(true)}>
+          <Img size={40} />
+        </span>
+        <AnimatePresence>
+          {show && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0 }}
+            >
+              <Dropdown />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </OutsideClickHandler>
     </ProfileWrap>
   );
 };
@@ -16,6 +36,7 @@ const Profile = () => {
 export default Profile;
 
 const Dropdown = () => {
+  const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
 
   return (
@@ -34,13 +55,13 @@ const Dropdown = () => {
           <span className="li-icon">
             <SettingsIcon />
           </span>
-          <span>Sign out</span>
+          <span>Settings</span>
         </li>
-        <li>
+        <li onClick={() => dispatch(signOutUser())}>
           <span className="li-icon">
             <LogoutIcon />
           </span>
-          <span>Settings</span>
+          <span>Sign out</span>
         </li>
       </ul>
     </DropdownWrap>
