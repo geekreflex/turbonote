@@ -11,6 +11,7 @@ import {
   updateNote,
 } from '../features/note/noteSlice';
 import { Overlay } from '../styles/GlobalStyles';
+import { serializeTimestamps } from '../utils/serializeTimestamp';
 import Time from './excerpts/Time';
 
 const ViewNote = () => {
@@ -89,11 +90,13 @@ const ViewNote = () => {
                 {editContent}
               </Content>
               <EditTime>
-                <span id="edited">Edited</span> <Time time={note?.updatedAt} />
+                <span id="edited">Edited</span>{' '}
+                <Time time={serializeTimestamps(note?.updatedAt)} />
               </EditTime>
             </ViewData>
             <ViewActions>
               <button onClick={handleUpdateNote}>Update Note</button>
+              <button onClick={handleCloseNote}>Close</button>
             </ViewActions>
           </ViewNoteMain>
         </ViewNoteWrap>
@@ -125,6 +128,13 @@ const ViewNoteMain = styled.div`
   border-radius: 10px;
   position: relative;
   overflow: hidden;
+
+  @media (max-width: 680px) {
+    width: 100%;
+    min-height: 100vh;
+    max-height: 100vh;
+    border-radius: 0;
+  }
 `;
 
 const ViewData = styled.div`
@@ -139,7 +149,10 @@ const ViewActions = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-top: 1px solid #ddd;
+
+  @media (max-width: 680px) {
+    height: 100px;
+  }
 `;
 
 const Title = styled.div`

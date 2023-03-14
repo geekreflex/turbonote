@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import {
   toggleAddEditLabel,
@@ -10,9 +10,9 @@ import AddIcon from './icons/AddIcon';
 import ArchiveIcon from './icons/ArchiveIcon';
 import BinIcon from './icons/BinIcon';
 import EditIcon from './icons/EditIcon';
+import SearchIcon from './icons/SearchIcon';
 
 const Navbar = () => {
-  const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   const handleAddNoteModal = () => {
@@ -31,14 +31,6 @@ const Navbar = () => {
         animate={{ y: 0, opacity: 1, scale: 1 }}
         transition={{ duration: 0.5, delay: 0.5 }}
       >
-        <Avatar
-          as={motion.div}
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.3, delay: 0.6 }}
-        >
-          <img src={user.photoURL} alt={user.displayName} />
-        </Avatar>
         <ButtonIcon
           onClick={handleAddNoteModal}
           as={motion.button}
@@ -73,6 +65,15 @@ const Navbar = () => {
         >
           <EditIcon />
         </ButtonIcon>
+        <ButtonIcon
+          onClick={handleAddEditLabel}
+          as={motion.button}
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.3, delay: 1 }}
+        >
+          <SearchIcon />
+        </ButtonIcon>
       </NavMain>
     </NavWrap>
   );
@@ -81,7 +82,7 @@ const Navbar = () => {
 export default Navbar;
 
 const NavWrap = styled.div`
-  position: fixed;
+  position: sticky;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -98,18 +99,11 @@ const NavMain = styled.div`
   padding: 10px 20px;
   border-radius: 50px;
   display: flex;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
+    rgba(0, 0, 0, 0.04) 0px 10px 10px -5px, 0 0px 1px 1px #eee;
   pointer-events: auto;
   justify-content: space-between;
   align-items: center;
-`;
-const Avatar = styled.div`
-  display: flex;
-  border-radius: 50%;
-  overflow: hidden;
-  img {
-    width: 50px;
-  }
 `;
 
 const ButtonIcon = styled.button`

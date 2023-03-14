@@ -58,6 +58,7 @@ const CreateNote = () => {
             </NoteInput>
             <NoteActions>
               <button onClick={handleCreateNote}>Create Note</button>
+              <button onClick={closeModal}>Close</button>
             </NoteActions>
           </CreateNoteMain>
         </CreateNoteWrap>
@@ -84,6 +85,10 @@ const CreateNoteMain = styled.div`
   background-color: #fff;
   width: 600px;
   border-radius: 21px;
+  @media (max-width: 680px) {
+    height: 100vh;
+    border-radius: 0;
+  }
 `;
 
 const NoteInput = styled.div`
