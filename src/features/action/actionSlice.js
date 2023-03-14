@@ -5,6 +5,7 @@ import { db } from '../../config/firebase';
 const initialState = {
   addNoteModal: false,
   addLabelModal: false,
+  view: 'note',
 };
 
 const actionSlice = createSlice({
@@ -17,10 +18,14 @@ const actionSlice = createSlice({
     toggleAddEditLabel: (state, action) => {
       state.addLabelModal = action.payload;
     },
+    setView: (state, action) => {
+      state.view = action.payload;
+    },
   },
 });
 
-export const { toggleAddNote, toggleAddEditLabel } = actionSlice.actions;
+export const { toggleAddNote, toggleAddEditLabel, setView } =
+  actionSlice.actions;
 
 export const listenForNetworkChange = () => {};
 

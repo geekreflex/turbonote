@@ -1,8 +1,9 @@
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import {
+  setView,
   toggleAddEditLabel,
   toggleAddNote,
 } from '../features/action/actionSlice';
@@ -11,9 +12,12 @@ import ArchiveIcon from './icons/ArchiveIcon';
 import BinIcon from './icons/BinIcon';
 import EditIcon from './icons/EditIcon';
 import SearchIcon from './icons/SearchIcon';
+import PlaneIcon from './icons/PlaneIcon';
+import LabelIcon from './icons/LabelIcon';
 
 const Navbar = () => {
   const dispatch = useDispatch();
+  const { view } = useSelector((state) => state.action);
 
   const handleAddNoteModal = () => {
     dispatch(toggleAddNote(true));
@@ -23,59 +27,79 @@ const Navbar = () => {
     dispatch(toggleAddEditLabel(true));
   };
 
+  const handleViewClick = (view) => {
+    dispatch(setView(view));
+  };
+
   return (
-    <NavWrap>
-      <NavMain
-        as={motion.div}
-        initial={{ y: 100, opacity: 0, scale: 0.5 }}
-        animate={{ y: 0, opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5, delay: 0.5 }}
-      >
-        <ButtonIcon
-          onClick={handleAddNoteModal}
-          as={motion.button}
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.3, delay: 0.7 }}
+    <AnimatePresence>
+      <NavWrap>
+        <NavMain
+          as={motion.div}
+          initial={{ y: 100, opacity: 0, scale: 0.5 }}
+          animate={{ y: 0, opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
         >
-          <AddIcon />
-        </ButtonIcon>
-        <ButtonIcon
-          as={motion.button}
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.3, delay: 0.8 }}
-        >
-          <ArchiveIcon />
-        </ButtonIcon>
-        <ButtonIcon
-          as={motion.button}
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.3, delay: 0.9 }}
-        >
-          <BinIcon />
-        </ButtonIcon>
-        <ButtonIcon
-          onClick={handleAddEditLabel}
-          as={motion.button}
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.3, delay: 1 }}
-        >
-          <EditIcon />
-        </ButtonIcon>
-        <ButtonIcon
-          onClick={handleAddEditLabel}
-          as={motion.button}
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.3, delay: 1 }}
-        >
-          <SearchIcon />
-        </ButtonIcon>
-      </NavMain>
-    </NavWrap>
+          <ButtonIcon
+            aria-label="Add Note"
+            onClick={
+              view === 'note'
+                ? handleAddNoteModal
+                : () => handleViewClick('note')
+            }
+            as={motion.button}
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0 }}
+            transition={{ duration: 0.3, delay: 0.7 }}
+          >
+            {view === 'note' ? <AddIcon /> : <EditIcon />}
+          </ButtonIcon>
+
+          <ButtonIcon
+            aria-label="Archived Notes "
+            onClick={() => handleViewClick('archive')}
+            as={motion.button}
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0 }}
+            transition={{ duration: 0.3, delay: 0.8 }}
+          >
+            <ArchiveIcon />
+          </ButtonIcon>
+          <ButtonIcon
+            aria-label="Trashed Notes"
+            onClick={() => handleViewClick('trash')}
+            as={motion.button}
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.3, delay: 0.9 }}
+          >
+            <BinIcon />
+          </ButtonIcon>
+          <ButtonIcon
+            aria-label="Add/Edit Labels"
+            onClick={handleAddEditLabel}
+            as={motion.button}
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.3, delay: 1 }}
+          >
+            <LabelIcon />
+          </ButtonIcon>
+          <ButtonIcon
+            aria-label="Search"
+            onClick={handleAddEditLabel}
+            as={motion.button}
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.3, delay: 1 }}
+          >
+            <SearchIcon />
+          </ButtonIcon>
+        </NavMain>
+      </NavWrap>
+    </AnimatePresence>
   );
 };
 

@@ -32,6 +32,7 @@ const noteSlice = createSlice({
       state.notes = state.notes.filter((note) => note.id !== action.payload);
     },
 
+    trashNoteSync: (state, action) => {},
     setSelectedNote: (state, action) => {
       state.note = state.notes.find((note) => note.id === action.payload);
     },
@@ -130,6 +131,7 @@ export const pinNote = (note) => async (dispatch) => {
   try {
     await updateDoc(doc(db, 'notes', note.id), {
       ...note,
+      archived: false,
     });
   } catch (error) {
     console.error('Error pinning note:', error);
@@ -140,9 +142,23 @@ export const archiveNote = (note) => async (dispatch) => {
   try {
     await updateDoc(doc(db, 'notes', note.id), {
       ...note,
+      pinned: false,
     });
   } catch (error) {
     console.error('Error archiving note:', error);
+  }
+};
+
+export const trashNote = (note) => async (dispatch) => {
+  try {
+    await updateDoc(doc(db, 'notes', note.id), {
+      ...note,
+      pinned: false,
+      archived: false,
+    });
+    console.log('here');
+  } catch (error) {
+    console.error('Error trashing note:', error);
   }
 };
 
