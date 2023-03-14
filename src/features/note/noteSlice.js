@@ -32,7 +32,15 @@ const noteSlice = createSlice({
       state.notes = state.notes.filter((note) => note.id !== action.payload);
     },
 
-    trashNoteSync: (state, action) => {},
+    trashNoteSync: (state, action) => {
+      const item = action.payload;
+      const noteIndex = state.notes.findIndex((note) => note.id === item.id);
+      if (noteIndex !== -1) {
+        state.notes[noteIndex].trashed = true;
+        state.notes[noteIndex].pinned = false;
+        state.notes[noteIndex].archived = false;
+      }
+    },
     setSelectedNote: (state, action) => {
       state.note = state.notes.find((note) => note.id === action.payload);
     },
@@ -40,7 +48,7 @@ const noteSlice = createSlice({
       state.note = null;
     },
     getNotesFromStorage: (state, action) => {
-      const json = localStorage.getItem('note');
+      const json = localStorage.getItem('notes');
       state.notes = json ? JSON.parse(json) : [];
     },
   },
@@ -53,6 +61,7 @@ export const {
   setSelectedNote,
   removeSelectedNote,
   getNotesFromStorage,
+  trashNoteSync,
 } = noteSlice.actions;
 
 export const listenForNotes = () => (dispatch, getState) => {
@@ -156,7 +165,7 @@ export const trashNote = (note) => async (dispatch) => {
       pinned: false,
       archived: false,
     });
-    console.log('here');
+    dispatch(trashNoteSync(note));
   } catch (error) {
     console.error('Error trashing note:', error);
   }

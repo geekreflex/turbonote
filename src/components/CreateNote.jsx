@@ -46,13 +46,13 @@ const CreateNote = () => {
               <AutoResizableTextarea
                 id="title"
                 value={title}
-                placeholder="Take a note"
+                placeholder="Title"
                 onChange={(e) => setTitle(e.target.value)}
               />
               <AutoResizableTextarea
                 id="content"
                 value={content}
-                placeholder="Note content"
+                placeholder="Take a note..."
                 onChange={(e) => setContent(e.target.value)}
               />
             </NoteInput>
@@ -85,6 +85,8 @@ const CreateNoteMain = styled.div`
   background-color: #fff;
   width: 600px;
   border-radius: 21px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
+    rgba(0, 0, 0, 0.04) 0px 10px 10px -5px, 0 0px 1px 1px #eee;
   @media (max-width: 680px) {
     height: 100vh;
     border-radius: 0;
@@ -94,28 +96,31 @@ const CreateNoteMain = styled.div`
 const NoteInput = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 30px 15px;
+  padding: 30px 0;
 
   textarea {
     border: none;
     outline: none;
     resize: none;
-    line-height: 1;
+    line-height: 1.5;
     margin: 0;
+    overflow-y: scroll !important;
+    padding: 0 20px;
+    font-weight: 600;
   }
 
   #title {
     min-height: 20px;
     max-height: 100px;
-    font-size: 20px;
-    font-weight: 600;
+    font-size: 16px;
   }
 
   #content {
     min-height: 80px;
     max-height: 200px;
     font-size: 15px;
-    font-weight: 400;
+    overflow-y: auto;
+    padding-bottom: 30px;
   }
 `;
 

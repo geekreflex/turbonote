@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import {
   setView,
@@ -17,6 +18,7 @@ import LabelIcon from './icons/LabelIcon';
 
 const Navbar = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { view } = useSelector((state) => state.action);
 
   const handleAddNoteModal = () => {
@@ -29,6 +31,7 @@ const Navbar = () => {
 
   const handleViewClick = (view) => {
     dispatch(setView(view));
+    navigate(`#${view}`);
   };
 
   return (

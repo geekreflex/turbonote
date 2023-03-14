@@ -13,6 +13,7 @@ import Nav from '../components/Nav';
 import ArchivedList from '../components/ArchivedList';
 import TrashedList from '../components/TrashedList';
 import { useLocation } from 'react-router-dom';
+import { setView } from '../features/action/actionSlice';
 
 const Note = () => {
   const dispatch = useDispatch();
@@ -24,7 +25,8 @@ const Note = () => {
   }, []);
 
   useEffect(() => {
-    console.log(location);
+    const hash = location.hash.split('#')[1];
+    dispatch(setView(hash || 'note'));
   }, [location]);
 
   return (

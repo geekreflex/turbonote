@@ -15,6 +15,7 @@ import ArchiveIcon from './icons/ArchiveIcon';
 import BinIcon from './icons/BinIcon';
 import PinIcon from './icons/PinIcon';
 import PinIcon2 from './icons/PinIcon2';
+import RestoreIcon from './icons/RestoreIcon';
 
 const Note = ({ note }) => {
   const dispatch = useDispatch();
@@ -102,10 +103,10 @@ const Note = ({ note }) => {
         {view === 'trash' && (
           <>
             <ButtonIconSm onClick={handleRestoreNote}>
-              <button>restore</button>
+              <RestoreIcon />
             </ButtonIconSm>
             <ButtonIconSm onClick={handleDeleteNote}>
-              <button>delete</button>
+              <BinIcon />
             </ButtonIconSm>
           </>
         )}
