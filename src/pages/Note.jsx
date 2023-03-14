@@ -25,8 +25,9 @@ const Note = () => {
   }, []);
 
   useEffect(() => {
-    const hash = location.hash.split('#')[1];
-    dispatch(setView(hash || 'note'));
+    const hash = location.hash && location.hash.split('#')[1];
+    const cView = hash.split('/')[0];
+    dispatch(setView(cView || 'note'));
   }, [location]);
 
   return (

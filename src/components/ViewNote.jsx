@@ -12,14 +12,17 @@ import {
 } from '../features/note/noteSlice';
 import { Overlay } from '../styles/GlobalStyles';
 import { serializeTimestamps } from '../utils/serializeTimestamp';
+import Pin from './excerpts/Pin';
 import Time from './excerpts/Time';
+import NoteActions from './NoteActions';
 
 const ViewNote = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const localtion = useLocation();
-  const noteId = localtion.hash.substr(6);
+  const noteId = localtion.hash.split('/')[1];
   const { note, notes } = useSelector((state) => state.note);
+  const { view } = useSelector((state) => state.action);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [editTitle, setEditTitle] = useState('');
@@ -27,6 +30,7 @@ const ViewNote = () => {
 
   useEffect(() => {
     if (note) {
+      <div className="right">o</div>;
       setTitle(note.title);
       setContent(note.content);
       setEditTitle(note.title);
@@ -50,7 +54,7 @@ const ViewNote = () => {
 
   const handleCloseNote = () => {
     dispatch(removeSelectedNote());
-    navigate('/note');
+    navigate(`/note#${view}`);
   };
 
   return (
@@ -72,17 +76,20 @@ const ViewNote = () => {
             exit={{ scale: 0, y: -600 }}
             transition={{ duration: 0.5 }}
           >
+            <Pin note={note} show={true} />
             <ViewData>
               <Title
-                contentEditable={true}
+                contentEditable={view === 'trash' ? false : true}
                 onInput={(e) => setTitle(e.currentTarget.textContent)}
                 onBlur={handleUpdateNote}
                 suppressContentEditableWarning="true"
+                data-placeholder="Title"
+                id="title"
               >
                 {editTitle}
               </Title>
               <Content
-                contentEditable={true}
+                contentEditable={view === 'trash' ? false : true}
                 onInput={(e) => setContent(e.currentTarget.textContent)}
                 onBlur={handleUpdateNote}
                 suppressContentEditableWarning="true"
@@ -94,10 +101,7 @@ const ViewNote = () => {
                 <Time time={serializeTimestamps(note?.updatedAt)} />
               </EditTime>
             </ViewData>
-            <ViewActions>
-              <button onClick={handleUpdateNote}>Update Note</button>
-              <button onClick={handleCloseNote}>Close</button>
-            </ViewActions>
+            <NoteActions note={note} show={true} />
           </ViewNoteMain>
         </ViewNoteWrap>
       )}
@@ -128,6 +132,8 @@ const ViewNoteMain = styled.div`
   border-radius: 10px;
   position: relative;
   overflow: hidden;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
+    rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
 
   @media (max-width: 680px) {
     width: 100%;
@@ -142,16 +148,10 @@ const ViewData = styled.div`
   flex: 1;
   padding: 15px;
   border-radius: 20px;
-`;
-const ViewActions = styled.div`
-  height: 70px;
-  padding: 0 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 
-  @media (max-width: 680px) {
-    height: 100px;
+  #title[data-placeholder]:empty:before {
+    content: attr(data-placeholder);
+    color: #999;
   }
 `;
 
@@ -160,7 +160,7 @@ const Title = styled.div`
   word-wrap: break-word;
   outline: none;
   margin-bottom: 20px;
-  font-size: 25px;
+  font-size: 22px;
   font-weight: 400;
   color: #222;
 `;

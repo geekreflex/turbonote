@@ -26,3 +26,37 @@ export const Overlay = styled.div`
   height: 100%;
   background-color: rgba(0, 0, 0, 0.3);
 `;
+
+export const ButtonIconSm = styled.button`
+  border: none;
+  outline: none;
+  width: 33px;
+  height: 33px;
+  font-size: 18px;
+  border-radius: 50%;
+  background-color: transparent;
+  color: #444;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  :hover {
+    background-color: #eee;
+    color: #222;
+  }
+`;
+
+export const CloseBtn = styled.button`
+  padding: 10px 25px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  font-weight: 600;
+  color: #333;
+  transition: all 300ms;
+  border-radius: 6px;
+  cursor: pointer;
+  :hover {
+    background-color: #eee;
+  }
+`;

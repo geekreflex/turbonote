@@ -4,8 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { toggleAddNote } from '../features/action/actionSlice';
 import { createNote } from '../features/note/noteSlice';
-import { Overlay } from '../styles/GlobalStyles';
+import { ButtonIconSm, CloseBtn, Overlay } from '../styles/GlobalStyles';
 import { AutoResizableTextarea } from './Expand';
+import LabelIcon from './icons/LabelIcon';
 
 const CreateNote = () => {
   const dispatch = useDispatch();
@@ -15,12 +16,16 @@ const CreateNote = () => {
 
   const handleCreateNote = (e) => {
     e.preventDefault();
-    dispatch(createNote({ title, content }));
+    if (content !== '') {
+      dispatch(createNote({ title, content }));
+    }
     closeModal();
   };
 
   const closeModal = () => {
     dispatch(toggleAddNote(false));
+    setTitle('');
+    setContent('');
   };
 
   return (
@@ -57,8 +62,14 @@ const CreateNote = () => {
               />
             </NoteInput>
             <NoteActions>
-              <button onClick={handleCreateNote}>Create Note</button>
-              <button onClick={closeModal}>Close</button>
+              <div className="left">
+                <ButtonIconSm>
+                  <LabelIcon />
+                </ButtonIconSm>
+              </div>
+              <div className="right">
+                <CloseBtn onClick={handleCreateNote}>Close</CloseBtn>
+              </div>
             </NoteActions>
           </CreateNoteMain>
         </CreateNoteWrap>
@@ -96,7 +107,8 @@ const CreateNoteMain = styled.div`
 const NoteInput = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 30px 0;
+  padding-top: 30px;
+  overflow: hidden;
 
   textarea {
     border: none;
@@ -104,7 +116,7 @@ const NoteInput = styled.div`
     resize: none;
     line-height: 1.5;
     margin: 0;
-    overflow-y: scroll !important;
+    overflow-y: auto !important;
     padding: 0 20px;
     font-weight: 600;
   }
@@ -116,15 +128,25 @@ const NoteInput = styled.div`
   }
 
   #content {
-    min-height: 80px;
-    max-height: 200px;
+    min-height: 50px;
+    height: 20px;
+    max-height: 60vh;
     font-size: 15px;
     overflow-y: auto;
-    padding-bottom: 30px;
+    /* padding-bottom: 30px; */
   }
 `;
 
 const NoteActions = styled.div`
-  height: 100px;
-  padding: 0 50px;
+  height: 70px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .left,
+  .right {
+    display: flex;
+    align-items: center;
+  }
 `;

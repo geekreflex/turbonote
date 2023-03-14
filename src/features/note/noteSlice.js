@@ -36,7 +36,7 @@ const noteSlice = createSlice({
       const item = action.payload;
       const noteIndex = state.notes.findIndex((note) => note.id === item.id);
       if (noteIndex !== -1) {
-        state.notes[noteIndex].trashed = true;
+        state.notes[noteIndex].trashed = item.trash;
         state.notes[noteIndex].pinned = false;
         state.notes[noteIndex].archived = false;
       }
@@ -123,7 +123,7 @@ export const updateNote = (update) => async (dispatch) => {
       updatedAt: serverTimestamp(),
     });
   } catch (error) {
-    console.error('Error updateing note:', error);
+    console.error('Error updating note:', error);
   }
 };
 
@@ -165,7 +165,7 @@ export const trashNote = (note) => async (dispatch) => {
       pinned: false,
       archived: false,
     });
-    dispatch(trashNoteSync(note));
+    // dispatch(trashNoteSync(note));
   } catch (error) {
     console.error('Error trashing note:', error);
   }
