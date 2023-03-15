@@ -21,23 +21,3 @@ input {
     transform: rotate(360deg);
   }
 }
-
-/* Change the scrollbar style for webkit-based browsers */
-::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: #f5f5f5; /* Use a light grey color for the scrollbar track */
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: #ccc; /* Use a slightly darker grey color for the scrollbar thumb */
-  border-radius: 5px;
-  border: 3px solid #f5f5f5;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background-color: #999; /* Use a darker grey color for the scrollbar thumb when hovering over it */
-}

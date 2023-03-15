@@ -10,6 +10,33 @@ export default createGlobalStyle`
 body {
   background-color: ${(props) => props.theme.colors.bgColor};
 }
+
+/* Change the scrollbar style for webkit-based browsers */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: ${(props) =>
+      props.theme.colors
+        .scrollbarTrackBg}; /* Use a light grey color for the scrollbar track #f5f5f5 */
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: ${(props) =>
+      props.theme.colors
+        .scrollbarThumbBg}; /* Use a slightly darker grey color for the scrollbar thumb #ccc */
+    border-radius: 5px;
+    border: 3px solid ${(props) =>
+      props.theme.colors.scrollbarTrackBg}; /* #f5f5f5 */
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: ${(props) =>
+      props.theme.colors
+        .scrollbarThumbBgHover}; /* Use a darker grey color for the scrollbar thumb when hovering over it #999 */
+  }
 `;
 
 export const Container = styled.div`
