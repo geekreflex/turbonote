@@ -126,7 +126,7 @@ const NavWrap = styled.div`
 const NavMain = styled.div`
   width: 300px;
   max-width: 100%;
-  background-color: ${(props) => props.theme.colors.bgColor};
+  background-color: ${(props) => props.theme.colors.cardBg};
   padding: 10px 20px;
   border-radius: 50px;
   display: flex;

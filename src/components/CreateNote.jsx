@@ -43,7 +43,7 @@ const CreateNote = () => {
         <CreateNoteWrap>
           <Overlay
             as={motion.div}
-            onClick={closeModal}
+            onClick={handleCreateNote}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}

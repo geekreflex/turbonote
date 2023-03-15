@@ -13,6 +13,7 @@ import StarIcon from './StarIcon';
 import RefreshIcon from './RefreshIcon';
 import PaletteIcon from './PaletteIcon';
 import CheckIcon from './CheckIcon';
+import MoonIcon from './MoonIcon';
 
 export {
   RestoreIcon,
@@ -30,4 +31,5 @@ export {
   RefreshIcon,
   PaletteIcon,
   CheckIcon,
+  MoonIcon,
 };

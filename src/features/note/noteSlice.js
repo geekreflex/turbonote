@@ -88,6 +88,7 @@ export const listenForNotes = () => (dispatch, getState) => {
           ...data,
         };
       });
+      console.log('NOTES', notes);
       dispatch(setNotes(notes));
       localStorage.setItem('notes', JSON.stringify(notes));
     });
@@ -119,9 +120,10 @@ export const createNote = (note) => async (dispatch, getState) => {
 
 export const updateNote = (note) => async () => {
   try {
+    console.log('here... Again');
     await updateDoc(doc(db, 'notes', note.id), {
       ...note,
-      updatedAt: serverTimestamp(),
+      // updatedAt: serverTimestamp(),
     });
   } catch (error) {
     console.error('Error updating note:', error);

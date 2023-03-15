@@ -23,6 +23,7 @@ const actionSlice = createSlice({
     },
     toggleThemeMode: (state) => {
       state.mode = state.mode === 'light' ? 'dark' : 'light';
+      localStorage.setItem('mode', state.mode);
     },
     setView: (state, action) => {
       state.view = action.payload;
@@ -32,6 +33,10 @@ const actionSlice = createSlice({
     },
     clearErrorMessage: (state) => {
       state.errMessage = null;
+    },
+    getThemeModeFromStroage: (state) => {
+      const mode = localStorage.getItem('mode');
+      state.mode = mode || 'light';
     },
   },
 });
@@ -43,6 +48,7 @@ export const {
   setErrorMessage,
   clearErrorMessage,
   toggleThemeMode,
+  getThemeModeFromStroage,
 } = actionSlice.actions;
 
 export const listenForNetworkChange = () => {};

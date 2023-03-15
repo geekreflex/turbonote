@@ -7,13 +7,19 @@ import LogoutIcon from './icons/LogoutIcon';
 import SettingsIcon from './icons/SettingsIcon';
 import OutsideClickHandler from 'react-outside-click-handler';
 import { signOutUser } from '../features/auth/authSlice';
+import { MoonIcon } from './icons';
+import { toggleThemeMode } from '../features/action/actionSlice';
 
 const Profile = () => {
   const [show, setShow] = useState(false);
 
+  const close = () => {
+    setShow(false);
+  };
+
   return (
     <ProfileWrap>
-      <OutsideClickHandler onOutsideClick={() => setShow(false)}>
+      <OutsideClickHandler onOutsideClick={close}>
         <span onClick={() => setShow(true)}>
           <Img size={40} />
         </span>
@@ -24,7 +30,7 @@ const Profile = () => {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0 }}
             >
-              <Dropdown />
+              <Dropdown close={close} />
             </motion.div>
           )}
         </AnimatePresence>
@@ -35,9 +41,15 @@ const Profile = () => {
 
 export default Profile;
 
-const Dropdown = () => {
+const Dropdown = ({ close }) => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
+  const { mode } = useSelector((state) => state.action);
+
+  const themeClick = () => {
+    dispatch(toggleThemeMode());
+    close();
+  };
 
   return (
     <DropdownWrap>
@@ -51,6 +63,12 @@ const Dropdown = () => {
         </div>
       </div>
       <ul>
+        <li onClick={themeClick}>
+          <span className="li-icon">
+            {mode === 'light' ? <MoonIcon /> : <MoonIcon />}
+          </span>
+          <span>{`Enable ${mode === 'light' ? ' dark' : 'light'} theme`}</span>
+        </li>
         <li>
           <span className="li-icon">
             <SettingsIcon />

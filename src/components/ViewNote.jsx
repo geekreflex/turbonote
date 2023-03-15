@@ -11,7 +11,6 @@ import {
   updateNote,
 } from '../features/note/noteSlice';
 import { Overlay } from '../styles/GlobalStyles';
-import { serializeTimestamps } from '../utils/serializeTimestamp';
 import Pin from './excerpts/Pin';
 import Time from './excerpts/Time';
 import Labels from './Labels';
@@ -31,6 +30,7 @@ const ViewNote = () => {
   const [editContent, setEditContent] = useState('');
   const [selectedLabels, setSelectedLabels] = useState([]);
   const [showLabels, setShowLabels] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
     if (note) {
@@ -57,7 +57,22 @@ const ViewNote = () => {
     dispatch(updateNote(payload));
   };
 
+  const handleInputChange = (type, value) => {
+    setIsEditing(true);
+    if (type === 'title') {
+      setTitle(value);
+    }
+
+    if (type === 'content') {
+      setContent(value);
+    }
+  };
+
   const handleCloseNote = () => {
+    if (isEditing) {
+      handleUpdateNote();
+    }
+    setIsEditing(false);
     dispatch(removeSelectedNote());
     navigate(`/note#${view}`);
   };
@@ -94,8 +109,9 @@ const ViewNote = () => {
             <ViewData>
               <Title
                 contentEditable={view === 'trash' ? false : true}
-                onInput={(e) => setTitle(e.currentTarget.textContent)}
-                onBlur={view !== 'trash' ? handleUpdateNote : () => {}}
+                onInput={(e) =>
+                  handleInputChange('title', e.currentTarget.innerText)
+                }
                 suppressContentEditableWarning="true"
                 data-placeholder="Title"
                 id="title"
@@ -104,15 +120,19 @@ const ViewNote = () => {
               </Title>
               <Content
                 contentEditable={view === 'trash' ? false : true}
-                onInput={(e) => setContent(e.currentTarget.textContent)}
-                onBlur={view !== 'trash' ? handleUpdateNote : () => {}}
+                onInput={(e) =>
+                  handleInputChange('content', e.currentTarget.innerText)
+                }
                 suppressContentEditableWarning="true"
+                aria-multiline="true"
+                role="textbox"
+                dir="ltr"
+                tabIndex="0"
               >
                 {editContent}
               </Content>
               <EditTime>
-                <span id="edited">Edited</span>{' '}
-                <Time time={serializeTimestamps(note?.updatedAt)} />
+                <span id="edited">Edited</span> <Time time={note?.updatedAt} />
               </EditTime>
             </ViewData>
             <NoteActions

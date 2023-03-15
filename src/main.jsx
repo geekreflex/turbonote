@@ -10,10 +10,12 @@ import GlobalStyles from './styles/GlobalStyles';
 import { getNotesFromStorage } from './features/note/noteSlice';
 import { getLabelsFromStorage } from './features/label/labelSlice';
 import WithTheme from './components/WithTheme';
+import { getThemeModeFromStroage } from './features/action/actionSlice';
 
 store.dispatch(checkUserAuthStorage());
 store.dispatch(getNotesFromStorage());
 store.dispatch(getLabelsFromStorage());
+store.dispatch(getThemeModeFromStroage());
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
