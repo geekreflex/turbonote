@@ -1,8 +1,8 @@
-import { AnimatePresence, motion } from 'framer-motion';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import Empty from './Empty';
 import Note from './Note';
+import ViewWrap from './ViewWrap';
 
 const NoteList = () => {
   const { notes } = useSelector((state) => state.note);
@@ -21,35 +21,28 @@ const NoteList = () => {
   }
 
   return (
-    <AnimatePresence>
-      <motion.div
-        initial={{ y: 100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5 }}
-        exit={{ y: 100, opacity: 0 }}
-      >
-        <NoteListWrap>
-          {!!pinnedNotes.length && (
-            <section>
-              <h2>Pinned</h2>
-              <div className="note-wrap">
-                {pinnedNotes?.map((note) => (
-                  <Note note={note} key={note.id} />
-                ))}
-              </div>
-            </section>
-          )}
+    <ViewWrap>
+      <NoteListWrap>
+        {!!pinnedNotes.length && (
           <section>
-            {!!pinnedNotes.length && <h2>Others</h2>}
+            <h2>Pinned</h2>
             <div className="note-wrap">
-              {otherNotes?.map((note) => (
+              {pinnedNotes?.map((note) => (
                 <Note note={note} key={note.id} />
               ))}
             </div>
           </section>
-        </NoteListWrap>
-      </motion.div>
-    </AnimatePresence>
+        )}
+        <section>
+          {!!pinnedNotes.length && <h2>Others</h2>}
+          <div className="note-wrap">
+            {otherNotes?.map((note) => (
+              <Note note={note} key={note.id} />
+            ))}
+          </div>
+        </section>
+      </NoteListWrap>
+    </ViewWrap>
   );
 };
 

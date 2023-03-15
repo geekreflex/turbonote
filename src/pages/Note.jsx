@@ -15,6 +15,7 @@ import TrashedList from '../components/TrashedList';
 import { useLocation } from 'react-router-dom';
 import { setView } from '../features/action/actionSlice';
 import Toast from '../components/Toast';
+import Search from '../components/Search';
 
 const Note = () => {
   const dispatch = useDispatch();
@@ -44,6 +45,7 @@ const Note = () => {
           {view === 'note' && <NoteList />}
           {view === 'archive' && <ArchivedList />}
           {view === 'trash' && <TrashedList />}
+          {view === 'search' && <Search />}
           <CreateNote />
           <AddEditLabels />
           <ViewNote />

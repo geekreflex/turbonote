@@ -1,20 +1,12 @@
 import React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import styled from 'styled-components';
+import ViewWrap from './ViewWrap';
 
 const NotesWrap = ({ children }) => {
   return (
-    <AnimatePresence>
-      <Wrap
-        as={motion.div}
-        initial={{ y: 100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5 }}
-        exit={{ y: 100, opacity: 0 }}
-      >
-        {children}
-      </Wrap>
-    </AnimatePresence>
+    <ViewWrap>
+      <Wrap>{children}</Wrap>
+    </ViewWrap>
   );
 };
 
