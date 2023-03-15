@@ -8,6 +8,7 @@ const initialState = {
   view: 'note',
   errMessage: null,
   loading: false,
+  mode: 'light',
 };
 
 const actionSlice = createSlice({
