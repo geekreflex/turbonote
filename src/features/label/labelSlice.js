@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import {
   addDoc,
   collection,
+  deleteDoc,
   doc,
   onSnapshot,
   orderBy,
@@ -81,7 +82,7 @@ export const createLabel = (label) => async (dispatch, getState) => {
   }
 };
 
-export const updateNote = (label) => async () => {
+export const updateLabel = (label) => async () => {
   try {
     await updateDoc(doc(db, 'labels', label.id), {
       ...label,
@@ -89,6 +90,14 @@ export const updateNote = (label) => async () => {
     });
   } catch (error) {
     console.error('Error updating label:', error);
+  }
+};
+
+export const deleteLabel = (labelId) => async () => {
+  try {
+    await deleteDoc(doc(db, 'labels', labelId));
+  } catch (error) {
+    console.error(`Error deleting label:`, error);
   }
 };
 

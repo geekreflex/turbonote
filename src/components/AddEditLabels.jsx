@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { toggleAddEditLabel } from '../features/action/actionSlice';
-import { createLabel } from '../features/label/labelSlice';
+import { createLabel, deleteLabel } from '../features/label/labelSlice';
 import { ButtonIconSm, Overlay } from '../styles/GlobalStyles';
 import { BinIcon, CheckIcon, PaperIcon, PlaneIcon } from './icons';
 
@@ -47,8 +47,9 @@ const AddEditLabels = () => {
     setDelLabelId(id);
   };
 
-  const handleDeleteLabel = () => {
+  const handleDeleteLabel = (id) => {
     //
+    dispatch(deleteLabel(id));
   };
 
   useEffect(() => {
@@ -96,7 +97,9 @@ const AddEditLabels = () => {
                   {labels.map((label, index) => (
                     <li key={label.id}>
                       {delLabelId && delLabelId === label.id ? (
-                        <ButtonIconSm onClick={() => onDeleteClick(label.id)}>
+                        <ButtonIconSm
+                          onClick={() => handleDeleteLabel(label.id)}
+                        >
                           <CheckIcon />
                         </ButtonIconSm>
                       ) : (
