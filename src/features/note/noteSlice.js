@@ -78,7 +78,7 @@ export const listenForNotes = () => (dispatch, getState) => {
     const q = query(
       collection(db, 'notes'),
       where('userId', '==', uid),
-      orderBy('createdAt')
+      orderBy('createdAt', 'desc')
     );
     onSnapshot(q, (snapshot) => {
       const notes = snapshot.docs.map((doc) => {

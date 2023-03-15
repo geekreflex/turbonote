@@ -24,4 +24,5 @@ const Wrap = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
   gap: 25px;
   list-style: none;
+  margin-bottom: 100px;
 `;

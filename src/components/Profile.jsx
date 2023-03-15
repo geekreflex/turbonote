@@ -125,7 +125,7 @@ const DropdownWrap = styled.div`
   min-width: 300px;
   max-width: 320px;
   right: 0;
-  top: 80px;
+  margin-top: 30px;
   padding: 20px 0;
   border-radius: 21px;
   color: ${(props) => props.theme.colors.text3};

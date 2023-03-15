@@ -66,7 +66,8 @@ const NoteListWrap = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 30px;
-  gap: 50px;
+  gap: 100px;
+  margin-bottom: 100px;
   .note-wrap {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
