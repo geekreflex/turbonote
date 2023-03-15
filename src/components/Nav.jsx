@@ -1,11 +1,13 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { toggleThemeMode } from '../features/action/actionSlice';
 import { RefreshIcon } from './icons';
 import Profile from './Profile';
 
 const Nav = () => {
+  const dispatch = useDispatch();
   const { loading } = useSelector((state) => state.action);
 
   return (
@@ -18,6 +20,7 @@ const Nav = () => {
         </Logo>
       </div>
       <div className="right">
+        <button onClick={() => dispatch(toggleThemeMode())}>Theme</button>
         <span className={`refresh-icon ${loading && 'rotate-infinite'}`}>
           <RefreshIcon />
         </span>
@@ -48,7 +51,7 @@ const NavWrap = styled.div`
     font-size: 30px;
     margin-right: 20px;
     display: flex;
-    color: #444;
+    color: ${(props) => props.theme.colors.text2};
   }
 `;
 export const Logo = styled.div`

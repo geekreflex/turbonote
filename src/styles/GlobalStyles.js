@@ -8,7 +8,7 @@ export default createGlobalStyle`
 }
 
 body {
-  background-color: #fff;
+  background-color: ${(props) => props.theme.colors.bgColor};
 }
 `;
 
@@ -35,14 +35,14 @@ export const ButtonIconSm = styled.button`
   font-size: 18px;
   border-radius: 50%;
   background-color: transparent;
-  color: #444;
+  color: ${(props) => props.theme.colors.text2};
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
   :hover {
-    background-color: #eee;
-    color: #222;
+    background-color: ${(props) => props.theme.colors.highlight};
+    color: ${(props) => props.theme.colors.text1};
   }
 `;
 
@@ -52,11 +52,11 @@ export const CloseBtn = styled.button`
   border: none;
   outline: none;
   font-weight: 600;
-  color: #333;
+  color: ${(props) => props.theme.colors.text1};
   transition: all 300ms;
   border-radius: 6px;
   cursor: pointer;
   :hover {
-    background-color: #eee;
+    background-color: ${(props) => props.theme.colors.highlight};
   }
 `;

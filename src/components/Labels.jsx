@@ -51,12 +51,12 @@ const LabelsWrap = styled.div`
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: #fff;
+  background-color: ${(props) => props.theme.colors.bgColor};
   min-height: 20px;
   max-height: 100px;
   align-items: center;
   padding: 20px;
-  border-top: 1px solid #eee;
+  border-top: 1px solid ${(props) => props.theme.colors.border1};
   overflow-y: auto;
 
   @media (max-width: 680px) {
@@ -64,14 +64,14 @@ const LabelsWrap = styled.div`
   }
 
   .selected {
-    background-color: #444;
-    color: #fff;
-    border-color: #444;
+    background-color: ${(props) => props.theme.colors.text2};
+    color: ${(props) => props.theme.colors.cardBg};
+    border-color: ${(props) => props.theme.colors.text2};
   }
 
   button {
     padding: 5px 10px;
-    border: 1px solid #777;
+    border: 1px solid ${(props) => props.theme.colors.border1};
     background: transparent;
     outline: none;
     border-radius: 21px;
@@ -81,9 +81,9 @@ const LabelsWrap = styled.div`
     transition: all 300ms;
     cursor: pointer;
     :hover {
-      background-color: #444;
-      color: #fff;
-      border-color: #444;
+      background-color: ${(props) => props.theme.colors.text2};
+      color: ${(props) => props.theme.colors.cardBg};
+      border-color: ${(props) => props.theme.colors.text2};
     }
   }
 `;

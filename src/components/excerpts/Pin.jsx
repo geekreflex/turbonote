@@ -37,7 +37,7 @@ const PinWrap = styled.div`
   visibility: visible;
   opacity: 1;
   align-items: center;
-  color: #444;
+  color: ${(props) => props.theme.colors.text2};
   border-radius: 50%;
   right: 10px;
   top: 10px;
@@ -47,7 +47,7 @@ const PinWrap = styled.div`
   opacity: ${(props) => (props.show ? '1' : '0')};
 
   :hover {
-    background-color: #eee;
-    color: #222;
+    background-color: ${(props) => props.theme.colors.highlight};
+    color: ${(props) => props.theme.colors.text1};
   }
 `;

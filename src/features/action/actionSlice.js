@@ -8,7 +8,7 @@ const initialState = {
   view: 'note',
   errMessage: null,
   loading: false,
-  mode: 'light',
+  mode: 'dark',
 };
 
 const actionSlice = createSlice({
@@ -20,6 +20,9 @@ const actionSlice = createSlice({
     },
     toggleAddEditLabel: (state, action) => {
       state.addLabelModal = action.payload;
+    },
+    toggleThemeMode: (state) => {
+      state.mode = state.mode === 'light' ? 'dark' : 'light';
     },
     setView: (state, action) => {
       state.view = action.payload;
@@ -39,6 +42,7 @@ export const {
   setView,
   setErrorMessage,
   clearErrorMessage,
+  toggleThemeMode,
 } = actionSlice.actions;
 
 export const listenForNetworkChange = () => {};

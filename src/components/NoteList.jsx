@@ -79,7 +79,7 @@ const NoteListWrap = styled.div`
       font-weight: 600;
       margin-bottom: 10px;
       margin-left: 20px;
-      color: #444;
+      color: ${(props) => props.theme.colors.text2};
     }
   }
 `;

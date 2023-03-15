@@ -54,7 +54,7 @@ const Navbar = () => {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0 }}
             transition={{ duration: 0.3, delay: 0.7 }}
-            isActive={view === 'note'}
+            // isActive={view === 'note'}
           >
             {view === 'note' ? <AddIcon /> : <EditIcon />}
           </ButtonIcon>
@@ -126,12 +126,11 @@ const NavWrap = styled.div`
 const NavMain = styled.div`
   width: 300px;
   max-width: 100%;
-  background-color: #fff;
+  background-color: ${(props) => props.theme.colors.bgColor};
   padding: 10px 20px;
   border-radius: 50px;
   display: flex;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
-    rgba(0, 0, 0, 0.04) 0px 10px 10px -5px, 0 0px 1px 1px #eee;
+  box-shadow: ${(props) => props.theme.colors.shadow2};
   pointer-events: auto;
   justify-content: space-between;
   align-items: center;
@@ -142,8 +141,10 @@ const ButtonIcon = styled.button`
   border: none;
   outline: none;
   font-size: 20px;
-  background-color: ${(props) => (props.isActive ? '#333 ' : 'transparent')};
-  color: ${(props) => (props.isActive ? '#fff' : '#333')};
+  background-color: ${(props) =>
+    props.isActive ? props.theme.colors.isActiveBg : 'transparent'};
+  color: ${(props) =>
+    props.isActive ? props.theme.colors.isActive : props.theme.colors.text2};
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -153,7 +154,7 @@ const ButtonIcon = styled.button`
   cursor: pointer;
 
   :hover {
-    background-color: #333;
-    color: #fff;
+    background-color: ${(props) => props.theme.colors.isActiveBg};
+    color: ${(props) => props.theme.colors.isActive};
   }
 `;

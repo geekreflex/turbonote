@@ -179,10 +179,11 @@ const AddEditLabelsWrap = styled.div`
 
 const Main = styled.div`
   position: relative;
-  background-color: #fff;
+  background-color: ${(props) => props.theme.colors.cardBg};
   width: 300px;
   border-radius: 21px;
   overflow: hidden;
+  box-shadow: ${(props) => props.theme.colors.shadow2};
 `;
 
 const Inner = styled.div`
@@ -198,7 +199,7 @@ const LabelList = styled.div`
     li {
       font-size: 16px;
       display: flex;
-      color: #555;
+      color: ${(props) => props.theme.colors.text3};
       cursor: text;
       justify-content: space-between;
       align-items: center;
@@ -216,7 +217,8 @@ const LabelList = styled.div`
     input {
       border: none;
       outline: none;
-      border-bottom: 1px solid #999;
+      border-bottom: 1px solid ${(props) => props.theme.colors.border1};
+      background-color: transparent;
     }
   }
 `;
@@ -230,7 +232,9 @@ const NewLabel = styled.div`
     flex: 1;
     border: none;
     outline: none;
-    border-bottom: 1px solid #999;
+    border-bottom: 1px solid ${(props) => props.theme.colors.border1};
     font-size: 14px;
+    background-color: transparent;
+    color: ${(props) => props.theme.colors.text3};
   }
 `;

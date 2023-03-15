@@ -153,7 +153,7 @@ const ViewNoteWrap = styled.div`
 const ViewNoteMain = styled.div`
   max-height: 90vh;
   width: 600px;
-  background-color: white;
+  background-color: ${(props) => props.theme.colors.cardBg};
   display: flex;
   flex-direction: column;
   border-radius: 10px;
@@ -189,7 +189,7 @@ const Title = styled.div`
   margin-bottom: 20px;
   font-size: 22px;
   font-weight: 400;
-  color: #222;
+  color: ${(props) => props.theme.colors.text1};
 `;
 const Content = styled.div`
   white-space: pre-wrap;
@@ -199,14 +199,14 @@ const Content = styled.div`
   line-height: 1.5rem;
   letter-spacing: 0.00625em;
   font-weight: 400;
-  color: #333;
+  color: ${(props) => props.theme.colors.text2};
 `;
 
 const EditTime = styled.div`
   display: flex;
   justify-content: flex-end;
   font-size: 12px;
-  color: #444;
+  color: ${(props) => props.theme.colors.text2};
   gap: 3px;
   font-weight: 400;
 `;

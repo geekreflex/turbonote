@@ -9,6 +9,7 @@ import { checkUserAuthStorage } from './features/auth/authSlice';
 import GlobalStyles from './styles/GlobalStyles';
 import { getNotesFromStorage } from './features/note/noteSlice';
 import { getLabelsFromStorage } from './features/label/labelSlice';
+import WithTheme from './components/WithTheme';
 
 store.dispatch(checkUserAuthStorage());
 store.dispatch(getNotesFromStorage());
@@ -18,8 +19,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
       <Router>
-        <GlobalStyles />
-        <App />
+        <WithTheme>
+          <GlobalStyles />
+          <App />
+        </WithTheme>
       </Router>
     </Provider>
   </React.StrictMode>

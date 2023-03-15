@@ -90,7 +90,7 @@ const Avatar = styled.div`
   padding: 3px;
   cursor: pointer;
   :hover {
-    background-color: #eee;
+    background-color: ${(props) => props.theme.colors.highlight};
   }
   img {
     width: ${(props) => (props.size ? `${props.size}px` : '40px')};
@@ -102,16 +102,15 @@ const Avatar = styled.div`
 
 const DropdownWrap = styled.div`
   position: absolute;
-  background-color: #fff;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
-    rgba(0, 0, 0, 0.04) 0px 10px 10px -5px, 0 0px 1px 1px #eee;
+  background-color: ${(props) => props.theme.colors.cardBg};
+  box-shadow: ${(props) => props.theme.colors.shadow2};
   min-width: 300px;
   max-width: 320px;
   right: 0;
   top: 80px;
   padding: 20px 0;
   border-radius: 21px;
-  color: #555;
+  color: ${(props) => props.theme.colors.text3};
 
   .user-info {
     display: flex;
@@ -144,7 +143,7 @@ const DropdownWrap = styled.div`
         font-size: 22px;
       }
       :hover {
-        background-color: #eee;
+        background-color: ${(props) => props.theme.colors.highlight};
         cursor: pointer;
       }
     }

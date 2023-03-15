@@ -110,12 +110,11 @@ const CreateNoteWrap = styled.div`
 `;
 const CreateNoteMain = styled.div`
   position: relative;
-  background-color: #fff;
+  background-color: ${(props) => props.theme.colors.cardBg};
   width: 600px;
   border-radius: 21px;
   overflow: hidden;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
-    rgba(0, 0, 0, 0.04) 0px 10px 10px -5px, 0 0px 1px 1px #eee;
+  box-shadow: ${(props) => props.theme.colors.shadow2};
   @media (max-width: 680px) {
     height: 100vh;
     width: 100%;
@@ -141,7 +140,8 @@ const NoteInput = styled.div`
     overflow-y: auto !important;
     padding: 0 20px;
     font-weight: 600;
-    color: #444;
+    color: ${(props) => props.theme.colors.text2};
+    background-color: transparent;
   }
 
   #title {

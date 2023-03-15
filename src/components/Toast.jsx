@@ -41,11 +41,10 @@ const ToastContainer = styled.div`
   position: fixed;
   bottom: 20px;
   left: 20px;
-  background-color: #fff;
+  background-color: ${(props) => props.theme.colors.cardBg};
   padding: 25px 30px;
   border-radius: 21px;
   min-width: 200px;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
-    rgba(0, 0, 0, 0.04) 0px 10px 10px -5px, 0 0px 1px 1px #eee;
-  color: #444;
+  box-shadow: ${(props) => props.theme.colors.shadow2};
+  color: ${(props) => props.theme.colors.text2};
 `;

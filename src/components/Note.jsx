@@ -42,10 +42,7 @@ const Note = ({ note }) => {
       animate={{ scale: 1, y: 0 }}
       exit={{ scale: 0, y: 300 }}
       transition={{ duration: 0.4 }}
-      whileHover={{
-        scale: 1.05,
-        boxShadow: `rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px`,
-      }}
+      whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.8 }}
       onPointerDownCapture={(e) => e.stopPropagation()}
     >
@@ -72,11 +69,11 @@ const Note = ({ note }) => {
 
 const NoteCard = styled.div`
   cursor: default;
-  background-color: #fff;
+  background-color: ${(props) => props.theme.colors.cardBg};
   border-radius: 21px;
-  box-shadow: 0 0px 1px 1px #eee;
   position: relative;
   overflow: hidden;
+  box-shadow: ${(props) => props.theme.colors.shadow1};
 
   .card-data {
     padding: 30px;
@@ -84,16 +81,17 @@ const NoteCard = styled.div`
 
     h4 {
       margin-bottom: 10px;
-      color: #333;
+      color: ${(props) => props.theme.colors.text1};
     }
 
     p {
-      color: #444;
+      color: ${(props) => props.theme.colors.text2};
       line-height: 1.3;
     }
   }
 
   :hover {
+    box-shadow: ${(props) => props.theme.colors.shadow2};
     .pin {
       visibility: visible;
       opacity: 1;
