@@ -110,4 +110,11 @@ const NoteActionWrap = styled.div`
     align-items: center;
     gap: 10px;
   }
+
+  @media (max-width: 768px) {
+    * {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
 `;

@@ -50,4 +50,9 @@ const PinWrap = styled.div`
     background-color: ${(props) => props.theme.colors.highlight};
     color: ${(props) => props.theme.colors.text1};
   }
+
+  @media (max-width: 768px) {
+    visibility: visible;
+    opacity: 1;
+  }
 `;

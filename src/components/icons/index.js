@@ -14,6 +14,8 @@ import RefreshIcon from './RefreshIcon';
 import PaletteIcon from './PaletteIcon';
 import CheckIcon from './CheckIcon';
 import MoonIcon from './MoonIcon';
+import ArchiveIcon from './ArchiveIcon';
+import SunIcon from './SunIcon';
 
 export {
   RestoreIcon,
@@ -32,4 +34,6 @@ export {
   PaletteIcon,
   CheckIcon,
   MoonIcon,
+  ArchiveIcon,
+  SunIcon,
 };

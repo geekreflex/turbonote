@@ -7,7 +7,7 @@ import LogoutIcon from './icons/LogoutIcon';
 import SettingsIcon from './icons/SettingsIcon';
 import OutsideClickHandler from 'react-outside-click-handler';
 import { signOutUser } from '../features/auth/authSlice';
-import { MoonIcon } from './icons';
+import { MoonIcon, SunIcon } from './icons';
 import { toggleThemeMode } from '../features/action/actionSlice';
 
 const Profile = () => {
@@ -65,7 +65,7 @@ const Dropdown = ({ close }) => {
       <ul>
         <li onClick={themeClick}>
           <span className="li-icon">
-            {mode === 'light' ? <MoonIcon /> : <MoonIcon />}
+            {mode === 'light' ? <MoonIcon /> : <SunIcon />}
           </span>
           <span>{`Enable ${mode === 'light' ? ' dark' : 'light'} theme`}</span>
         </li>
@@ -153,12 +153,12 @@ const DropdownWrap = styled.div`
       padding: 10px 20px;
       display: flex;
       align-items: center;
-      gap: 10px;
       font-size: 14px;
       font-weight: 600;
       span:first-child {
         display: flex;
         font-size: 22px;
+        width: 30px;
       }
       :hover {
         background-color: ${(props) => props.theme.colors.highlight};

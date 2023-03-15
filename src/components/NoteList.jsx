@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import PaperIcon from './icons/PaperIcon';
+import Empty from './Empty';
 import Note from './Note';
 
 const NoteList = () => {
@@ -17,14 +17,7 @@ const NoteList = () => {
   pinnedNotes.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
 
   if (pinnedNotes.length === 0 && otherNotes.length === 0) {
-    return (
-      <NoNote>
-        <span>
-          <PaperIcon />
-        </span>
-        <p>You don't have any notes yet.</p>
-      </NoNote>
-    );
+    return <Empty type="note" />;
   }
 
   return (
@@ -82,26 +75,5 @@ const NoteListWrap = styled.div`
       margin-left: 20px;
       color: ${(props) => props.theme.colors.text2};
     }
-  }
-`;
-
-const NoNote = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  margin-top: 20vh;
-  gap: 10px;
-
-  span {
-    font-size: 150px;
-    color: #777;
-    display: flex;
-  }
-
-  p {
-    font-size: 20px;
-    font-weight: 400;
-    color: #888;
   }
 `;

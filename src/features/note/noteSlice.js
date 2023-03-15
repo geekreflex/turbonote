@@ -88,7 +88,6 @@ export const listenForNotes = () => (dispatch, getState) => {
           ...data,
         };
       });
-      console.log('NOTES', notes);
       dispatch(setNotes(notes));
       localStorage.setItem('notes', JSON.stringify(notes));
     });
