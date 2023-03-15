@@ -2,10 +2,12 @@ import { createSlice } from '@reduxjs/toolkit';
 import {
   addDoc,
   collection,
+  doc,
   onSnapshot,
   orderBy,
   query,
   serverTimestamp,
+  updateDoc,
   where,
 } from 'firebase/firestore';
 import { db } from '../../config/firebase';
@@ -76,6 +78,17 @@ export const createLabel = (label) => async (dispatch, getState) => {
     dispatch(addLabel({ ...labelToAdd, id: 234 }));
   } catch (error) {
     console.error('Error creating label:', error);
+  }
+};
+
+export const updateNote = (label) => async () => {
+  try {
+    await updateDoc(doc(db, 'labels', label.id), {
+      ...label,
+      updatedAt: serverTimestamp(),
+    });
+  } catch (error) {
+    console.error('Error updating label:', error);
   }
 };
 

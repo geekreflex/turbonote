@@ -14,9 +14,14 @@ function App() {
   const { isLoggedIn } = useSelector((state) => state.auth);
 
   useEffect(() => {
+    if (isLoggedIn) {
+      dispatch(listenForNotes());
+      dispatch(listenForLabels());
+    }
+  }, [isLoggedIn]);
+
+  useEffect(() => {
     dispatch(listenForAuthChanges());
-    dispatch(listenForNotes());
-    dispatch(listenForLabels());
   }, []);
 
   return (

@@ -10,6 +10,7 @@ import PinIcon2 from './PinIcon2';
 import PlaneIcon from './PlaneIcon';
 import SearchIcon from './SearchIcon';
 import StarIcon from './StarIcon';
+import RefreshIcon from './RefreshIcon';
 
 export {
   RestoreIcon,
@@ -24,4 +25,5 @@ export {
   PlaneIcon,
   SearchIcon,
   StarIcon,
+  RefreshIcon,
 };

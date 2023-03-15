@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { toggleAddEditLabel } from '../features/action/actionSlice';
 import { createLabel } from '../features/label/labelSlice';
@@ -9,6 +10,7 @@ import { BinIcon, PaperIcon, PlaneIcon } from './icons';
 
 const AddEditLabels = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { labels } = useSelector((state) => state.label);
   const { addLabelModal } = useSelector((state) => state.action);
   const [editingIndex, setEditingIndex] = useState(-1);
@@ -37,6 +39,7 @@ const AddEditLabels = () => {
 
   const closeModal = () => {
     dispatch(toggleAddEditLabel(false));
+    navigate(`/note#${view}`);
   };
 
   useEffect(() => {

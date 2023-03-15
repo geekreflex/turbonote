@@ -116,7 +116,7 @@ export const createNote = (note) => async (dispatch, getState) => {
   }
 };
 
-export const updateNote = (note) => async (dispatch) => {
+export const updateNote = (note) => async () => {
   try {
     await updateDoc(doc(db, 'notes', note.id), {
       ...note,

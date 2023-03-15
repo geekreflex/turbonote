@@ -70,6 +70,7 @@ export const signOutUser = () => (dispatch) => {
   signOut(auth)
     .then(() => {
       dispatch(clearUserAuth(null));
+      localStorage.removeItem('labels');
       localSorage.removeItem('notes');
     })
     .catch((error) => {

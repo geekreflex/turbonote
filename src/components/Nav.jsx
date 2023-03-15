@@ -1,9 +1,13 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { RefreshIcon } from './icons';
 import Profile from './Profile';
 
 const Nav = () => {
+  const { loading } = useSelector((state) => state.action);
+
   return (
     <NavWrap>
       <div className="left">
@@ -14,6 +18,9 @@ const Nav = () => {
         </Logo>
       </div>
       <div className="right">
+        <span className={`refresh-icon ${loading && 'rotate-infinite'}`}>
+          <RefreshIcon />
+        </span>
         <Profile />
       </div>
     </NavWrap>
@@ -33,6 +40,15 @@ const NavWrap = styled.div`
 
   .left,
   .right {
+    display: flex;
+    align-items: center;
+  }
+
+  .refresh-icon {
+    font-size: 30px;
+    margin-right: 20px;
+    display: flex;
+    color: #444;
   }
 `;
 export const Logo = styled.div`

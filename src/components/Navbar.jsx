@@ -13,7 +13,6 @@ import ArchiveIcon from './icons/ArchiveIcon';
 import BinIcon from './icons/BinIcon';
 import EditIcon from './icons/EditIcon';
 import SearchIcon from './icons/SearchIcon';
-import PlaneIcon from './icons/PlaneIcon';
 import LabelIcon from './icons/LabelIcon';
 
 const Navbar = () => {
@@ -55,6 +54,7 @@ const Navbar = () => {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0 }}
             transition={{ duration: 0.3, delay: 0.7 }}
+            isActive={view === 'note'}
           >
             {view === 'note' ? <AddIcon /> : <EditIcon />}
           </ButtonIcon>
@@ -67,6 +67,7 @@ const Navbar = () => {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0 }}
             transition={{ duration: 0.3, delay: 0.8 }}
+            isActive={view === 'archive'}
           >
             <ArchiveIcon />
           </ButtonIcon>
@@ -77,6 +78,7 @@ const Navbar = () => {
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.3, delay: 0.9 }}
+            isActive={view === 'trash'}
           >
             <BinIcon />
           </ButtonIcon>
@@ -87,6 +89,7 @@ const Navbar = () => {
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.3, delay: 1 }}
+            // isActive={view === 'label'}
           >
             <LabelIcon />
           </ButtonIcon>
@@ -97,6 +100,7 @@ const Navbar = () => {
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.3, delay: 1 }}
+            isActive={view === 'search'}
           >
             <SearchIcon />
           </ButtonIcon>
@@ -138,8 +142,8 @@ const ButtonIcon = styled.button`
   border: none;
   outline: none;
   font-size: 20px;
-  background-color: transparent;
-  color: #333;
+  background-color: ${(props) => (props.isActive ? '#333 ' : 'transparent')};
+  color: ${(props) => (props.isActive ? '#fff' : '#333')};
   width: 50px;
   height: 50px;
   border-radius: 50%;
