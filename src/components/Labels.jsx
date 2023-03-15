@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { prioritizeIds } from '../utils/sort';
+import { updateNoteLabel } from '../features/note/noteSlice';
 
-const Labels = ({ selectedLabels, setSelectedLabels, small }) => {
+const Labels = ({ small, note }) => {
+  const dispatch = useDispatch();
+  const [selectedLabels, setSelectedLabels] = useState(note.labels || []);
+
   const { labels } = useSelector((state) => state.label);
   const sortedLabels = prioritizeIds(selectedLabels, labels);
 
@@ -16,6 +20,19 @@ const Labels = ({ selectedLabels, setSelectedLabels, small }) => {
       setSelectedLabels([...selectedLabels, label]);
     }
   };
+
+  useEffect(() => {
+    console.log('up here');
+
+    if (
+      note.labels.length === selectedLabels.length &&
+      note.labels.every((item) => selectedLabels.includes(item))
+    ) {
+      return;
+    }
+    console.log('passed');
+    dispatch(updateNoteLabel({ ...note, labels: selectedLabels }));
+  }, [selectedLabels]);
 
   return (
     <AnimatePresence>

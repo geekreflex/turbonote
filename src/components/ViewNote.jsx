@@ -9,6 +9,7 @@ import {
   removeSelectedNote,
   setSelectedNote,
   updateNote,
+  updateNoteLabel,
 } from '../features/note/noteSlice';
 import { Overlay } from '../styles/GlobalStyles';
 import Pin from './excerpts/Pin';
@@ -28,7 +29,6 @@ const ViewNote = () => {
   const [content, setContent] = useState('');
   const [editTitle, setEditTitle] = useState('');
   const [editContent, setEditContent] = useState('');
-  const [selectedLabels, setSelectedLabels] = useState([]);
   const [showLabels, setShowLabels] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
@@ -38,7 +38,6 @@ const ViewNote = () => {
       setContent(note.content);
       setEditTitle(note.title);
       setEditContent(note.content);
-      setSelectedLabels(note?.labels || []);
     }
   }, [note]);
 
@@ -54,6 +53,7 @@ const ViewNote = () => {
       title,
       content,
     };
+    console.log(payload);
     dispatch(updateNote(payload));
   };
 
@@ -75,15 +75,6 @@ const ViewNote = () => {
     setIsEditing(false);
     dispatch(removeSelectedNote());
     navigate(`/note#${view}`);
-  };
-
-  const handleDoneLabel = () => {
-    const payload = {
-      ...note,
-      labels: selectedLabels,
-    };
-    dispatch(updateNote(payload));
-    setShowLabels(false);
   };
 
   return (
@@ -132,7 +123,8 @@ const ViewNote = () => {
                 {editContent}
               </Content>
               <EditTime>
-                <span id="edited">Edited</span> <Time time={note?.updatedAt} />
+                <span id="edited">Edited</span>
+                {note && <Time time={note.updatedAt} />}
               </EditTime>
             </ViewData>
             <NoteActions
@@ -140,14 +132,8 @@ const ViewNote = () => {
               show={true}
               clickLabel={() => setShowLabels(true)}
             />
-            <OutsideClickHandler onOutsideClick={handleDoneLabel}>
-              {showLabels && (
-                <Labels
-                  small={true}
-                  selectedLabels={selectedLabels}
-                  setSelectedLabels={setSelectedLabels}
-                />
-              )}
+            <OutsideClickHandler onOutsideClick={() => setShowLabels(false)}>
+              {showLabels && <Labels small={true} note={note} />}
             </OutsideClickHandler>
           </ViewNoteMain>
         </ViewNoteWrap>

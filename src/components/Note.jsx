@@ -14,7 +14,6 @@ const Note = ({ note }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { view } = useSelector((state) => state.action);
-  const [selectedLabels, setSelectedLabels] = useState(note.labels || []);
   const [showLabels, setShowLabels] = useState(false);
 
   const handleViewNote = () => {
@@ -24,15 +23,6 @@ const Note = ({ note }) => {
 
   const handleShwoNoteLabel = () => {
     setShowLabels(true);
-  };
-
-  const handleDoneLabel = () => {
-    const payload = {
-      ...note,
-      labels: selectedLabels,
-    };
-    dispatch(updateNote(payload));
-    setShowLabels(false);
   };
 
   return (
@@ -54,14 +44,8 @@ const Note = ({ note }) => {
       <div className="card-actions">
         <NoteActions note={note} clickLabel={handleShwoNoteLabel} />
       </div>
-      <OutsideClickHandler onOutsideClick={handleDoneLabel}>
-        {showLabels && (
-          <Labels
-            small={true}
-            selectedLabels={selectedLabels}
-            setSelectedLabels={setSelectedLabels}
-          />
-        )}
+      <OutsideClickHandler onOutsideClick={() => setShowLabels(false)}>
+        {showLabels && <Labels small={true} note={note} />}
       </OutsideClickHandler>
     </NoteCard>
   );

@@ -29,7 +29,7 @@ const labelSlice = createSlice({
     },
     getLabelsFromStorage: (state) => {
       const json = localStorage.getItem('labels');
-      state.notelabelss = json ? JSON.parse(json) : [];
+      state.labels = json ? JSON.parse(json) : [];
     },
   },
 });

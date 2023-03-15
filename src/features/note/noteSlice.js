@@ -123,10 +123,20 @@ export const updateNote = (note) => async () => {
     console.log('here... Again');
     await updateDoc(doc(db, 'notes', note.id), {
       ...note,
-      // updatedAt: serverTimestamp(),
+      updatedAt: serverTimestamp(),
     });
   } catch (error) {
     console.error('Error updating note:', error);
+  }
+};
+
+export const updateNoteLabel = (note) => async () => {
+  try {
+    await updateDoc(doc(db, 'notes', note.id), {
+      ...note,
+    });
+  } catch (error) {
+    console.error('Error updating note label:', error);
   }
 };
 
