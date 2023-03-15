@@ -4,9 +4,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { toggleAddEditLabel } from '../features/action/actionSlice';
-import { createLabel, deleteLabel } from '../features/label/labelSlice';
+import {
+  createLabel,
+  deleteLabel,
+  updateLabel,
+} from '../features/label/labelSlice';
 import { ButtonIconSm, Overlay } from '../styles/GlobalStyles';
-import { BinIcon, CheckIcon, PaperIcon, PlaneIcon } from './icons';
+import { BinIcon, CheckIcon, PlaneIcon } from './icons';
 
 const AddEditLabels = () => {
   const dispatch = useDispatch();
@@ -15,6 +19,7 @@ const AddEditLabels = () => {
   const { addLabelModal, view } = useSelector((state) => state.action);
   const [editingIndex, setEditingIndex] = useState(-1);
   const [delLabelId, setDelLabelId] = useState('');
+  const [editLabelId, setEditLabelId] = useState('');
   const [editedText, setEditedText] = useState('');
   const [name, setName] = useState('');
   const inputRef = useRef();
@@ -24,23 +29,27 @@ const AddEditLabels = () => {
     dispatch(createLabel({ name }));
   };
 
-  const handleItemClick = (index, text) => {
+  const handleItemClick = (index, text, id) => {
     setEditingIndex(index);
     setEditedText(text);
+    setEditLabelId(id);
   };
 
-  const handleInputBlur = () => {
+  const handleInputBlur = (label) => {
     setEditingIndex(-1);
-    setEditedText('');
-  };
-
-  const handleInputChange = (event) => {
-    setEditedText(event.target.value);
+    if (label.name !== editedText) {
+      handleUpdateLabel(label);
+    }
   };
 
   const closeModal = () => {
     dispatch(toggleAddEditLabel(false));
     navigate(`/note#${view}`);
+    setEditingIndex('');
+    setEditedText('');
+    setEditLabelId('');
+    setDelLabelId('');
+    setName('');
   };
 
   const onDeleteClick = (id) => {
@@ -48,14 +57,23 @@ const AddEditLabels = () => {
   };
 
   const handleDeleteLabel = (id) => {
-    //
     dispatch(deleteLabel(id));
+  };
+
+  const handleUpdateLabel = (label) => {
+    if (editedText === '') {
+      return;
+    }
+    console.log({ ...label, name: editedText });
+    dispatch(updateLabel({ ...label, name: editedText }));
   };
 
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.focus();
       setDelLabelId('');
+    } else {
+      // setEditLabelId('');
     }
   }, [editingIndex]);
 
@@ -111,20 +129,28 @@ const AddEditLabels = () => {
                         <input
                           type="text"
                           value={editedText}
-                          onChange={handleInputChange}
-                          onBlur={handleInputBlur}
+                          onChange={(e) => setEditedText(e.target.value)}
+                          onBlur={() => handleInputBlur(label)}
                           ref={inputRef}
                         />
                       ) : (
                         <span
-                          onClick={() => handleItemClick(index, label.name)}
+                          onClick={() =>
+                            handleItemClick(index, label.name, label.id)
+                          }
                         >
                           {label.name}
                         </span>
                       )}
-                      <ButtonIconSm>
-                        <PlaneIcon />
-                      </ButtonIconSm>
+                      {editLabelId && editLabelId === label.id ? (
+                        <ButtonIconSm onClick={() => handleUpdateLabel(label)}>
+                          <CheckIcon />
+                        </ButtonIconSm>
+                      ) : (
+                        <ButtonIconSm>
+                          <PlaneIcon />
+                        </ButtonIconSm>
+                      )}
                     </li>
                   ))}
                 </ul>

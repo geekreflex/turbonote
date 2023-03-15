@@ -27,10 +27,14 @@ const labelSlice = createSlice({
     setLabels: (state, action) => {
       state.labels = action.payload;
     },
+    getLabelsFromStorage: (state) => {
+      const json = localStorage.getItem('labels');
+      state.notelabelss = json ? JSON.parse(json) : [];
+    },
   },
 });
 
-export const { addLabel, setLabels } = labelSlice.actions;
+export const { addLabel, setLabels, getLabelsFromStorage } = labelSlice.actions;
 
 export const listenForLabels = () => (dispatch, getState) => {
   try {

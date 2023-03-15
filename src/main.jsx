@@ -8,9 +8,11 @@ import { store } from './app/store';
 import { checkUserAuthStorage } from './features/auth/authSlice';
 import GlobalStyles from './styles/GlobalStyles';
 import { getNotesFromStorage } from './features/note/noteSlice';
+import { getLabelsFromStorage } from './features/label/labelSlice';
 
 store.dispatch(checkUserAuthStorage());
 store.dispatch(getNotesFromStorage());
+store.dispatch(getLabelsFromStorage());
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
