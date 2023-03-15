@@ -11,6 +11,8 @@ import PlaneIcon from './PlaneIcon';
 import SearchIcon from './SearchIcon';
 import StarIcon from './StarIcon';
 import RefreshIcon from './RefreshIcon';
+import PaletteIcon from './PaletteIcon';
+import CheckIcon from './CheckIcon';
 
 export {
   RestoreIcon,
@@ -26,4 +28,6 @@ export {
   SearchIcon,
   StarIcon,
   RefreshIcon,
+  PaletteIcon,
+  CheckIcon,
 };

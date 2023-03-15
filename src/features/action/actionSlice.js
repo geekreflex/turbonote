@@ -6,7 +6,7 @@ const initialState = {
   addNoteModal: false,
   addLabelModal: false,
   view: 'note',
-  error: null,
+  errMessage: null,
   loading: false,
 };
 
@@ -23,11 +23,11 @@ const actionSlice = createSlice({
     setView: (state, action) => {
       state.view = action.payload;
     },
-    setError: (state, action) => {
-      state.error = action.payload;
+    setErrorMessage: (state, action) => {
+      state.errMessage = action.payload;
     },
-    clearError: (state, action) => {
-      state.error = action.payload;
+    clearErrorMessage: (state) => {
+      state.errMessage = null;
     },
   },
 });
@@ -36,8 +36,8 @@ export const {
   toggleAddNote,
   toggleAddEditLabel,
   setView,
-  setError,
-  clearError,
+  setErrorMessage,
+  clearErrorMessage,
 } = actionSlice.actions;
 
 export const listenForNetworkChange = () => {};

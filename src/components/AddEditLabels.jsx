@@ -6,14 +6,15 @@ import styled from 'styled-components';
 import { toggleAddEditLabel } from '../features/action/actionSlice';
 import { createLabel } from '../features/label/labelSlice';
 import { ButtonIconSm, Overlay } from '../styles/GlobalStyles';
-import { BinIcon, PaperIcon, PlaneIcon } from './icons';
+import { BinIcon, CheckIcon, PaperIcon, PlaneIcon } from './icons';
 
 const AddEditLabels = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { labels } = useSelector((state) => state.label);
-  const { addLabelModal } = useSelector((state) => state.action);
+  const { addLabelModal, view } = useSelector((state) => state.action);
   const [editingIndex, setEditingIndex] = useState(-1);
+  const [delLabelId, setDelLabelId] = useState('');
   const [editedText, setEditedText] = useState('');
   const [name, setName] = useState('');
   const inputRef = useRef();
@@ -42,9 +43,18 @@ const AddEditLabels = () => {
     navigate(`/note#${view}`);
   };
 
+  const onDeleteClick = (id) => {
+    setDelLabelId(id);
+  };
+
+  const handleDeleteLabel = () => {
+    //
+  };
+
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.focus();
+      setDelLabelId('');
     }
   }, [editingIndex]);
 
@@ -85,9 +95,15 @@ const AddEditLabels = () => {
                 <ul>
                   {labels.map((label, index) => (
                     <li key={label.id}>
-                      <ButtonIconSm>
-                        <BinIcon />
-                      </ButtonIconSm>
+                      {delLabelId && delLabelId === label.id ? (
+                        <ButtonIconSm onClick={() => onDeleteClick(label.id)}>
+                          <CheckIcon />
+                        </ButtonIconSm>
+                      ) : (
+                        <ButtonIconSm onClick={() => onDeleteClick(label.id)}>
+                          <BinIcon />
+                        </ButtonIconSm>
+                      )}
                       {editingIndex === index ? (
                         <input
                           type="text"

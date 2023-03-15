@@ -75,7 +75,7 @@ const LabelsWrap = styled.div`
     background: transparent;
     outline: none;
     border-radius: 21px;
-    font-weight: 400;
+    font-weight: 600;
     color: #777;
     font-size: ${(props) => (props.small ? '11px' : '14px')};
     transition: all 300ms;

@@ -14,7 +14,9 @@ import { Overlay } from '../styles/GlobalStyles';
 import { serializeTimestamps } from '../utils/serializeTimestamp';
 import Pin from './excerpts/Pin';
 import Time from './excerpts/Time';
+import Labels from './Labels';
 import NoteActions from './NoteActions';
+import OutsideClickHandler from 'react-outside-click-handler';
 
 const ViewNote = () => {
   const dispatch = useDispatch();
@@ -27,14 +29,16 @@ const ViewNote = () => {
   const [content, setContent] = useState('');
   const [editTitle, setEditTitle] = useState('');
   const [editContent, setEditContent] = useState('');
+  const [selectedLabels, setSelectedLabels] = useState([]);
+  const [showLabels, setShowLabels] = useState(false);
 
   useEffect(() => {
     if (note) {
-      console.log('123');
       setTitle(note.title);
       setContent(note.content);
       setEditTitle(note.title);
       setEditContent(note.content);
+      setSelectedLabels(note?.labels || []);
     }
   }, [note]);
 
@@ -56,6 +60,15 @@ const ViewNote = () => {
   const handleCloseNote = () => {
     dispatch(removeSelectedNote());
     navigate(`/note#${view}`);
+  };
+
+  const handleDoneLabel = () => {
+    const payload = {
+      ...note,
+      labels: selectedLabels,
+    };
+    dispatch(updateNote(payload));
+    setShowLabels(false);
   };
 
   return (
@@ -82,7 +95,7 @@ const ViewNote = () => {
               <Title
                 contentEditable={view === 'trash' ? false : true}
                 onInput={(e) => setTitle(e.currentTarget.textContent)}
-                onBlur={view !== 'trash' && handleUpdateNote}
+                onBlur={view !== 'trash' ? handleUpdateNote : () => {}}
                 suppressContentEditableWarning="true"
                 data-placeholder="Title"
                 id="title"
@@ -92,7 +105,7 @@ const ViewNote = () => {
               <Content
                 contentEditable={view === 'trash' ? false : true}
                 onInput={(e) => setContent(e.currentTarget.textContent)}
-                onBlur={view !== 'trash' && handleUpdateNote}
+                onBlur={view !== 'trash' ? handleUpdateNote : () => {}}
                 suppressContentEditableWarning="true"
               >
                 {editContent}
@@ -102,7 +115,20 @@ const ViewNote = () => {
                 <Time time={serializeTimestamps(note?.updatedAt)} />
               </EditTime>
             </ViewData>
-            <NoteActions note={note} show={true} />
+            <NoteActions
+              note={note}
+              show={true}
+              clickLabel={() => setShowLabels(true)}
+            />
+            <OutsideClickHandler onOutsideClick={handleDoneLabel}>
+              {showLabels && (
+                <Labels
+                  small={true}
+                  selectedLabels={selectedLabels}
+                  setSelectedLabels={setSelectedLabels}
+                />
+              )}
+            </OutsideClickHandler>
           </ViewNoteMain>
         </ViewNoteWrap>
       )}

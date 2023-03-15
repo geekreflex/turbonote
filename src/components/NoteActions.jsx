@@ -9,7 +9,7 @@ import {
   trashNote,
 } from '../features/note/noteSlice';
 import { ButtonIconSm, CloseBtn } from '../styles/GlobalStyles';
-import { BinIcon, LabelIcon, RestoreIcon } from './icons';
+import { BinIcon, LabelIcon, PaletteIcon, RestoreIcon } from './icons';
 import ArchiveIcon from './icons/ArchiveIcon';
 
 const NoteActions = ({ note, show, clickLabel }) => {
@@ -68,6 +68,9 @@ const NoteActions = ({ note, show, clickLabel }) => {
             </ButtonIconSm>
             <ButtonIconSm onClick={clickLabel}>
               <LabelIcon />
+            </ButtonIconSm>
+            <ButtonIconSm onClick={clickLabel}>
+              <PaletteIcon />
             </ButtonIconSm>
           </>
         )}

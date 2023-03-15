@@ -14,6 +14,7 @@ import ArchivedList from '../components/ArchivedList';
 import TrashedList from '../components/TrashedList';
 import { useLocation } from 'react-router-dom';
 import { setView } from '../features/action/actionSlice';
+import Toast from '../components/Toast';
 
 const Note = () => {
   const dispatch = useDispatch();
@@ -47,6 +48,7 @@ const Note = () => {
           <AddEditLabels />
           <ViewNote />
           <Navbar />
+          <Toast />
         </Container>
       </motion.div>
     </AnimatePresence>

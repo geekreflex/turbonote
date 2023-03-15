@@ -12,6 +12,7 @@ import {
   where,
 } from 'firebase/firestore';
 import { db } from '../../config/firebase';
+import { setErrorMessage } from '../action/actionSlice';
 
 const initialState = {
   notes: [],
@@ -153,6 +154,9 @@ export const archiveNote = (note) => async (dispatch) => {
       ...note,
       pinned: false,
     });
+    dispatch(
+      setErrorMessage(`Note ${note.archived ? 'archived' : 'unarchived'}`)
+    );
   } catch (error) {
     console.error('Error archiving note:', error);
   }
