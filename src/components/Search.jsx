@@ -48,6 +48,7 @@ const SearchWrap = styled.div``;
 const SearchFieldWrap = styled.div`
   position: relative;
   width: 600px;
+  max-width: 100%;
   display: flex;
   border-radius: 21px;
   align-items: center;

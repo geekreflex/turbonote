@@ -122,6 +122,10 @@ const NavWrap = styled.div`
   padding: 30px 0;
   left: 0;
   pointer-events: none;
+
+  @media (max-width: 600px) {
+    padding: 0;
+  }
 `;
 const NavMain = styled.div`
   width: 300px;
@@ -134,6 +138,11 @@ const NavMain = styled.div`
   pointer-events: auto;
   justify-content: space-between;
   align-items: center;
+
+  @media (max-width: 600px) {
+    width: 100%;
+    border-radius: 0;
+  }
 `;
 
 const ButtonIcon = styled.button`
