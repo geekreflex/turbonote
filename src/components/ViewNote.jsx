@@ -168,11 +168,13 @@ const ViewNoteMain = styled.div`
   box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
     rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
 
-  @media (max-width: 680px) {
+  @media (max-width: 600px) {
     width: 100%;
     min-height: 100vh;
     max-height: 100vh;
     border-radius: 0;
+    bottom: 0;
+    position: fixed;
   }
 `;
 
@@ -180,7 +182,8 @@ const ViewData = styled.div`
   overflow-y: auto;
   flex: 1;
   padding: 15px;
-  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
 
   #title[data-placeholder]:empty:before {
     content: attr(data-placeholder);
@@ -206,6 +209,7 @@ const Content = styled.div`
   letter-spacing: 0.00625em;
   font-weight: 400;
   color: ${(props) => props.theme.colors.text2};
+  flex: 1;
 `;
 
 const EditTime = styled.div`
