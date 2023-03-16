@@ -29,7 +29,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route
-          path="/note"
+          path="note"
           element={
             <ProtectedRoute isLoggedIn={isLoggedIn}>
               <Note />
@@ -37,7 +37,7 @@ function App() {
           }
         />
         <Route
-          path="/auth"
+          path="auth"
           element={
             <PublicRoute isLoggedIn={isLoggedIn}>
               <Auth />
