@@ -12,7 +12,7 @@ import { ButtonIconSm, CloseBtn } from '../styles/GlobalStyles';
 import { BinIcon, LabelIcon, PaletteIcon, RestoreIcon } from './icons';
 import ArchiveIcon from './icons/ArchiveIcon';
 
-const NoteActions = ({ note, show, clickLabel }) => {
+const NoteActions = ({ note, show, clickLabel, close }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { view } = useSelector((state) => state.action);
@@ -50,10 +50,10 @@ const NoteActions = ({ note, show, clickLabel }) => {
     handleCloseNote();
   };
 
-  const handleCloseNote = () => {
-    dispatch(removeSelectedNote());
-    navigate(`/note#${view}`);
-  };
+  // const handleCloseNote = () => {
+  //   dispatch(removeSelectedNote());
+  //   navigate(`/note#${view}`);
+  // };
 
   return (
     <NoteActionWrap show={show}>
@@ -86,7 +86,7 @@ const NoteActions = ({ note, show, clickLabel }) => {
         )}
       </div>
       <div className="right">
-        {show && <CloseBtn onClick={handleCloseNote}>Close</CloseBtn>}
+        {show && <CloseBtn onClick={close}>Close</CloseBtn>}
       </div>
     </NoteActionWrap>
   );
