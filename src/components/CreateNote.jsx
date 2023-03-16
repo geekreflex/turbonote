@@ -115,10 +115,15 @@ const CreateNoteMain = styled.div`
   border-radius: 21px;
   overflow: hidden;
   box-shadow: ${(props) => props.theme.colors.shadow2};
-  @media (max-width: 680px) {
+  @media (max-width: 600px) {
     height: 100vh;
     width: 100%;
     border-radius: 0;
+    position: fixed;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
   }
   display: flex;
   flex-direction: column;
