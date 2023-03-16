@@ -3,7 +3,7 @@ import { useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { CloseIcon, SearchIcon } from './icons';
+import { ArrowLeftIcon, ArrowRightIcon, CloseIcon, SearchIcon } from './icons';
 import NotesWrap from './NotesWrap';
 import ViewWrap from './ViewWrap';
 import Note from './Note';
@@ -15,10 +15,7 @@ const Search = () => {
   const [filteredNotes, setFilteredNotes] = useState([]);
   const [query, setQuery] = useState('');
   const [placeholder, setPlaceholder] = useState('Search');
-  const [selectedLabel, setSelectedLabel] = useState({
-    id: '1Oy61SsZa1kjTOwr1MTy',
-    name: 'Lyrics',
-  });
+  const [selectedLabel, setSelectedLabel] = useState(null);
 
   const filterNotes = () => {
     const filtered = notes.filter((note) => {
@@ -135,17 +132,35 @@ const SearchField = ({ query, setQuery, placeholder, clear }) => {
 };
 
 const Labels = ({ labels, selectedLabel, setSelectedLabel }) => {
+  const containerRef = useRef(null);
+
+  const handleScrollLeft = () => {
+    containerRef.current.scrollBy({ left: -100, behavior: 'smooth' });
+  };
+
+  const handleScrollRight = () => {
+    containerRef.current.scrollBy({ left: 100, behavior: 'smooth' });
+  };
+
   return (
     <LabelsWrap>
-      {labels.map((label) => (
-        <button
-          key={label.id}
-          className={selectedLabel?.id === label?.id ? 'selected' : ''}
-          onClick={() => setSelectedLabel(label)}
-        >
-          {label.name}
-        </button>
-      ))}
+      <button className="arrow arrow-left" onClick={handleScrollLeft}>
+        <ArrowLeftIcon />
+      </button>
+      <div className="label-list" ref={containerRef}>
+        {labels.map((label) => (
+          <button
+            key={label.id}
+            className={selectedLabel?.id === label?.id ? 'selected' : ''}
+            onClick={() => setSelectedLabel(label)}
+          >
+            {label.name}
+          </button>
+        ))}
+      </div>
+      <button className="arrow arrow-right" onClick={handleScrollRight}>
+        <ArrowRightIcon />
+      </button>
     </LabelsWrap>
   );
 };
@@ -208,12 +223,76 @@ const SearchFieldWrap = styled.div`
 `;
 
 const LabelsWrap = styled.div`
+  width: 100%;
   display: flex;
   margin-top: 10px;
   gap: 20px;
-  cursor: pointer;
+  align-items: center;
+
+  div {
+    width: 400px;
+    max-width: 70%;
+    display: flex;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    gap: 10px;
+
+    button {
+      padding: 8px 15px;
+      cursor: pointer;
+      border-radius: 20px;
+      border: none;
+      outline: none;
+      font-size: 12px;
+      font-weight: 600;
+      color: ${(props) => props.theme.colors.text3};
+      background-color: transparent;
+      /* border-bottom: 1px solid ${(props) => props.theme.colors.border1}; */
+      border: 1px solid ${(props) => props.theme.colors.border1};
+
+      :hover {
+        background-color: ${(props) => props.theme.colors.text2};
+        color: ${(props) => props.theme.colors.cardBg};
+        border-color: ${(props) => props.theme.colors.text2};
+      }
+    }
+  }
 
   .selected {
-    color: red;
+    background-color: ${(props) => props.theme.colors.text2};
+    color: ${(props) => props.theme.colors.cardBg};
+    border-color: ${(props) => props.theme.colors.text2};
+  }
+
+  .arrow {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    cursor: pointer;
+    color: ${(props) => props.theme.colors.text3};
+    background-color: ${(props) => props.theme.colors.cardBg};
+    :hover {
+      background-color: ${(props) => props.theme.colors.text2};
+      color: ${(props) => props.theme.colors.cardBg};
+      border-color: ${(props) => props.theme.colors.text2};
+    }
+  }
+
+  .arrow-left {
+    svg {
+      margin-left: 5px;
+    }
+  }
+
+  .arrow-right {
+    svg {
+      margin-right: 1px;
+    }
   }
 `;
