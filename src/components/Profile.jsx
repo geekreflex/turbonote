@@ -122,13 +122,16 @@ const DropdownWrap = styled.div`
   position: absolute;
   background-color: ${(props) => props.theme.colors.cardBg};
   box-shadow: ${(props) => props.theme.colors.shadow2};
-  min-width: 300px;
-  max-width: 320px;
+  min-width: 320px;
+  max-width: 100%;
   right: 0;
   margin-top: 30px;
   padding: 20px 0;
   border-radius: 21px;
   color: ${(props) => props.theme.colors.text3};
+
+  @media (max-width: 600px) {
+  }
 
   .user-info {
     display: flex;

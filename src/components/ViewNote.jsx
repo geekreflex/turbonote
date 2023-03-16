@@ -173,6 +173,7 @@ const ViewNoteMain = styled.div`
     min-height: 100vh;
     max-height: 100vh;
     border-radius: 0;
+    top: 0;
     bottom: 0;
     position: fixed;
   }
