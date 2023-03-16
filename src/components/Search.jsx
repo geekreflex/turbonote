@@ -7,6 +7,7 @@ import { ArrowLeftIcon, ArrowRightIcon, CloseIcon, SearchIcon } from './icons';
 import NotesWrap from './NotesWrap';
 import ViewWrap from './ViewWrap';
 import Note from './Note';
+import Empty from './Empty';
 
 const Search = () => {
   const navigate = useNavigate();
@@ -79,6 +80,8 @@ const Search = () => {
           setSelectedLabel={setSelectedLabel}
         />
       </SearchWrap>
+      {query === '' && selectedLabel === null && <Empty type="search" />}
+      {filteredNotes.length === 0 && <Empty type="empty" />}
       <NotesWrap>
         {(query || selectedLabel) &&
           filteredNotes.map((note) => <Note note={note} key={note.id} />)}

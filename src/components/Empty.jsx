@@ -1,13 +1,27 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import React from 'react';
 import styled from 'styled-components';
-import { BinIcon, PaperIcon, ArchiveIcon } from './icons';
+import {
+  BinIcon,
+  PaperIcon,
+  ArchiveIcon,
+  SearchIcon,
+  CloseIcon,
+} from './icons';
 
 const Empty = ({ type }) => {
   const data = {
     note: {
       text: "You don't have any notes yet.",
       icon: <PaperIcon />,
+    },
+    search: {
+      text: 'Blast off with search.',
+      icon: <SearchIcon />,
+    },
+    empty: {
+      text: 'No matching results.',
+      icon: <CloseIcon />,
     },
     archive: {
       text: "You haven't archived any notes yet.",
