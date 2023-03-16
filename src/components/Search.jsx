@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { createRef, useEffect } from 'react';
 import { useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -133,6 +133,7 @@ const SearchField = ({ query, setQuery, placeholder, clear }) => {
 
 const Labels = ({ labels, selectedLabel, setSelectedLabel }) => {
   const containerRef = useRef(null);
+  const refs = useRef(labels.map(() => createRef()));
 
   const handleScrollLeft = () => {
     containerRef.current.scrollBy({ left: -100, behavior: 'smooth' });
@@ -142,17 +143,31 @@ const Labels = ({ labels, selectedLabel, setSelectedLabel }) => {
     containerRef.current.scrollBy({ left: 100, behavior: 'smooth' });
   };
 
+  const handleSelect = (label, index) => {
+    refs.current[index].current.scrollIntoView({
+      behavior: 'smooth',
+      inline: 'center',
+      block: 'nearest',
+    });
+    if (selectedLabel && selectedLabel.id === label.id) {
+      setSelectedLabel(null);
+    } else {
+      setSelectedLabel(label);
+    }
+  };
+
   return (
     <LabelsWrap>
       <button className="arrow arrow-left" onClick={handleScrollLeft}>
         <ArrowLeftIcon />
       </button>
       <div className="label-list" ref={containerRef}>
-        {labels.map((label) => (
+        {labels.map((label, index) => (
           <button
+            ref={refs.current[index]}
             key={label.id}
             className={selectedLabel?.id === label?.id ? 'selected' : ''}
-            onClick={() => setSelectedLabel(label)}
+            onClick={() => handleSelect(label, index)}
           >
             {label.name}
           </button>
@@ -229,14 +244,23 @@ const LabelsWrap = styled.div`
   gap: 20px;
   align-items: center;
   justify-content: center;
+  position: relative;
 
-  div {
+  .label-list {
     width: 400px;
     max-width: 70%;
     display: flex;
+    flex-direction: row;
     overflow-x: hidden;
     scroll-behavior: smooth;
     gap: 10px;
+    position: relative;
+
+    .selected {
+      background-color: ${(props) => props.theme.colors.text2};
+      color: ${(props) => props.theme.colors.cardBg};
+      border-color: ${(props) => props.theme.colors.text2};
+    }
 
     button {
       padding: 8px 15px;
@@ -257,12 +281,6 @@ const LabelsWrap = styled.div`
         border-color: ${(props) => props.theme.colors.text2};
       }
     }
-  }
-
-  .selected {
-    background-color: ${(props) => props.theme.colors.text2};
-    color: ${(props) => props.theme.colors.cardBg};
-    border-color: ${(props) => props.theme.colors.text2};
   }
 
   .arrow {
