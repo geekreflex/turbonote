@@ -9,9 +9,16 @@ import ViewWrap from './ViewWrap';
 import Note from './Note';
 
 const Search = () => {
+  const navigate = useNavigate();
   const { notes } = useSelector((state) => state.note);
+  const { labels } = useSelector((state) => state.label);
   const [filteredNotes, setFilteredNotes] = useState([]);
   const [query, setQuery] = useState('');
+  const [placeholder, setPlaceholder] = useState('Search');
+  const [selectedLabel, setSelectedLabel] = useState({
+    id: '1Oy61SsZa1kjTOwr1MTy',
+    name: 'Lyrics',
+  });
 
   const filterNotes = () => {
     const filtered = notes.filter((note) => {
@@ -21,41 +28,76 @@ const Search = () => {
       const contentMatch = note.content
         .toLowerCase()
         .includes(query.toLowerCase());
-      return !note.trashed && (titleMatcth || contentMatch);
+
+      if (!note.trashed && (titleMatcth || contentMatch)) {
+        // check if note has selected label
+        if (selectedLabel === null) {
+          return true;
+        } else {
+          return note.labels.includes(selectedLabel.id);
+        }
+      } else {
+        return false; // if note is trashed or doesn't match search query, exclude it
+      }
     });
     setFilteredNotes(filtered);
   };
 
+  const onClearSearch = () => {
+    setQuery('');
+    setSelectedLabel(null);
+    navigate(`/note#search`);
+  };
+
+  useEffect(() => {
+    if (query) {
+      navigate(`/note#search/text:${query}`);
+    }
+  }, [query]);
+
   useEffect(() => {
     filterNotes();
-  }, [query]);
+  }, [query, selectedLabel]);
+
+  useEffect(() => {
+    if (selectedLabel) {
+      setPlaceholder(`Search within "${selectedLabel.name}"`);
+    } else {
+      setPlaceholder('Search');
+    }
+  }, [selectedLabel]);
 
   return (
     <ViewWrap>
       <SearchWrap>
-        <SearchField query={query} setQuery={setQuery} />
+        <SearchField
+          query={query}
+          setQuery={setQuery}
+          placeholder={placeholder}
+          clear={onClearSearch}
+        />
+        <Labels
+          labels={labels}
+          selectedLabel={selectedLabel}
+          setSelectedLabel={setSelectedLabel}
+        />
       </SearchWrap>
       <NotesWrap>
-        {query &&
+        {(query || selectedLabel) &&
           filteredNotes.map((note) => <Note note={note} key={note.id} />)}
       </NotesWrap>
     </ViewWrap>
   );
 };
 
-const SearchField = ({ query, setQuery }) => {
-  const navigate = useNavigate();
+const SearchField = ({ query, setQuery, placeholder, clear }) => {
   const location = useLocation();
   const hashQuery = location.hash.split(':')[1];
+  const [focused, setFocused] = useState(false);
   const searchRef = useRef();
 
   const onSearchIcon = () => {
     searchRef.current.focus();
-  };
-
-  const onClearSearch = () => {
-    setQuery('');
-    navigate(`/note#search`);
   };
 
   useEffect(() => {
@@ -64,12 +106,6 @@ const SearchField = ({ query, setQuery }) => {
     }
   }, [hashQuery]);
 
-  useEffect(() => {
-    if (query) {
-      navigate(`/note#search/text:${query}`);
-    }
-  }, [query]);
-
   return (
     <SearchFieldWrap>
       <span className="sicon icon-search" onClick={onSearchIcon}>
@@ -77,16 +113,40 @@ const SearchField = ({ query, setQuery }) => {
       </span>
       <input
         ref={searchRef}
-        placeholder="Search"
+        placeholder={placeholder}
         value={query}
         onChange={(e) => setQuery(e.target.value)}
+        onFocus={() => setFocused(true)}
+        onBlur={() => setFocused(false)}
       />
-      {query && (
-        <span className="sicon icon-close" onClick={onClearSearch}>
+      {(focused || query) && (
+        <span
+          className="sicon icon-close"
+          onClick={() => {
+            clear();
+            setFocused(false);
+          }}
+        >
           <CloseIcon />
         </span>
       )}
     </SearchFieldWrap>
+  );
+};
+
+const Labels = ({ labels, selectedLabel, setSelectedLabel }) => {
+  return (
+    <LabelsWrap>
+      {labels.map((label) => (
+        <button
+          key={label.id}
+          className={selectedLabel?.id === label?.id ? 'selected' : ''}
+          onClick={() => setSelectedLabel(label)}
+        >
+          {label.name}
+        </button>
+      ))}
+    </LabelsWrap>
   );
 };
 
@@ -144,5 +204,16 @@ const SearchFieldWrap = styled.div`
     :focus {
       box-shadow: ${(props) => props.theme.colors.shadow2};
     }
+  }
+`;
+
+const LabelsWrap = styled.div`
+  display: flex;
+  margin-top: 10px;
+  gap: 20px;
+  cursor: pointer;
+
+  .selected {
+    color: red;
   }
 `;
