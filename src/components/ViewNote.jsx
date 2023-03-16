@@ -69,12 +69,14 @@ const ViewNote = () => {
   };
 
   const handleCloseNote = () => {
+    const hash = localStorage.getItem('hash');
+    console.log(hash);
+    navigate(hash ? `/note${hash}` : `/note#${view}`);
     if (isEditing) {
       handleUpdateNote();
     }
     setIsEditing(false);
     dispatch(removeSelectedNote());
-    navigate(`/note#${view}`);
   };
 
   return (

@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { setSelectedNote, updateNote } from '../features/note/noteSlice';
 import { shortenSentence } from '../utils/convert';
@@ -12,6 +12,8 @@ import OutsideClickHandler from 'react-outside-click-handler';
 
 const Note = ({ note }) => {
   const dispatch = useDispatch();
+  const location = useLocation();
+  const hash = location.hash;
   const navigate = useNavigate();
   const { view } = useSelector((state) => state.action);
   const [showLabels, setShowLabels] = useState(false);
@@ -19,6 +21,7 @@ const Note = ({ note }) => {
   const handleViewNote = () => {
     dispatch(setSelectedNote(note.id));
     navigate(`#${view}/${note.id}`);
+    localStorage.setItem('hash', hash);
   };
 
   const handleShwoNoteLabel = () => {
