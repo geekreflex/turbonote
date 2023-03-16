@@ -228,6 +228,7 @@ const LabelsWrap = styled.div`
   margin-top: 10px;
   gap: 20px;
   align-items: center;
+  justify-content: center;
 
   div {
     width: 400px;
