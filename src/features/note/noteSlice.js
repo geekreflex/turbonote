@@ -119,7 +119,6 @@ export const createNote = (note) => async (dispatch, getState) => {
 
 export const updateNote = (note) => async () => {
   try {
-    console.log('here... Again');
     await updateDoc(doc(db, 'notes', note.id), {
       ...note,
       updatedAt: serverTimestamp(),
@@ -180,7 +179,6 @@ export const trashNote = (note) => async (dispatch) => {
       pinned: false,
       archived: false,
     });
-    // dispatch(trashNoteSync(note));
   } catch (error) {
     console.error('Error trashing note:', error);
   }
