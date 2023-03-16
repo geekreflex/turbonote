@@ -9,6 +9,7 @@ export default createGlobalStyle`
 
 body {
   background-color: ${(props) => props.theme.colors.bgColor};
+  color: ${(props) => props.theme.colors.text2}
 }
 
 /* Change the scrollbar style for webkit-based browsers */

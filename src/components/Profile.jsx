@@ -64,22 +64,22 @@ const Dropdown = ({ close }) => {
       </div>
       <ul>
         <li onClick={themeClick}>
+          <span>{`Enable ${mode === 'light' ? ' dark' : 'light'} theme`}</span>
           <span className="li-icon">
             {mode === 'light' ? <MoonIcon /> : <SunIcon />}
           </span>
-          <span>{`Enable ${mode === 'light' ? ' dark' : 'light'} theme`}</span>
         </li>
         <li>
+          <span>Settings</span>
           <span className="li-icon">
             <SettingsIcon />
           </span>
-          <span>Settings</span>
         </li>
         <li onClick={() => dispatch(signOutUser())}>
+          <span>Sign out</span>
           <span className="li-icon">
             <LogoutIcon />
           </span>
-          <span>Sign out</span>
         </li>
       </ul>
     </DropdownWrap>
@@ -155,7 +155,11 @@ const DropdownWrap = styled.div`
       align-items: center;
       font-size: 14px;
       font-weight: 600;
+      justify-content: space-between;
       span:first-child {
+        flex: 1;
+      }
+      span:last-child {
         display: flex;
         font-size: 22px;
         width: 30px;

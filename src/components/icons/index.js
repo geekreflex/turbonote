@@ -16,6 +16,7 @@ import CheckIcon from './CheckIcon';
 import MoonIcon from './MoonIcon';
 import ArchiveIcon from './ArchiveIcon';
 import SunIcon from './SunIcon';
+import CloseIcon from './CloseIcon';
 
 export {
   RestoreIcon,
@@ -36,4 +37,5 @@ export {
   MoonIcon,
   ArchiveIcon,
   SunIcon,
+  CloseIcon,
 };
