@@ -84,7 +84,7 @@ const Search = () => {
         />
       </SearchWrap>
       {query === '' && selectedLabel === null && <Empty type="search" />}
-      {filteredNotes.length === 0 && <Empty type="empty" />}
+      {filteredNotes.length === 0 && !!selectedLabel && <Empty type="empty" />}
       <NotesWrap>
         {(query || selectedLabel) &&
           filteredNotes.map((note) => <Note note={note} key={note.id} />)}
