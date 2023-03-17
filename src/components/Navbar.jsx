@@ -11,6 +11,7 @@ import {
 import AddIcon from './icons/AddIcon';
 import ArchiveIcon from './icons/ArchiveIcon';
 import BinIcon from './icons/BinIcon';
+import 'react-tooltip/dist/react-tooltip.css';
 import EditIcon from './icons/EditIcon';
 import SearchIcon from './icons/SearchIcon';
 import LabelIcon from './icons/LabelIcon';
@@ -54,7 +55,8 @@ const Navbar = () => {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0 }}
             transition={{ duration: 0.3, delay: 0.7 }}
-            // isActive={view === 'note'}
+            data-tooltip-id="nav"
+            data-tooltip-content="Note"
           >
             {view === 'note' ? <AddIcon /> : <EditIcon />}
           </ButtonIcon>
@@ -68,6 +70,8 @@ const Navbar = () => {
             exit={{ opacity: 0, scale: 0 }}
             transition={{ duration: 0.3, delay: 0.8 }}
             isActive={view === 'archive'}
+            data-tooltip-id="nav"
+            data-tooltip-content="Archived Notes"
           >
             <ArchiveIcon />
           </ButtonIcon>
@@ -79,6 +83,8 @@ const Navbar = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.3, delay: 0.9 }}
             isActive={view === 'trash'}
+            data-tooltip-id="nav"
+            data-tooltip-content="Trashed Notes"
           >
             <BinIcon />
           </ButtonIcon>
@@ -89,7 +95,8 @@ const Navbar = () => {
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.3, delay: 1 }}
-            // isActive={view === 'label'}
+            data-tooltip-id="nav"
+            data-tooltip-content="Add/Edit Labels"
           >
             <LabelIcon />
           </ButtonIcon>
@@ -101,6 +108,8 @@ const Navbar = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.3, delay: 1 }}
             isActive={view === 'search'}
+            data-tooltip-id="nav"
+            data-tooltip-content="Search"
           >
             <SearchIcon />
           </ButtonIcon>

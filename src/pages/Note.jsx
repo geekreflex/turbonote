@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import CreateNote from '../components/CreateNote';
 import NoteList from '../components/NoteList';
@@ -16,6 +16,8 @@ import { useLocation } from 'react-router-dom';
 import { setView } from '../features/action/actionSlice';
 import Toast from '../components/Toast';
 import Search from '../components/Search';
+import { Tooltip } from 'react-tooltip';
+import 'react-tooltip/dist/react-tooltip.css';
 
 const Note = () => {
   const dispatch = useDispatch();
@@ -51,6 +53,9 @@ const Note = () => {
           <ViewNote />
           <Navbar />
           <Toast />
+          <NavTippy>
+            <Tooltip id="nav" place="top" />
+          </NavTippy>
         </Container>
       </motion.div>
     </AnimatePresence>
@@ -60,3 +65,11 @@ const Note = () => {
 export default Note;
 
 export const NoteWrap = styled.div``;
+
+const NavTippy = styled.div`
+  #nav {
+    color: ${(props) => props.theme.colors.isActive};
+    background-color: ${(props) => props.theme.colors.isActiveBg};
+    box-shadow: ${(props) => props.theme.colors.shadow2};
+  }
+`;
