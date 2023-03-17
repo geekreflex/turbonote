@@ -178,8 +178,8 @@ const ViewNoteMain = styled.div`
 
   @media (max-width: 600px) {
     width: 100%;
-    min-height: 100vh;
-    max-height: 100vh;
+    min-height: 100%;
+    max-height: 100%;
     border-radius: 0;
     top: 0;
     bottom: 0;
