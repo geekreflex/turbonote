@@ -77,11 +77,13 @@ const Search = () => {
           placeholder={placeholder}
           clear={onClearSearch}
         />
-        <LabelList
-          labels={labels}
-          selectedLabel={selectedLabel}
-          setSelectedLabel={setSelectedLabel}
-        />
+        {labels && labels.length && (
+          <LabelList
+            labels={labels}
+            selectedLabel={selectedLabel}
+            setSelectedLabel={setSelectedLabel}
+          />
+        )}
       </SearchWrap>
       {query === '' && selectedLabel === null && <Empty type="search" />}
       {filteredNotes.length === 0 && !!selectedLabel && <Empty type="empty" />}

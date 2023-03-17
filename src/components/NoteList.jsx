@@ -50,11 +50,13 @@ const NoteList = () => {
 
   return (
     <ViewWrap>
-      <LabelList
-        labels={labels}
-        selectedLabel={selectedLabel}
-        setSelectedLabel={setSelectedLabel}
-      />
+      {labels && labels.length && (
+        <LabelList
+          labels={labels}
+          selectedLabel={selectedLabel}
+          setSelectedLabel={setSelectedLabel}
+        />
+      )}
       <NoteListWrap>
         {selectedLabel !== null && labelNotes.length === 0 && (
           <Empty type="empty" />
