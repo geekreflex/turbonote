@@ -58,7 +58,6 @@ const LabelList = ({ labels, selectedLabel, setSelectedLabel }) => {
 
   return (
     <LabelsWrap>
-      <p></p>
       <div className="arrow-box arrow-box-left">
         {showLeftArrow && (
           <button className="arrow arrow-left" onClick={handleScrollLeft}>
@@ -66,17 +65,19 @@ const LabelList = ({ labels, selectedLabel, setSelectedLabel }) => {
           </button>
         )}
       </div>
-      <div className="label-list" ref={containerRef}>
-        {labels.map((label, index) => (
-          <button
-            ref={refs.current[index]}
-            key={label.id}
-            className={selectedLabel?.id === label?.id ? 'selected' : ''}
-            onClick={() => handleSelect(label, index)}
-          >
-            {label.name}
-          </button>
-        ))}
+      <div className="labels-wrap" ref={containerRef}>
+        <div className="label-list">
+          {labels.map((label, index) => (
+            <button
+              ref={refs.current[index]}
+              key={label.id}
+              className={selectedLabel?.id === label?.id ? 'selected' : ''}
+              onClick={() => handleSelect(label, index)}
+            >
+              {label.name}
+            </button>
+          ))}
+        </div>
       </div>
       <div className="arrow-box arrow-box-right">
         {showRightArrow && (
@@ -100,14 +101,18 @@ const LabelsWrap = styled.div`
   justify-content: center;
   position: relative;
 
-  .label-list {
+  .labels-wrap {
     width: 400px;
-    max-width: 70%;
+    overflow-x: hidden;
+  }
+
+  .label-list {
+    width: max-content;
     display: flex;
-    flex-direction: row;
     overflow-x: hidden;
     scroll-behavior: smooth;
     gap: 10px;
+    flex-wrap: nowrap;
     position: relative;
 
     .selected {
