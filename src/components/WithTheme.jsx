@@ -31,6 +31,7 @@ const WithTheme = ({ children }) => {
       shadow1: '0 0px 1px 1px #eee',
       shadow2:
         'rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px, 0 0px 1px 1px #eee',
+      shadow3: 'rgba(0, 0, 0, 0.45) 0px 25px 20px -20px, 0 0px 1px 1px #eee',
     },
   };
 
@@ -43,6 +44,7 @@ const WithTheme = ({ children }) => {
       text2: '#eee',
       text3: '#f5f5f5',
       text4: '#5f6461',
+      text5: '#fff',
       border1: '#444',
       isActiveBg: '#eee',
       isActive: '#333',
@@ -53,9 +55,12 @@ const WithTheme = ({ children }) => {
       scrollbarThumbBg: '#4e4c4c',
       scrollbarTrackBg: '#212221',
       scrollbarThumbBgHover: '#343735',
+      btnBg1: '#fff',
+      btnText1: '#111',
       shadow1: '0 0px 1px 1px #3e433e',
       shadow2:
         'rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.2) 0px 10px 10px -5px, 0 0px 1px 1px #3e433e',
+      shadow3: 'rgba(0, 0, 0, 0.45) 0px 25px 20px -20px, 0 0px 1px 1px #3e433e',
     },
   };
 

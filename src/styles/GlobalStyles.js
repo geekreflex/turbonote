@@ -116,6 +116,10 @@ export const Button = styled.button`
     display: flex;
     font-size: 20px;
   }
+
+  @media (max-wdith: 600px) {
+    font-size: 12px;
+  }
 `;
 
 export const Logo = styled.div`

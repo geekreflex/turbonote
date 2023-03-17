@@ -13,7 +13,7 @@ const Layout = ({ children }) => {
           animate={{ y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          {children}
+          <div>{children}</div>
         </motion.div>
       </AnimatePresence>
     </Container>
