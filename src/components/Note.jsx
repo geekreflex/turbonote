@@ -45,7 +45,11 @@ const Note = ({ note }) => {
         <p>{note && shortenSentence(note.content, 110)}</p>
       </div>
       <div className="card-actions">
-        <NoteActions note={note} clickLabel={handleShwoNoteLabel} />
+        <NoteActions
+          note={note}
+          clickLabel={handleShwoNoteLabel}
+          close={() => {}}
+        />
       </div>
       <OutsideClickHandler onOutsideClick={() => setShowLabels(false)}>
         {showLabels && <Labels small={true} note={note} />}

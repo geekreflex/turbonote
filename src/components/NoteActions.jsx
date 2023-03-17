@@ -1,13 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import {
-  archiveNote,
-  deleteNote,
-  removeSelectedNote,
-  trashNote,
-} from '../features/note/noteSlice';
+import { archiveNote, deleteNote, trashNote } from '../features/note/noteSlice';
 import { ButtonIconSm, CloseBtn } from '../styles/GlobalStyles';
 import { BinIcon, LabelIcon, PaletteIcon, RestoreIcon } from './icons';
 import ArchiveIcon from './icons/ArchiveIcon';
@@ -47,13 +42,8 @@ const NoteActions = ({ note, show, clickLabel, close }) => {
       archived: !note.archived,
     };
     dispatch(archiveNote(payload));
-    handleCloseNote();
+    close();
   };
-
-  // const handleCloseNote = () => {
-  //   dispatch(removeSelectedNote());
-  //   navigate(`/note#${view}`);
-  // };
 
   return (
     <NoteActionWrap show={show}>
