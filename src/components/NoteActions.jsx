@@ -59,9 +59,9 @@ const NoteActions = ({ note, show, clickLabel, close }) => {
             <ButtonIconSm onClick={clickLabel}>
               <LabelIcon />
             </ButtonIconSm>
-            <ButtonIconSm onClick={clickLabel}>
+            {/* <ButtonIconSm onClick={clickLabel}>
               <PaletteIcon />
-            </ButtonIconSm>
+            </ButtonIconSm> */}
           </>
         )}
         {view === 'trash' && (

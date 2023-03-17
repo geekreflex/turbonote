@@ -9,6 +9,7 @@ import Pin from './excerpts/Pin';
 import Labels from './Labels';
 import NoteActions from './NoteActions';
 import OutsideClickHandler from 'react-outside-click-handler';
+import { Overlay } from '../styles/GlobalStyles';
 
 const Note = ({ note }) => {
   const dispatch = useDispatch();
@@ -52,7 +53,12 @@ const Note = ({ note }) => {
         />
       </div>
       <OutsideClickHandler onOutsideClick={() => setShowLabels(false)}>
-        {showLabels && <Labels small={true} note={note} />}
+        {showLabels && (
+          <>
+            <Overlay onClick={() => setShowLabels(false)} />
+            <Labels small={true} note={note} />
+          </>
+        )}
       </OutsideClickHandler>
     </NoteCard>
   );

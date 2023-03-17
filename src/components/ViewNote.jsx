@@ -133,7 +133,12 @@ const ViewNote = () => {
               clickLabel={() => setShowLabels(true)}
             />
             <OutsideClickHandler onOutsideClick={() => setShowLabels(false)}>
-              {showLabels && <Labels small={true} note={note} />}
+              {showLabels && (
+                <>
+                  <Overlay onClick={() => setShowLabels(false)} />
+                  <Labels small={true} note={note} />
+                </>
+              )}
             </OutsideClickHandler>
           </ViewNoteMain>
         </ViewNoteWrap>
