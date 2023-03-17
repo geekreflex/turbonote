@@ -71,12 +71,14 @@ const Search = () => {
   return (
     <ViewWrap>
       <SearchWrap>
-        <SearchField
-          query={query}
-          setQuery={setQuery}
-          placeholder={placeholder}
-          clear={onClearSearch}
-        />
+        {notes && !!notes.lnegth && (
+          <SearchField
+            query={query}
+            setQuery={setQuery}
+            placeholder={placeholder}
+            clear={onClearSearch}
+          />
+        )}
         {labels && !!labels.length && (
           <LabelList
             labels={labels}
