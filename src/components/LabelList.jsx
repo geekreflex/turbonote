@@ -1,10 +1,39 @@
-import React, { createRef, useRef } from 'react';
+import React, { createRef, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { ArrowLeftIcon, ArrowRightIcon } from './icons';
 
 const LabelList = ({ labels, selectedLabel, setSelectedLabel }) => {
   const containerRef = useRef(null);
   const refs = useRef(labels.map(() => createRef()));
+  const [showLeftArrow, setShowLeftArrow] = useState(false);
+  const [showRightArrow, setShowRightArrow] = useState(false);
+
+  useEffect(() => {
+    const container = containerRef.current;
+
+    if (container.scrollWidth > container.clientWidth) {
+      setShowLeftArrow(container.scrollLeft > 0);
+      setShowRightArrow(
+        container.scrollLeft + container.clientWidth < container.scrollWidth
+      );
+    } else {
+      setShowLeftArrow(false);
+      setShowRightArrow(false);
+    }
+
+    const handleScroll = () => {
+      setShowLeftArrow(container.scrollLeft > 0);
+      setShowRightArrow(
+        container.scrollLeft + container.clientWidth < container.scrollWidth
+      );
+    };
+
+    container.addEventListener('scroll', handleScroll);
+
+    return () => {
+      container.removeEventListener('scroll', handleScroll);
+    };
+  }, [labels]);
 
   const handleScrollLeft = () => {
     containerRef.current.scrollBy({ left: -100, behavior: 'smooth' });
@@ -29,9 +58,14 @@ const LabelList = ({ labels, selectedLabel, setSelectedLabel }) => {
 
   return (
     <LabelsWrap>
-      <button className="arrow arrow-left" onClick={handleScrollLeft}>
-        <ArrowLeftIcon />
-      </button>
+      <p></p>
+      <div className="arrow-box arrow-box-left">
+        {showLeftArrow && (
+          <button className="arrow arrow-left" onClick={handleScrollLeft}>
+            <ArrowLeftIcon />
+          </button>
+        )}
+      </div>
       <div className="label-list" ref={containerRef}>
         {labels.map((label, index) => (
           <button
@@ -44,9 +78,13 @@ const LabelList = ({ labels, selectedLabel, setSelectedLabel }) => {
           </button>
         ))}
       </div>
-      <button className="arrow arrow-right" onClick={handleScrollRight}>
-        <ArrowRightIcon />
-      </button>
+      <div className="arrow-box arrow-box-right">
+        {showRightArrow && (
+          <button className="arrow arrow-right" onClick={handleScrollRight}>
+            <ArrowRightIcon />
+          </button>
+        )}
+      </div>
     </LabelsWrap>
   );
 };
@@ -97,6 +135,14 @@ const LabelsWrap = styled.div`
         border-color: ${(props) => props.theme.colors.text2};
       }
     }
+  }
+
+  .arrow-box {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .arrow {
