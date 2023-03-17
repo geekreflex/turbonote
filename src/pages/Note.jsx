@@ -54,7 +54,9 @@ const Note = () => {
           <Navbar />
           <Toast />
           <NavTippy>
-            <Tooltip id="nav" place="top" />
+            <Tooltip id="pin" place="bottom" className="tooltip" />
+            <Tooltip id="nav" place="top" className="tooltip" />
+            <Tooltip id="nact" className="tooltip" />
           </NavTippy>
         </Container>
       </motion.div>
@@ -67,9 +69,11 @@ export default Note;
 export const NoteWrap = styled.div``;
 
 const NavTippy = styled.div`
-  #nav {
+  .tooltip {
     color: ${(props) => props.theme.colors.isActive};
     background-color: ${(props) => props.theme.colors.isActiveBg};
     box-shadow: ${(props) => props.theme.colors.shadow2};
+    font-size: 12px;
+    font-weight: 600;
   }
 `;

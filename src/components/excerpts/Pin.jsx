@@ -17,9 +17,22 @@ const Pin = ({ note, show }) => {
     };
     dispatch(pinNote(payload));
   };
+
   return (
     view !== 'trash' && (
-      <PinWrap show={show} onClick={handlePinNote} className="pin">
+      <PinWrap
+        show={show}
+        onClick={handlePinNote}
+        className="pin"
+        data-tooltip-id="pin"
+        data-tooltip-content={
+          note.archived
+            ? 'Pin archived note'
+            : note.pinned
+            ? 'Unpin note'
+            : 'Pin note'
+        }
+      >
         {note.pinned ? <PinIcon2 /> : <PinIcon />}
       </PinWrap>
     )
