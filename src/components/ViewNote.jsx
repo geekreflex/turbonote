@@ -95,7 +95,7 @@ const ViewNote = () => {
             exit={{ scale: 0, y: -600 }}
             transition={{ duration: 0.5 }}
           >
-            <Pin note={note} show={true} />
+            {/* <Pin note={note} show={true} /> */}
             <ViewData>
               <Title
                 contentEditable={view === 'trash' ? false : true}
@@ -126,12 +126,15 @@ const ViewNote = () => {
                 {note && <Time time={note.updatedAt} />}
               </EditTime>
             </ViewData>
-            <NoteActions
-              note={note}
-              show={true}
-              close={handleCloseNote}
-              clickLabel={() => setShowLabels(true)}
-            />
+            <span className="note-action-wrap">
+              <NoteActions
+                note={note}
+                show={true}
+                pin={true}
+                close={handleCloseNote}
+                clickLabel={() => setShowLabels(true)}
+              />
+            </span>
             <OutsideClickHandler onOutsideClick={() => setShowLabels(false)}>
               {showLabels && (
                 <>
@@ -181,6 +184,10 @@ const ViewNoteMain = styled.div`
     top: 0;
     bottom: 0;
     position: fixed;
+
+    .note-action-main {
+      order: 1;
+    }
   }
 `;
 
@@ -194,6 +201,10 @@ const ViewData = styled.div`
   #title[data-placeholder]:empty:before {
     content: attr(data-placeholder);
     color: #999;
+  }
+
+  @media (max-width: 680px) {
+    order: 2;
   }
 `;
 

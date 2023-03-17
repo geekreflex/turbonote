@@ -4,10 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { archiveNote, deleteNote, trashNote } from '../features/note/noteSlice';
 import { ButtonIconSm, CloseBtn } from '../styles/GlobalStyles';
+import Pin from './excerpts/Pin';
 import { BinIcon, LabelIcon, PaletteIcon, RestoreIcon } from './icons';
 import ArchiveIcon from './icons/ArchiveIcon';
 
-const NoteActions = ({ note, show, clickLabel, close }) => {
+const NoteActions = ({ note, show, clickLabel, close, pin = false }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { view } = useSelector((state) => state.action);
@@ -71,9 +72,12 @@ const NoteActions = ({ note, show, clickLabel, close }) => {
             >
               <LabelIcon />
             </ButtonIconSm>
-            {/* <ButtonIconSm onClick={clickLabel}>
-              <PaletteIcon />
-            </ButtonIconSm> */}
+            <Pin note={note} show={true} fixed={'static'} />
+            {false && (
+              <ButtonIconSm onClick={clickLabel}>
+                <PaletteIcon />
+              </ButtonIconSm>
+            )}
           </>
         )}
         {view === 'trash' && (

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { pinNote } from '../../features/note/noteSlice';
 import { PinIcon, PinIcon2 } from '../icons';
 
-const Pin = ({ note, show }) => {
+const Pin = ({ note, show, pos = 'abssolute' }) => {
   const dispatch = useDispatch();
 
   const { view } = useSelector((state) => state.action);
@@ -21,6 +21,7 @@ const Pin = ({ note, show }) => {
   return (
     view !== 'trash' && (
       <PinWrap
+        pos={pos}
         show={show}
         onClick={handlePinNote}
         className="pin"
@@ -42,7 +43,7 @@ const Pin = ({ note, show }) => {
 export default Pin;
 
 const PinWrap = styled.div`
-  position: absolute;
+  position: ${(props) => props.pos || 'absolute'};
   width: 30px;
   height: 30px;
   display: flex;
