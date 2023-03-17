@@ -36,11 +36,17 @@ const LabelList = ({ labels, selectedLabel, setSelectedLabel }) => {
   }, [labels]);
 
   const handleScrollLeft = () => {
-    containerRef.current.scrollBy({ left: -100, behavior: 'smooth' });
+    containerRef.current.scrollBy({
+      left: -containerRef.current.clientWidth,
+      behavior: 'smooth',
+    });
   };
 
   const handleScrollRight = () => {
-    containerRef.current.scrollBy({ left: 100, behavior: 'smooth' });
+    containerRef.current.scrollBy({
+      left: containerRef.current.clientWidth,
+      behavior: 'smooth',
+    });
   };
 
   const handleSelect = (label, index) => {
