@@ -86,7 +86,8 @@ const Search = () => {
         )}
       </SearchWrap>
       {query === '' && selectedLabel === null && <Empty type="search" />}
-      {filteredNotes.length === 0 ? (
+      {(query !== '' || selectedLabel !== null) &&
+      filteredNotes.length === 0 ? (
         <Empty type="empty" />
       ) : (
         <NotesWrap>
