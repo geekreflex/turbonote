@@ -50,7 +50,7 @@ const NoteList = () => {
 
   return (
     <ViewWrap>
-      {labels && labels.length && (
+      {labels && !!labels.length && (
         <LabelList
           labels={labels}
           selectedLabel={selectedLabel}

@@ -77,7 +77,7 @@ const Search = () => {
           placeholder={placeholder}
           clear={onClearSearch}
         />
-        {labels && labels.length && (
+        {labels && !!labels.length && (
           <LabelList
             labels={labels}
             selectedLabel={selectedLabel}
