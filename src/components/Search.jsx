@@ -68,24 +68,24 @@ const Search = () => {
     }
   }, [selectedLabel]);
 
+  if (notes && notes.length === 0) {
+    return <Empty type="search" />;
+  }
+
   return (
     <ViewWrap>
       <SearchWrap>
-        {notes && !!notes.length && (
-          <SearchField
-            query={query}
-            setQuery={setQuery}
-            placeholder={placeholder}
-            clear={onClearSearch}
-          />
-        )}
-        {notes && !!notes.length && labels && !!labels.length && (
-          <LabelList
-            labels={labels}
-            selectedLabel={selectedLabel}
-            setSelectedLabel={setSelectedLabel}
-          />
-        )}
+        <SearchField
+          query={query}
+          setQuery={setQuery}
+          placeholder={placeholder}
+          clear={onClearSearch}
+        />
+        <LabelList
+          labels={labels}
+          selectedLabel={selectedLabel}
+          setSelectedLabel={setSelectedLabel}
+        />
       </SearchWrap>
       {query === '' && selectedLabel === null && <Empty type="search" />}
       {(query !== '' || selectedLabel !== null) &&
