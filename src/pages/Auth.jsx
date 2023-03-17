@@ -2,7 +2,10 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import Layout from '../components/Layout';
-import { signInWithGoogle } from '../features/auth/authSlice';
+import {
+  signInWithFacebook,
+  signInWithGoogle,
+} from '../features/auth/authSlice';
 import GoogleLogo from '../assets/google-logo.png';
 import FacebookLogo from '../assets/facebook-logo.png';
 
@@ -23,7 +26,7 @@ const Auth = () => {
             </button>
             <button
               className="auth-btn"
-              onClick={() => dispatch(signInWithGoogle())}
+              onClick={() => dispatch(signInWithFacebook())}
             >
               <img src={FacebookLogo} />
               Continue with Facebook

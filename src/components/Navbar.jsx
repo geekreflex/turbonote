@@ -43,23 +43,39 @@ const Navbar = () => {
           animate={{ y: 0, opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, delay: 0.5 }}
         >
-          <ButtonIcon
-            aria-label="Add Note"
-            onClick={
-              view === 'note'
-                ? handleAddNoteModal
-                : () => handleViewClick('note')
-            }
-            as={motion.button}
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0 }}
-            transition={{ duration: 0.3, delay: 0.7 }}
-            data-tooltip-id="nav"
-            data-tooltip-content="Note"
-          >
-            {view === 'note' ? <AddIcon /> : <EditIcon />}
-          </ButtonIcon>
+          {view === 'note' ? (
+            <ButtonIcon
+              aria-label="Add Note"
+              onClick={
+                view === 'note'
+                  ? handleAddNoteModal
+                  : () => handleViewClick('note')
+              }
+              as={motion.button}
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0 }}
+              transition={{ duration: 0.3, delay: 0.7 }}
+              data-tooltip-id="nav"
+              data-tooltip-content="Add note"
+            >
+              <AddIcon />
+            </ButtonIcon>
+          ) : (
+            <ButtonIcon
+              aria-label="Notes"
+              onClick={() => handleViewClick('note')}
+              as={motion.button}
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0 }}
+              transition={{ duration: 0.3, delay: 0.7 }}
+              data-tooltip-id="nav"
+              data-tooltip-content="Notes"
+            >
+              <EditIcon />
+            </ButtonIcon>
+          )}
 
           <ButtonIcon
             aria-label="Archived Notes "
@@ -71,7 +87,7 @@ const Navbar = () => {
             transition={{ duration: 0.3, delay: 0.8 }}
             isActive={view === 'archive'}
             data-tooltip-id="nav"
-            data-tooltip-content="Archived Notes"
+            data-tooltip-content="Archived notes"
           >
             <ArchiveIcon />
           </ButtonIcon>
@@ -84,7 +100,7 @@ const Navbar = () => {
             transition={{ duration: 0.3, delay: 0.9 }}
             isActive={view === 'trash'}
             data-tooltip-id="nav"
-            data-tooltip-content="Trashed Notes"
+            data-tooltip-content="Trashed lotes"
           >
             <BinIcon />
           </ButtonIcon>
@@ -96,7 +112,7 @@ const Navbar = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.3, delay: 1 }}
             data-tooltip-id="nav"
-            data-tooltip-content="Add/Edit Labels"
+            data-tooltip-content="Add/Edit labels"
           >
             <LabelIcon />
           </ButtonIcon>

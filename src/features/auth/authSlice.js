@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
+  FacebookAuthProvider,
   GoogleAuthProvider,
   onAuthStateChanged,
   signInWithPopup,
@@ -56,8 +57,23 @@ export const listenForAuthChanges = () => (dispatch) => {
 
 export const signInWithGoogle = () => (dispatch) => {
   const provider = new GoogleAuthProvider();
+
   signInWithPopup(auth, provider)
     .then((result) => {
+      const { uid, displayName, email, photoURL } = result.user;
+      dispatch(setUserAuth({ uid, displayName, email, photoURL }));
+    })
+    .catch((error) => {
+      dispatch(clearUserAuth(error.message));
+    });
+};
+
+export const signInWithFacebook = () => (dispatch) => {
+  const provider = new FacebookAuthProvider();
+
+  signInWithPopup(auth, provider)
+    .then((result) => {
+      console.log(result);
       const { uid, displayName, email, photoURL } = result.user;
       dispatch(setUserAuth({ uid, displayName, email, photoURL }));
     })

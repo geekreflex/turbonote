@@ -1,10 +1,11 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { Button, Logo } from '../styles/GlobalStyles';
 
 const Header = () => {
+  const location = useLocation();
   const { isLoggedIn } = useSelector((state) => state.auth);
   return (
     <HeaderWrap>
@@ -14,7 +15,7 @@ const Header = () => {
         </Link>
       </Logo>
       <nav>
-        {!isLoggedIn && (
+        {location.pathname !== '/auth' && !isLoggedIn && (
           <Link to="/auth">
             <Button>Sign In or Join Now</Button>
           </Link>
