@@ -19,9 +19,11 @@ const Nav = () => {
         </Logo>
       </div>
       <div className="right">
-        <span className={`refresh-icon ${loading && 'rotate-infinite'}`}>
-          <RefreshIcon />
-        </span>
+        {false && (
+          <span className={`refresh-icon ${loading && 'rotate-infinite'}`}>
+            <RefreshIcon />
+          </span>
+        )}
         <Profile />
       </div>
     </NavWrap>

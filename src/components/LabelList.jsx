@@ -109,7 +109,12 @@ const LabelsWrap = styled.div`
 
   .labels-wrap {
     width: 400px;
-    overflow-x: hidden;
+    overflow-x: scroll;
+    &::-webkit-scrollbar {
+      width: 0px;
+      height: 0px;
+      background-color: transparent;
+    }
   }
 
   .label-list {
@@ -165,10 +170,10 @@ const LabelsWrap = styled.div`
     font-size: 16px;
     cursor: pointer;
     color: ${(props) => props.theme.colors.text3};
-    background-color: ${(props) => props.theme.colors.cardBg};
+    background-color: transparent;
     :hover {
-      background-color: ${(props) => props.theme.colors.text2};
-      color: ${(props) => props.theme.colors.cardBg};
+      background-color: ${(props) => props.theme.colors.highlight2};
+      color: ${(props) => props.theme.colors.text2};
       border-color: ${(props) => props.theme.colors.text2};
     }
   }

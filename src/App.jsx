@@ -12,6 +12,15 @@ import { listenForLabels } from './features/label/labelSlice';
 function App() {
   const dispatch = useDispatch();
   const { isLoggedIn } = useSelector((state) => state.auth);
+  const { note } = useSelector((state) => state.note);
+
+  useEffect(() => {
+    if (note) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'scroll';
+    }
+  }, [note]);
 
   useEffect(() => {
     if (isLoggedIn) {
