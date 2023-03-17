@@ -20,6 +20,7 @@ import CloseIcon from './CloseIcon';
 import ArrowRightIcon from './ArrowRightIcon';
 import ArrowLeftIcon from './ArrowLeftIcon';
 import ArrowRightIcon2 from './ArrowRightIcon2';
+import GithubIcon from './GithubIcon';
 
 export {
   RestoreIcon,
@@ -44,4 +45,5 @@ export {
   ArrowRightIcon,
   ArrowLeftIcon,
   ArrowRightIcon2,
+  GithubIcon,
 };
