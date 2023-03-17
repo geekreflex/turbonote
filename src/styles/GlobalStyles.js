@@ -7,6 +7,10 @@ export default createGlobalStyle`
   box-sizing: border;
 }
 
+a {
+  text-decoration: none;
+}
+
 body {
   background-color: ${(props) => props.theme.colors.bgColor};
   color: ${(props) => props.theme.colors.text2}
@@ -86,5 +90,42 @@ export const CloseBtn = styled.button`
   cursor: pointer;
   :hover {
     background-color: ${(props) => props.theme.colors.highlight};
+  }
+`;
+
+export const Button = styled.button`
+  padding: 13px 20px;
+  background-color: ${(props) => props.theme.colors.btnBg1};
+  color: ${(props) => props.theme.colors.btnText1};
+  border: none;
+  outline: none;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 100ms;
+  :hover {
+    /* box-shadow: ${(props) => props.theme.colors.shadow2}; */
+    background-color: ${(props) => props.theme.colors.text1};
+  }
+
+  .icon {
+    display: flex;
+    font-size: 20px;
+  }
+`;
+
+export const Logo = styled.div`
+  font-size: 30px;
+  font-weight: 900;
+  a {
+    color: #333;
+    text-decoration: none;
+    span {
+      margin-right: 10px;
+    }
   }
 `;

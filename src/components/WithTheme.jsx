@@ -15,6 +15,7 @@ const WithTheme = ({ children }) => {
       text2: '#444',
       text3: '#555',
       text4: '#999',
+      text5: '#111',
       border1: '#eee',
       isActiveBg: '#333',
       isActive: '#fff',
@@ -25,6 +26,8 @@ const WithTheme = ({ children }) => {
       scrollbarThumbBg: '#ccc',
       scrollbarTrackBg: '#f5f5f5',
       scrollbarThumbBgHover: '#999',
+      btnBg1: '#111',
+      btnText1: '#fff',
       shadow1: '0 0px 1px 1px #eee',
       shadow2:
         'rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px, 0 0px 1px 1px #eee',

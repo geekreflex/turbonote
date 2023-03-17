@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { Logo } from '../styles/GlobalStyles';
 import { RefreshIcon } from './icons';
 import Profile from './Profile';
 
@@ -49,16 +50,5 @@ const NavWrap = styled.div`
     margin-right: 20px;
     display: flex;
     color: ${(props) => props.theme.colors.text2};
-  }
-`;
-export const Logo = styled.div`
-  font-size: 30px;
-  font-weight: 900;
-  a {
-    color: #333;
-    text-decoration: none;
-    span {
-      margin-right: 10px;
-    }
   }
 `;

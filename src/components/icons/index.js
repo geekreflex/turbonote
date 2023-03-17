@@ -19,6 +19,7 @@ import SunIcon from './SunIcon';
 import CloseIcon from './CloseIcon';
 import ArrowRightIcon from './ArrowRightIcon';
 import ArrowLeftIcon from './ArrowLeftIcon';
+import ArrowRightIcon2 from './ArrowRightIcon2';
 
 export {
   RestoreIcon,
@@ -42,4 +43,5 @@ export {
   CloseIcon,
   ArrowRightIcon,
   ArrowLeftIcon,
+  ArrowRightIcon2,
 };
