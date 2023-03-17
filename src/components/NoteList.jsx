@@ -1,11 +1,17 @@
+import { useEffect } from 'react';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import Empty from './Empty';
+import LabelList from './LabelList';
 import Note from './Note';
 import ViewWrap from './ViewWrap';
 
 const NoteList = () => {
   const { notes } = useSelector((state) => state.note);
+  const { labels } = useSelector((state) => state.label);
+  const [selectedLabel, setSelectedLabel] = useState(null);
+  const [labelNotes, setLabelNotes] = useState([]);
   // Filter notes into two arrays: pinned and unpinned
   const unarchivedNotes = notes.filter(
     (note) => !note.archived && !note.trashed
@@ -16,31 +22,72 @@ const NoteList = () => {
   // Sort pinned notes by date in descending order
   pinnedNotes.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
 
-  if (pinnedNotes.length === 0 && otherNotes.length === 0) {
+  // filter notes
+  const filterNotes = () => {
+    const notes = [...pinnedNotes, ...otherNotes];
+    const filtered = notes.filter((note) => {
+      // check if note has selected label
+      if (selectedLabel === null) {
+        return;
+      } else {
+        return note.labels.includes(selectedLabel.id);
+      }
+    });
+    setLabelNotes(filtered);
+  };
+
+  useEffect(() => {
+    filterNotes();
+  }, [selectedLabel]);
+
+  if (
+    pinnedNotes.length === 0 &&
+    otherNotes.length === 0 &&
+    selectedLabel === null
+  ) {
     return <Empty type="note" />;
   }
 
   return (
     <ViewWrap>
+      <LabelList
+        labels={labels}
+        selectedLabel={selectedLabel}
+        setSelectedLabel={setSelectedLabel}
+      />
       <NoteListWrap>
-        {!!pinnedNotes.length && (
+        {selectedLabel !== null && labelNotes.length === 0 && (
+          <Empty type="empty" />
+        )}
+        {!!selectedLabel && !!labelNotes.length && (
+          <div className="note-wrap">
+            {labelNotes?.map((note) => (
+              <Note note={note} key={note.id} />
+            ))}
+          </div>
+        )}
+        {!!pinnedNotes.length &&
+          selectedLabel == null &&
+          labelNotes.length === 0 && (
+            <section>
+              <h2>Pinned</h2>
+              <div className="note-wrap">
+                {pinnedNotes?.map((note) => (
+                  <Note note={note} key={note.id} />
+                ))}
+              </div>
+            </section>
+          )}
+        {selectedLabel === null && labelNotes.length === 0 && (
           <section>
-            <h2>Pinned</h2>
+            {!!pinnedNotes.length && <h2>Others</h2>}
             <div className="note-wrap">
-              {pinnedNotes?.map((note) => (
+              {otherNotes?.map((note) => (
                 <Note note={note} key={note.id} />
               ))}
             </div>
           </section>
         )}
-        <section>
-          {!!pinnedNotes.length && <h2>Others</h2>}
-          <div className="note-wrap">
-            {otherNotes?.map((note) => (
-              <Note note={note} key={note.id} />
-            ))}
-          </div>
-        </section>
       </NoteListWrap>
     </ViewWrap>
   );
