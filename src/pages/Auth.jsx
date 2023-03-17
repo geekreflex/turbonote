@@ -63,7 +63,7 @@ const AuthMain = styled.div`
   }
 
   .auth-btn {
-    padding: 15px 20px;
+    padding: 12px 20px;
     border: none;
     outline: none;
     background-color: transparent;
@@ -85,7 +85,7 @@ const AuthMain = styled.div`
     }
 
     img {
-      width: 30px;
+      width: 25px;
     }
   }
 `;
