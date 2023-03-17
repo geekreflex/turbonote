@@ -71,7 +71,7 @@ const Search = () => {
   return (
     <ViewWrap>
       <SearchWrap>
-        {notes && !!notes.lnegth && (
+        {notes && !!notes.length && (
           <SearchField
             query={query}
             setQuery={setQuery}
@@ -79,7 +79,7 @@ const Search = () => {
             clear={onClearSearch}
           />
         )}
-        {labels && !!labels.length && (
+        {notes && !!notes.length && labels && !!labels.length && (
           <LabelList
             labels={labels}
             selectedLabel={selectedLabel}
