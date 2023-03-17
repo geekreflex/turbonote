@@ -50,13 +50,25 @@ const NoteActions = ({ note, show, clickLabel, close }) => {
       <div className="left">
         {view !== 'trash' && (
           <>
-            <ButtonIconSm onClick={handleTrashNote}>
+            <ButtonIconSm
+              onClick={handleTrashNote}
+              data-tooltip-id="nact"
+              data-tooltip-content="Delete note"
+            >
               <BinIcon />
             </ButtonIconSm>
-            <ButtonIconSm onClick={handleArchiveNote}>
+            <ButtonIconSm
+              onClick={handleArchiveNote}
+              data-tooltip-id="nact"
+              data-tooltip-content="Archive note"
+            >
               <ArchiveIcon />
             </ButtonIconSm>
-            <ButtonIconSm onClick={clickLabel}>
+            <ButtonIconSm
+              onClick={clickLabel}
+              data-tooltip-id="nact"
+              data-tooltip-content="Edit label"
+            >
               <LabelIcon />
             </ButtonIconSm>
             {/* <ButtonIconSm onClick={clickLabel}>
@@ -66,10 +78,18 @@ const NoteActions = ({ note, show, clickLabel, close }) => {
         )}
         {view === 'trash' && (
           <>
-            <ButtonIconSm onClick={handleRestoreNote}>
+            <ButtonIconSm
+              onClick={handleRestoreNote}
+              data-tooltip-id="nact"
+              data-tooltip-content="Restore note"
+            >
               <RestoreIcon />
             </ButtonIconSm>
-            <ButtonIconSm onClick={handleDeleteNote}>
+            <ButtonIconSm
+              onClick={handleDeleteNote}
+              data-tooltip-id="nact"
+              data-tooltip-content="Delete forever"
+            >
               <BinIcon />
             </ButtonIconSm>
           </>

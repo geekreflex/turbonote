@@ -56,7 +56,7 @@ const Note = () => {
           <NavTippy>
             <Tooltip id="pin" place="bottom" className="tooltip" />
             <Tooltip id="nav" place="top" className="tooltip" />
-            <Tooltip id="nact" className="tooltip" />
+            <Tooltip id="nact" place="bottom" className="tooltip" />
           </NavTippy>
         </Container>
       </motion.div>
@@ -75,5 +75,6 @@ const NavTippy = styled.div`
     box-shadow: ${(props) => props.theme.colors.shadow2};
     font-size: 12px;
     font-weight: 600;
+    z-index: 998;
   }
 `;
