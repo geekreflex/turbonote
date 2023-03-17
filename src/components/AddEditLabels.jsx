@@ -27,6 +27,7 @@ const AddEditLabels = () => {
   const handleCreateLabel = (e) => {
     e.preventDefault();
     dispatch(createLabel({ name }));
+    setName('');
   };
 
   const handleItemClick = (index, text, id) => {

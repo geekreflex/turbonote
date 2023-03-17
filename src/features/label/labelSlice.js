@@ -21,9 +21,6 @@ const labelSlice = createSlice({
   name: 'label',
   initialState,
   reducers: {
-    addLabel: (state, action) => {
-      state.labels.push(action.payload);
-    },
     setLabels: (state, action) => {
       state.labels = action.payload;
     },
@@ -34,7 +31,7 @@ const labelSlice = createSlice({
   },
 });
 
-export const { addLabel, setLabels, getLabelsFromStorage } = labelSlice.actions;
+export const { setLabels, getLabelsFromStorage } = labelSlice.actions;
 
 export const listenForLabels = () => (dispatch, getState) => {
   try {
@@ -79,8 +76,6 @@ export const createLabel = (label) => async (dispatch, getState) => {
     };
 
     await addDoc(collection(db, 'labels'), labelToAdd);
-
-    dispatch(addLabel({ ...labelToAdd, id: 234 }));
   } catch (error) {
     console.error('Error creating label:', error);
   }
