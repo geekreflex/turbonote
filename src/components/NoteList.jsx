@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { compareCreatedAt } from '../utils/sort';
 import Empty from './Empty';
 import LabelList from './LabelList';
 import Note from './Note';
@@ -18,13 +19,16 @@ const NoteList = () => {
   );
   const pinnedNotes = unarchivedNotes.filter((note) => note.pinned);
   const otherNotes = unarchivedNotes.filter((note) => !note.pinned);
+  const archivedNotes = notes.filter((note) => note.archived);
 
   // Sort pinned notes by date in descending order
-  pinnedNotes.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
+  pinnedNotes.sort(compareCreatedAt);
 
   // filter notes
   const filterNotes = () => {
-    const notes = [...pinnedNotes, ...otherNotes];
+    const notes = [...pinnedNotes, ...otherNotes, ...archivedNotes].sort(
+      compareCreatedAt
+    );
     const filtered = notes.filter((note) => {
       // check if note has selected label
       if (selectedLabel === null) {

@@ -9,7 +9,6 @@ import {
   removeSelectedNote,
   setSelectedNote,
   updateNote,
-  updateNoteLabel,
 } from '../features/note/noteSlice';
 import { Overlay } from '../styles/GlobalStyles';
 import Pin from './excerpts/Pin';

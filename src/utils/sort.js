@@ -19,3 +19,21 @@ export function prioritizeIds(priorityIds, items) {
 
   return sortedItems;
 }
+
+export function compareCreatedAt(a, b) {
+  const createdAtA = a.createdAt;
+  const createdAtB = b.createdAt;
+  if (createdAtA.seconds < createdAtB.seconds) {
+    return -1;
+  }
+  if (createdAtA.seconds > createdAtB.seconds) {
+    return 1;
+  }
+  if (createdAtA.nanoseconds < createdAtB.nanoseconds) {
+    return -1;
+  }
+  if (createdAtA.nanoseconds > createdAtB.nanoseconds) {
+    return 1;
+  }
+  return 0;
+}
