@@ -24,13 +24,15 @@ const Auth = () => {
               <img src={GoogleLogo} />
               Continue with Google
             </button>
-            <button
-              className="auth-btn"
-              onClick={() => dispatch(signInWithFacebook())}
-            >
-              <img src={FacebookLogo} />
-              Continue with Facebook
-            </button>
+            {false && (
+              <button
+                className="auth-btn"
+                onClick={() => dispatch(signInWithFacebook())}
+              >
+                <img src={FacebookLogo} />
+                Continue with Facebook
+              </button>
+            )}
           </div>
         </AuthMain>
       </AuthWrap>
