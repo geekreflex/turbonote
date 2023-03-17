@@ -137,13 +137,10 @@ const LabelsWrap = styled.div`
       font-weight: 600;
       color: ${(props) => props.theme.colors.text3};
       background-color: transparent;
-      /* border-bottom: 1px solid ${(props) => props.theme.colors.border1}; */
       border: 1px solid ${(props) => props.theme.colors.border1};
 
       :hover {
-        background-color: ${(props) => props.theme.colors.text2};
-        color: ${(props) => props.theme.colors.cardBg};
-        border-color: ${(props) => props.theme.colors.text2};
+        border-color: ${(props) => props.theme.colors.text4};
       }
     }
   }

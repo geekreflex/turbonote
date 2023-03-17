@@ -77,4 +77,10 @@ const NavTippy = styled.div`
     font-weight: 600;
     z-index: 998;
   }
+
+  @media (max-width: 768px) {
+    .tooltip {
+      display: none;
+    }
+  }
 `;

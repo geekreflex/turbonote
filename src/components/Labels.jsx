@@ -76,7 +76,7 @@ const LabelsWrap = styled.div`
   border-top: 1px solid ${(props) => props.theme.colors.border1};
   overflow-y: auto;
 
-  @media (max-width: 680px) {
+  @media (max-width: 768px) {
     max-height: 50vh;
   }
 

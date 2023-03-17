@@ -187,6 +187,7 @@ const SearchFieldWrap = styled.div`
   }
 
   input {
+    width: 100%;
     flex: 1;
     height: 50px;
     border-radius: 10px;
