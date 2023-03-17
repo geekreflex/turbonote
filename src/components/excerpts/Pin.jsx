@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { pinNote } from '../../features/note/noteSlice';
 import { PinIcon, PinIcon2 } from '../icons';
 
-const Pin = ({ note, show, pos = 'abssolute' }) => {
+const Pin = ({ note, show, pos = 'absolute' }) => {
   const dispatch = useDispatch();
 
   const { view } = useSelector((state) => state.action);

@@ -72,7 +72,7 @@ const NoteActions = ({ note, show, clickLabel, close, pin = false }) => {
             >
               <LabelIcon />
             </ButtonIconSm>
-            <Pin note={note} show={true} fixed={'static'} />
+            {pin && <Pin note={note} show={true} pos={'static'} />}
             {false && (
               <ButtonIconSm onClick={clickLabel}>
                 <PaletteIcon />
@@ -95,6 +95,9 @@ const NoteActions = ({ note, show, clickLabel, close, pin = false }) => {
               data-tooltip-content="Delete forever"
             >
               <BinIcon />
+            </ButtonIconSm>
+            <ButtonIconSm onClick={clickLabel}>
+              <PaletteIcon />
             </ButtonIconSm>
           </>
         )}
