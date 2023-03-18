@@ -57,7 +57,7 @@ const Navbar = () => {
               exit={{ opacity: 0, scale: 0 }}
               transition={{ duration: 0.3, delay: 0.7 }}
               data-tooltip-id="nav"
-              data-tooltip-content="Add note"
+              data-tooltip-content="New note"
             >
               <AddIcon />
             </ButtonIcon>
@@ -78,7 +78,7 @@ const Navbar = () => {
           )}
 
           <ButtonIcon
-            aria-label="Archived Notes "
+            aria-label="Archive"
             onClick={() => handleViewClick('archive')}
             as={motion.button}
             initial={{ opacity: 0, scale: 0.5 }}
@@ -87,20 +87,21 @@ const Navbar = () => {
             transition={{ duration: 0.3, delay: 0.8 }}
             isActive={view === 'archive'}
             data-tooltip-id="nav"
-            data-tooltip-content="Archived notes"
+            data-tooltip-content="Archive"
           >
             <ArchiveIcon />
           </ButtonIcon>
           <ButtonIcon
-            aria-label="Trashed Notes"
+            aria-label="Trash"
             onClick={() => handleViewClick('trash')}
             as={motion.button}
+            notes
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.3, delay: 0.9 }}
             isActive={view === 'trash'}
             data-tooltip-id="nav"
-            data-tooltip-content="Trashed lotes"
+            data-tooltip-content="Trash"
           >
             <BinIcon />
           </ButtonIcon>

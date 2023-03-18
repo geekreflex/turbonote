@@ -22,15 +22,12 @@ const Labels = ({ small, note }) => {
   };
 
   useEffect(() => {
-    console.log('up here');
-
     if (
       note.labels.length === selectedLabels.length &&
       note.labels.every((item) => selectedLabels.includes(item))
     ) {
       return;
     }
-    console.log('passed');
     dispatch(updateNoteLabel({ ...note, labels: selectedLabels }));
   }, [selectedLabels]);
 
@@ -42,7 +39,7 @@ const Labels = ({ small, note }) => {
         initial={{ y: 200 }}
         animate={{ y: 0 }}
       >
-        {sortedLabels.map((label) => (
+        {labels?.map((label) => (
           <motion.button
             whileTap={{ scale: 0.8 }}
             whileHover={{ scale: 1.05 }}

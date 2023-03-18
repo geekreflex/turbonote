@@ -77,7 +77,7 @@ const CreateNote = () => {
                 </ButtonIconSm>
               </div>
               <div className="right">
-                <CloseBtn onClick={handleCreateNote}>Close</CloseBtn>
+                <CloseBtn onClick={handleCreateNote}>Save</CloseBtn>
               </div>
             </NoteActions>
             <OutsideClickHandler onOutsideClick={() => setShowLabels(false)}>

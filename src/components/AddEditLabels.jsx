@@ -23,6 +23,7 @@ const AddEditLabels = () => {
   const [editedText, setEditedText] = useState('');
   const [name, setName] = useState('');
   const inputRef = useRef();
+  const addInputRef = useRef();
 
   const handleCreateLabel = (e) => {
     e.preventDefault();
@@ -78,6 +79,12 @@ const AddEditLabels = () => {
     }
   }, [editingIndex]);
 
+  useEffect(() => {
+    if (addInputRef.current) {
+      addInputRef.current.focus();
+    }
+  }, []);
+
   return (
     <AnimatePresence>
       {addLabelModal && (
@@ -105,6 +112,7 @@ const AddEditLabels = () => {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="Create new label"
+                    ref={addInputRef}
                   />
                   <ButtonIconSm>
                     <PlaneIcon />

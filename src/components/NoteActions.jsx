@@ -96,9 +96,6 @@ const NoteActions = ({ note, show, clickLabel, close, pin = false }) => {
             >
               <BinIcon />
             </ButtonIconSm>
-            <ButtonIconSm onClick={clickLabel}>
-              <PaletteIcon />
-            </ButtonIconSm>
           </>
         )}
       </div>
