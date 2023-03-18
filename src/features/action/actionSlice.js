@@ -36,7 +36,7 @@ const actionSlice = createSlice({
     },
     getThemeModeFromStroage: (state) => {
       const mode = localStorage.getItem('mode');
-      state.mode = mode || 'light';
+      state.mode = mode || 'dark';
     },
   },
 });

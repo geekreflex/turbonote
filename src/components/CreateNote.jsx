@@ -25,7 +25,7 @@ const CreateNote = () => {
       content,
       labels: selectedLabels,
     };
-    if (content !== '') {
+    if (content !== '' || title !== '') {
       dispatch(createNote(payload));
     }
     closeModal();
@@ -77,7 +77,9 @@ const CreateNote = () => {
                 </ButtonIconSm>
               </div>
               <div className="right">
-                <CloseBtn onClick={handleCreateNote}>Save</CloseBtn>
+                <CloseBtn onClick={handleCreateNote}>
+                  {content || title ? 'Save' : 'Close'}
+                </CloseBtn>
               </div>
             </NoteActions>
             <OutsideClickHandler onOutsideClick={() => setShowLabels(false)}>
