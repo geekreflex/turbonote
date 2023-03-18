@@ -8,7 +8,14 @@ import Pin from './excerpts/Pin';
 import { BinIcon, LabelIcon, PaletteIcon, RestoreIcon } from './icons';
 import ArchiveIcon from './icons/ArchiveIcon';
 
-const NoteActions = ({ note, show, clickLabel, close, pin = false }) => {
+const NoteActions = ({
+  note,
+  show,
+  clickLabel,
+  close,
+  pin = false,
+  isEditing = false,
+}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { view } = useSelector((state) => state.action);
@@ -100,7 +107,9 @@ const NoteActions = ({ note, show, clickLabel, close, pin = false }) => {
         )}
       </div>
       <div className="right">
-        {show && <CloseBtn onClick={close}>Close</CloseBtn>}
+        {show && (
+          <CloseBtn onClick={close}>{isEditing ? 'Update' : 'Close'}</CloseBtn>
+        )}
       </div>
     </NoteActionWrap>
   );

@@ -133,6 +133,7 @@ const ViewNote = () => {
                 pin={true}
                 close={handleCloseNote}
                 clickLabel={() => setShowLabels(true)}
+                isEditing={isEditing}
               />
             </span>
             <OutsideClickHandler onOutsideClick={() => setShowLabels(false)}>
