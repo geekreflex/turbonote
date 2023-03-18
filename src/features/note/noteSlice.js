@@ -110,8 +110,6 @@ export const createNote = (note) => async (dispatch, getState) => {
       archived: false,
     };
     await addDoc(collection(db, 'notes'), noteToAdd);
-
-    dispatch(addNote({ ...noteToAdd, id: 234 }));
   } catch (error) {
     console.error('Error creating note:', error);
   }
