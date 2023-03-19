@@ -2,7 +2,7 @@
 
 # Turbo Note
 
-## Capture, Organize, and Share Your Thoughts with Ease.
+## Capture and Organize Your Thoughts with Ease.
 
 Unlock your creativity and productivity with effortless note-taking and organization.
 
