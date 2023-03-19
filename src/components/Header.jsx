@@ -56,7 +56,8 @@ const HeaderWrap = styled.div`
   width: 100%;
   top: 0;
   left: 0;
-  background-color: ${(props) => props.theme.colors.bgColor};
+  background-color: ${(props) =>
+    props.isFixed ? props.theme.colors.cardBg : ''};
   z-index: 99;
   box-shadow: ${(props) => (props.isFixed ? props.theme.colors.shadow2 : '')};
   transition: top 0.3s ease-in-out;
