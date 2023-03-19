@@ -150,7 +150,9 @@ const DropdownWrap = styled.div`
     gap: 10px;
 
     .user-data {
-      flex: 1;
+      width: 80%;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     p:first-child {
@@ -160,7 +162,9 @@ const DropdownWrap = styled.div`
     p:last-child {
       font-size: 13px;
       font-weight: 600;
+      overflow: hidden;
       text-overflow: ellipsis;
+      width: 100%;
     }
   }
 
