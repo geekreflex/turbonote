@@ -56,7 +56,11 @@ const Labels = ({ small, note }) => {
             {label.name}
           </motion.button>
         ))}
-        <motion.button onClick={handleAddEditLabel}>
+        <motion.button
+          onClick={handleAddEditLabel}
+          data-tooltip-id="nact"
+          data-tooltip-content="Add label"
+        >
           <AddIcon />
         </motion.button>
       </LabelsWrap>
