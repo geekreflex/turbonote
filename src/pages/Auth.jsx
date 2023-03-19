@@ -56,6 +56,7 @@ const AuthMain = styled.div`
   width: 400px;
   padding: 40px;
   border-radius: 21px;
+  box-shadow: ${(props) => props.theme.colors.shadow1};
 
   h1 {
     text-align: center;
@@ -97,6 +98,24 @@ const AuthMain = styled.div`
 
     .icon {
       font-size: 25px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    padding: 40px 20px;
+    h1 {
+      font-size: 30px;
+    }
+
+    .auth-btn {
+      padding: 8px 10px;
+      font-size: 13px;
+    }
+
+    img,
+    .icon {
+      width: 15px;
+      font-size: 15px;
     }
   }
 `;
