@@ -2,12 +2,8 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import Layout from '../components/Layout';
-import {
-  signInWithFacebook,
-  signInWithGoogle,
-} from '../features/auth/authSlice';
+import { signInWithGoogle, signInWithTest } from '../features/auth/authSlice';
 import GoogleLogo from '../assets/google-logo.png';
-import FacebookLogo from '../assets/facebook-logo.png';
 
 const Auth = () => {
   const dispatch = useDispatch();
@@ -19,20 +15,26 @@ const Auth = () => {
           <div className="auth-btns-wrap">
             <button
               className="auth-btn"
+              onClick={() =>
+                dispatch(
+                  signInWithTest({
+                    email: 'test@turbonote.com',
+                    password: 'turbo123',
+                  })
+                )
+              }
+            >
+              <span className="icon">🚀</span>
+              Continue with Test
+            </button>
+
+            <button
+              className="auth-btn"
               onClick={() => dispatch(signInWithGoogle())}
             >
               <img src={GoogleLogo} />
               Continue with Google
             </button>
-            {false && (
-              <button
-                className="auth-btn"
-                onClick={() => dispatch(signInWithFacebook())}
-              >
-                <img src={FacebookLogo} />
-                Continue with Facebook
-              </button>
-            )}
           </div>
         </AuthMain>
       </AuthWrap>
@@ -91,6 +93,10 @@ const AuthMain = styled.div`
 
     img {
       width: 25px;
+    }
+
+    .icon {
+      font-size: 25px;
     }
   }
 `;

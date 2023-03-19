@@ -9,6 +9,9 @@ import OutsideClickHandler from 'react-outside-click-handler';
 import { signOutUser } from '../features/auth/authSlice';
 import { MoonIcon, SunIcon } from './icons';
 import { toggleThemeMode } from '../features/action/actionSlice';
+import RocketImg from '../assets/rocket.png';
+
+const TEST_USER = 'ZOx9xbEeNmOGrYhYzJeC6FTCfcJ2';
 
 const Profile = () => {
   const [show, setShow] = useState(false);
@@ -58,7 +61,7 @@ const Dropdown = ({ close }) => {
           <Img size={60} />
         </span>
         <div className="user-data">
-          <p>{user.displayName}</p>
+          <p>{user.uid === TEST_USER ? 'Turbo Test' : user.displayName}</p>
           <p>{user.email}</p>
         </div>
       </div>
@@ -91,7 +94,10 @@ const Img = ({ size }) => {
 
   return (
     <Avatar size={size}>
-      <img src={user.photoURL} alt={user.displayName} />
+      <img
+        src={user.uid === TEST_USER ? RocketImg : user.photoURL}
+        alt={user.displayName}
+      />
     </Avatar>
   );
 };
@@ -105,10 +111,11 @@ const ProfileWrap = styled.div`
 const Avatar = styled.div`
   display: flex;
   border-radius: 50%;
-  padding: 3px;
+  padding: 6px;
+  border: 4px solid ${(props) => props.theme.colors.highlight3};
   cursor: pointer;
   :hover {
-    background-color: ${(props) => props.theme.colors.highlight};
+    background-color: ${(props) => props.theme.colors.highlight3};
   }
   img {
     width: ${(props) => (props.size ? `${props.size}px` : '40px')};

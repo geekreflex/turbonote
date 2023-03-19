@@ -3,6 +3,7 @@ import {
   FacebookAuthProvider,
   GoogleAuthProvider,
   onAuthStateChanged,
+  signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
 } from 'firebase/auth';
@@ -54,6 +55,18 @@ export const listenForAuthChanges = () => (dispatch) => {
     }
   });
 };
+
+export const signInWithTest =
+  ({ email, password }) =>
+  async (dispatch) => {
+    try {
+      const { user } = await signInWithEmailAndPassword(auth, email, password);
+      console.log(user);
+      // dispatch(setUser(user));
+    } catch (error) {
+      // dispatch(setError(error.message));
+    }
+  };
 
 export const signInWithGoogle = () => (dispatch) => {
   const provider = new GoogleAuthProvider();
