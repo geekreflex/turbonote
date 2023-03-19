@@ -19,7 +19,7 @@ const Layout = ({ children, name }) => {
             }}
           >
             <div>{children}</div>
-            <Footer />
+            {name !== 'note' && <Footer />}
           </motion.div>
         </AnimatePresence>
       </Container>

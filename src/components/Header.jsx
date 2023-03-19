@@ -65,7 +65,7 @@ const HeaderWrap = styled.div`
 const HeaderMain = styled.div`
   width: 100%;
   display: flex;
-  height: 60px;
+  height: 70px;
   align-items: center;
   justify-content: space-between;
 `;

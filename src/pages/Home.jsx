@@ -66,7 +66,7 @@ const Desc = styled.div`
 
   h1 {
     font-size: 60px;
-    font-family: 'Golos Text';
+    /* font-family: 'Golos Text'; */
     text-align: center;
     width: 900px;
     margin-bottom: 20px;
