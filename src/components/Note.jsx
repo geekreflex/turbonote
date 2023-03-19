@@ -71,6 +71,7 @@ const NoteCard = styled.div`
   position: relative;
   overflow: hidden;
   box-shadow: ${(props) => props.theme.colors.shadow1};
+  cursor: pointer;
 
   .card-data {
     padding: 30px;

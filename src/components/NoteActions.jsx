@@ -116,6 +116,7 @@ const NoteActionWrap = styled.div`
   padding: 10px;
   display: flex;
   justify-content: space-between;
+  cursor: default;
 
   * {
     visibility: ${(props) => (props.show ? 'visible' : 'hidden')};
