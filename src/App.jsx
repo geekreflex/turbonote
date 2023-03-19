@@ -11,16 +11,17 @@ import { listenForLabels } from './features/label/labelSlice';
 
 function App() {
   const dispatch = useDispatch();
+  const { addNoteModal, addLabelModal } = useSelector((state) => state.action);
   const { isLoggedIn } = useSelector((state) => state.auth);
   const { note } = useSelector((state) => state.note);
 
   useEffect(() => {
-    if (note) {
+    if (note || addNoteModal || addLabelModal) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'auto';
     }
-  }, [note]);
+  }, [note, addNoteModal, addLabelModal]);
 
   useEffect(() => {
     if (isLoggedIn) {
