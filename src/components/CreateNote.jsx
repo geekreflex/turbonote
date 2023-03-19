@@ -118,7 +118,7 @@ const CreateNoteMain = styled.div`
   overflow: hidden;
   box-shadow: ${(props) => props.theme.colors.shadow2};
   @media (max-width: 600px) {
-    height: 100vh;
+    height: 100%;
     width: 100%;
     border-radius: 0;
     position: fixed;
