@@ -8,9 +8,12 @@ const Footer = () => {
       <div className="footer-main">
         <span>
           &copy;
-          <a href="https://twitter.com/geekreflex">Jerry Nwosu</a>
+          <a target="_blank" href="https://jerrynwosu.vercel.app">
+            Jerry Nwosu
+          </a>
         </span>
         <a
+          target="_blank"
           href="https://github.com/geekreflex/turbo-octo-note"
           className="github-link"
         >

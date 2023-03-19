@@ -9,8 +9,8 @@ const WithTheme = ({ children }) => {
   const light = {
     name: 'Light',
     colors: {
-      bgColor: '#fff',
-      cardBg: '#fafafa',
+      bgColor: '#fafafa',
+      cardBg: '#fff',
       text1: '#333',
       text2: '#444',
       text3: '#555',
