@@ -14,7 +14,7 @@ const Home = () => {
     <Layout name="home">
       <div>
         <Desc>
-          <h1>Capture, Organize, and Share Your Thoughts with Ease.</h1>
+          <h1>Capture and Organize Your Thoughts with Ease.</h1>
           <p>
             Unlock your creativity and productivity with effortless note-taking
             and organization.
