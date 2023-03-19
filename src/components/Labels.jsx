@@ -7,9 +7,9 @@ import { updateNoteLabel } from '../features/note/noteSlice';
 import { AddIcon } from './icons';
 import { toggleAddEditLabel } from '../features/action/actionSlice';
 
-const Labels = ({ small, note }) => {
+const Labels = ({ small, note, setl = null }) => {
   const dispatch = useDispatch();
-  const [selectedLabels, setSelectedLabels] = useState(note.labels || []);
+  const [selectedLabels, setSelectedLabels] = useState(note ? note.labels : []);
 
   const { labels } = useSelector((state) => state.label);
   const sortedLabels = prioritizeIds(selectedLabels, labels);
@@ -28,7 +28,12 @@ const Labels = ({ small, note }) => {
   };
 
   useEffect(() => {
+    if (!note) {
+      setl(selectedLabels);
+      return;
+    }
     if (
+      note &&
       note.labels.length === selectedLabels.length &&
       note.labels.every((item) => selectedLabels.includes(item))
     ) {

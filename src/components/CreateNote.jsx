@@ -84,10 +84,10 @@ const CreateNote = () => {
             </NoteActions>
             <OutsideClickHandler onOutsideClick={() => setShowLabels(false)}>
               {showLabels && (
-                <Labels
-                  selectedLabels={selectedLabels}
-                  setSelectedLabels={setSelectedLabels}
-                />
+                <>
+                  <Overlay onClick={() => setShowLabels(false)} />
+                  <Labels small={true} note={false} setl={setSelectedLabels} />
+                </>
               )}
             </OutsideClickHandler>
           </CreateNoteMain>
