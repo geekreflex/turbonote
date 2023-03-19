@@ -112,7 +112,6 @@ const Avatar = styled.div`
   display: flex;
   border-radius: 50%;
   padding: 6px;
-  border: 4px solid ${(props) => props.theme.colors.highlight3};
   cursor: pointer;
   :hover {
     background-color: ${(props) => props.theme.colors.highlight3};
