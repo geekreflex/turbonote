@@ -75,7 +75,7 @@ const AddEditLabels = () => {
       inputRef.current.focus();
       setDelLabelId('');
     } else {
-      // setEditLabelId('');
+      setEditLabelId('');
     }
   }, [editingIndex]);
 

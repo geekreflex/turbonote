@@ -1,6 +1,6 @@
 import React, { createRef, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { ArrowLeftIcon, ArrowRightIcon } from './icons';
+import { AddIcon, ArrowLeftIcon, ArrowRightIcon } from './icons';
 
 const LabelList = ({ labels, selectedLabel, setSelectedLabel }) => {
   const containerRef = useRef(null);

@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { prioritizeIds } from '../utils/sort';
 import { updateNoteLabel } from '../features/note/noteSlice';
+import { AddIcon } from './icons';
+import { toggleAddEditLabel } from '../features/action/actionSlice';
 
 const Labels = ({ small, note }) => {
   const dispatch = useDispatch();
@@ -19,6 +21,10 @@ const Labels = ({ small, note }) => {
     } else {
       setSelectedLabels([...selectedLabels, label]);
     }
+  };
+
+  const handleAddEditLabel = () => {
+    dispatch(toggleAddEditLabel(true));
   };
 
   useEffect(() => {
@@ -50,6 +56,9 @@ const Labels = ({ small, note }) => {
             {label.name}
           </motion.button>
         ))}
+        <motion.button onClick={handleAddEditLabel}>
+          <AddIcon />
+        </motion.button>
       </LabelsWrap>
     </AnimatePresence>
   );
@@ -95,8 +104,6 @@ const LabelsWrap = styled.div`
     transition: all 300ms;
     cursor: pointer;
     :hover {
-      background-color: ${(props) => props.theme.colors.text2};
-      color: ${(props) => props.theme.colors.cardBg};
       border-color: ${(props) => props.theme.colors.text2};
     }
   }
