@@ -67,22 +67,22 @@ const Dropdown = ({ close }) => {
       </div>
       <ul>
         <li onClick={themeClick}>
-          <span>{`Enable ${mode === 'light' ? ' dark' : 'light'} theme`}</span>
           <span className="li-icon">
             {mode === 'light' ? <MoonIcon /> : <SunIcon />}
           </span>
+          <span>{`Enable ${mode === 'light' ? ' dark' : 'light'} theme`}</span>
         </li>
         <li>
-          <span>Settings</span>
           <span className="li-icon">
             <SettingsIcon />
           </span>
+          <span>Settings</span>
         </li>
         <li onClick={() => dispatch(signOutUser())}>
-          <span>Sign out</span>
           <span className="li-icon">
             <LogoutIcon />
           </span>
+          <span>Sign out</span>
         </li>
       </ul>
     </DropdownWrap>
@@ -128,8 +128,8 @@ const DropdownWrap = styled.div`
   position: absolute;
   background-color: ${(props) => props.theme.colors.cardBg};
   box-shadow: ${(props) => props.theme.colors.shadow2};
-  min-width: 320px;
-  max-width: 100%;
+  width: 300px;
+  /* max-width: 100%; */
   right: 0;
   margin-top: 30px;
   padding: 20px 0;
@@ -137,14 +137,21 @@ const DropdownWrap = styled.div`
   color: ${(props) => props.theme.colors.text3};
 
   @media (max-width: 600px) {
+    position: fixed;
+    /* min-width: 100%; */
+    /* max-width: 100%; */
   }
 
   .user-info {
     display: flex;
     margin-bottom: 20px;
-    padding: 10px 20px;
+    padding: 0 10px;
     align-items: center;
     gap: 10px;
+
+    .user-data {
+      flex: 1;
+    }
 
     p:first-child {
       font-weight: 600;
@@ -153,6 +160,7 @@ const DropdownWrap = styled.div`
     p:last-child {
       font-size: 13px;
       font-weight: 600;
+      text-overflow: ellipsis;
     }
   }
 
@@ -165,10 +173,10 @@ const DropdownWrap = styled.div`
       font-size: 14px;
       font-weight: 600;
       justify-content: space-between;
-      span:first-child {
+      span:last-child {
         flex: 1;
       }
-      span:last-child {
+      span:first-child {
         display: flex;
         font-size: 22px;
         width: 30px;

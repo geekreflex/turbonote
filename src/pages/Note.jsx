@@ -18,6 +18,7 @@ import Toast from '../components/Toast';
 import Search from '../components/Search';
 import { Tooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css';
+import Layout from '../components/Layout';
 
 const Note = () => {
   const dispatch = useDispatch();
@@ -35,32 +36,23 @@ const Note = () => {
   }, [location]);
 
   return (
-    <AnimatePresence>
-      <motion.div
-        initial={{ x: 100 }}
-        animate={{ x: 0 }}
-        transition={{ duration: 0.5 }}
-        exit={{ x: 100 }}
-      >
-        <Container>
-          <Nav />
-          {view === 'note' && <NoteList />}
-          {view === 'archive' && <ArchivedList />}
-          {view === 'trash' && <TrashedList />}
-          {view === 'search' && <Search />}
-          <CreateNote />
-          <AddEditLabels />
-          <ViewNote />
-          <Navbar />
-          <Toast />
-          <NavTippy>
-            <Tooltip id="pin" place="bottom" className="tooltip" />
-            <Tooltip id="nav" place="top" className="tooltip" />
-            <Tooltip id="nact" place="bottom" className="tooltip" />
-          </NavTippy>
-        </Container>
-      </motion.div>
-    </AnimatePresence>
+    <Layout name="note">
+      {/* <Nav /> */}
+      {view === 'note' && <NoteList />}
+      {view === 'archive' && <ArchivedList />}
+      {view === 'trash' && <TrashedList />}
+      {view === 'search' && <Search />}
+      <CreateNote />
+      <AddEditLabels />
+      <ViewNote />
+      <Navbar />
+      <Toast />
+      <NavTippy>
+        <Tooltip id="pin" place="bottom" className="tooltip" />
+        <Tooltip id="nav" place="top" className="tooltip" />
+        <Tooltip id="nact" place="bottom" className="tooltip" />
+      </NavTippy>
+    </Layout>
   );
 };
 

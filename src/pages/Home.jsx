@@ -11,7 +11,7 @@ import { useSelector } from 'react-redux';
 const Home = () => {
   const { isLoggedIn } = useSelector((state) => state.auth);
   return (
-    <Layout>
+    <Layout name="home">
       <div>
         <Desc>
           <h1>Capture, Organize, and Share Your Thoughts with Ease.</h1>

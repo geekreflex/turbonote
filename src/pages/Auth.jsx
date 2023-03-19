@@ -8,7 +8,7 @@ import GoogleLogo from '../assets/google-logo.png';
 const Auth = () => {
   const dispatch = useDispatch();
   return (
-    <Layout>
+    <Layout name="auth">
       <AuthWrap>
         <AuthMain>
           <h1>Let's Go!</h1>

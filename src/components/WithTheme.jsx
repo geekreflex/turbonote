@@ -10,7 +10,7 @@ const WithTheme = ({ children }) => {
     name: 'Light',
     colors: {
       bgColor: '#fff',
-      cardBg: '#fff',
+      cardBg: '#fafafa',
       text1: '#333',
       text2: '#444',
       text3: '#555',
