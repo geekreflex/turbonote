@@ -1,6 +1,5 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { archiveNote, deleteNote, trashNote } from '../features/note/noteSlice';
 import { ButtonIconSm, CloseBtn } from '../styles/GlobalStyles';
@@ -17,7 +16,6 @@ const NoteActions = ({
   isEditing = false,
 }) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { view } = useSelector((state) => state.action);
 
   const handleTrashNote = (e) => {
@@ -27,7 +25,6 @@ const NoteActions = ({
       trashed: true,
     };
     dispatch(trashNote(payload));
-    handleCloseNote();
   };
 
   const handleRestoreNote = () => {
@@ -36,12 +33,10 @@ const NoteActions = ({
       trashed: false,
     };
     dispatch(trashNote(payload));
-    handleCloseNote();
   };
 
   const handleDeleteNote = () => {
     dispatch(deleteNote(note.id));
-    handleCloseNote();
   };
 
   const handleArchiveNote = (e) => {
