@@ -11,7 +11,6 @@ import { getNotesFromStorage } from './features/note/noteSlice';
 import { getLabelsFromStorage } from './features/label/labelSlice';
 import WithTheme from './components/WithTheme';
 import { getThemeModeFromStroage } from './features/action/actionSlice';
-import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
 store.dispatch(checkUserAuthStorage());
 store.dispatch(getNotesFromStorage());
@@ -30,5 +29,3 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     </Provider>
   </React.StrictMode>
 );
-
-serviceWorkerRegistration.register();
