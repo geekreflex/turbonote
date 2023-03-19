@@ -65,6 +65,7 @@ const Labels = ({ small, note, setl = null }) => {
           onClick={handleAddEditLabel}
           data-tooltip-id="nact"
           data-tooltip-content="Add label"
+          className="add-label"
         >
           <AddIcon />
         </motion.button>
@@ -109,11 +110,15 @@ const LabelsWrap = styled.div`
     border-radius: 21px;
     font-weight: 600;
     color: #777;
-    font-size: ${(props) => (props.small ? '11px' : '14px')};
+    font-size: ${(props) => (props.small ? '12px' : '14px')};
     transition: all 300ms;
     cursor: pointer;
     :hover {
       border-color: ${(props) => props.theme.colors.text2};
     }
+  }
+
+  .add-label {
+    display: flex;
   }
 `;
