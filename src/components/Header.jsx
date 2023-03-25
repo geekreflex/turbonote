@@ -1,5 +1,3 @@
-import React, { useEffect } from 'react';
-import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
@@ -8,30 +6,14 @@ import Profile from './Profile';
 
 const Header = ({ name }) => {
   const { isLoggedIn } = useSelector((state) => state.auth);
-  const [isHeaderFixed, setIsHeaderFixed] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY >= 100) {
-        setIsHeaderFixed(true);
-      } else {
-        setIsHeaderFixed(false);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
 
   return (
-    <HeaderWrap isFixed={isHeaderFixed}>
+    <HeaderWrap>
       <Container>
         <HeaderMain>
           <Logo>
             <Link to="/">
-              <span>🚀🚀🚀</span>
+              <span>🚀 Turbo Note</span>
             </Link>
           </Logo>
           <nav>
@@ -52,7 +34,7 @@ const Header = ({ name }) => {
 export default Header;
 
 const HeaderWrap = styled.div`
-  position: ${(props) => (props.isFixed ? 'sticky' : 'absolute')};
+  /* position: ${(props) => (props.isFixed ? 'sticky' : 'absolute')}; */
   width: 100%;
   top: 0;
   left: 0;

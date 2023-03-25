@@ -127,7 +127,7 @@ export const Logo = styled.div`
   font-size: 30px;
   font-weight: 900;
   a {
-    color: #333;
+    color: #999;
     text-decoration: none;
     span {
       margin-right: 10px;
