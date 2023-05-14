@@ -22,6 +22,7 @@ import ArrowLeftIcon from './ArrowLeftIcon';
 import ArrowRightIcon2 from './ArrowRightIcon2';
 import GithubIcon from './GithubIcon';
 import MailIcon from './MailIcon';
+import TwitterIcon from './TwitterIcon';
 
 export {
   RestoreIcon,
@@ -48,4 +49,5 @@ export {
   ArrowRightIcon2,
   GithubIcon,
   MailIcon,
+  TwitterIcon,
 };

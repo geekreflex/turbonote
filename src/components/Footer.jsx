@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { GithubIcon, MailIcon } from './icons';
+import { GithubIcon, MailIcon, TwitterIcon } from './icons';
 
 const Footer = () => {
   return (
@@ -19,6 +19,15 @@ const Footer = () => {
         >
           <span className="github-icon">
             <GithubIcon />
+          </span>
+        </a>
+        <a
+          target="_blank"
+          href="https://twitter.com/geekreflex"
+          className="github-link"
+        >
+          <span className="github-icon">
+            <TwitterIcon />
           </span>
         </a>
         <a href="mailto:jerrynwosu007@gmail.com" className="github-link">

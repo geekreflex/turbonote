@@ -135,6 +135,7 @@ const DropdownWrap = styled.div`
   padding: 20px 0;
   border-radius: 21px;
   color: ${(props) => props.theme.colors.text3};
+  z-index: 9998;
 
   @media (max-width: 600px) {
     position: fixed;
@@ -177,6 +178,7 @@ const DropdownWrap = styled.div`
       font-size: 14px;
       font-weight: 600;
       justify-content: space-between;
+      cursor: pointer;
       span:last-child {
         flex: 1;
       }
